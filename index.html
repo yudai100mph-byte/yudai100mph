@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>J-Velo by NEOLAB</title>
+<meta name="description" content="J-Velo: Japanese pitching velocity program. Video analysis and online coaching by NEOLAB.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column; a radar-readout panel is the signature; bands separated by stitched seams */
+:root{
+  --bg:#F5F7F3; --surface:#FFFFFF; --ink:#14231F; --muted:#56655F; --line:#D9E0DA;
+  --seam:#C8102E; --panel:#10201B; --panel-ink:#E9F2EC; --readout:#7CF2B0;
+  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Noto Sans JP","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1714; --surface:#15211D; --ink:#E6EEE9; --muted:#9AAAA3; --line:#26352F;
+  --seam:#F0445C; --panel:#08110E; --panel-ink:#E6EEE9; --readout:#7CF2B0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1714; --surface:#15211D; --ink:#E6EEE9; --muted:#9AAAA3; --line:#26352F;
+  --seam:#F0445C; --panel:#08110E; --panel-ink:#E6EEE9; --readout:#7CF2B0; color-scheme:dark}
+html:lang(ko) body{font-family:"Noto Sans KR","Noto Sans JP",system-ui,sans-serif}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;padding-inline:16px;padding-block:0}
+.wrap{max-width:880px;margin:0 auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--seam);outline-offset:3px}
+
+header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:20px;border-bottom:1px solid var(--line)}
+.brand{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
+.brand span{color:var(--seam)}
+.langs{display:flex;gap:4px}
+.langs button{font:500 13px var(--f-mono);background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:4px 10px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;padding-block:48px 40px}
+.hero>*{min-width:0}
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--seam);margin:0 0 12px}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(40px,7vw,64px);line-height:1;text-transform:uppercase;margin:0 0 16px;text-wrap:balance}
+.lede{color:var(--muted);font-size:17px;margin:0 0 24px;max-width:34em}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:6px;border:2px solid var(--ink)}
+.btn.primary{background:var(--seam);border-color:var(--seam);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink)}
+
+.readout{background:var(--panel);color:var(--panel-ink);border-radius:10px;padding:20px;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.readout .row{display:flex;justify-content:space-between;gap:12px;padding-block:8px;border-bottom:1px dashed rgba(124,242,176,.25)}
+.readout .row:last-of-type{border-bottom:0}
+.readout .k{font-size:12px;letter-spacing:.1em;opacity:.7}
+.readout .v{color:var(--readout);font-size:18px}
+.readout .big{font-family:var(--f-display);font-weight:800;font-size:48px;color:var(--readout);line-height:1;margin:6px 0 2px}
+.readout .note{font-size:11px;opacity:.6;margin-top:10px;font-family:var(--f-body)}
+
+.seam{height:14px;margin-block:8px;background:
+  repeating-linear-gradient(115deg,transparent 0 10px,var(--seam) 10px 12px,transparent 12px 20px) top/100% 6px no-repeat,
+  linear-gradient(var(--line),var(--line)) center/100% 1px no-repeat;opacity:.9}
+
+section{padding-block:40px}
+h2{font-family:var(--f-display);font-weight:800;font-size:32px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 20px;text-wrap:balance}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.grid2>*{min-width:0}
+.cred{border-top:2px solid var(--ink);padding-top:12px}
+.cred b{display:block;font-family:var(--f-display);font-size:22px;text-transform:uppercase;letter-spacing:.02em}
+.cred p{margin:4px 0 0;color:var(--muted);font-size:15px}
+ul.for{margin:0;padding-left:1.2em}
+ul.for li{margin-block:6px}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+ol.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+ol.steps li::before{content:counter(s);display:block;font:800 28px var(--f-display);color:var(--seam)}
+
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;background:var(--surface)}
+th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+td.p{font-family:var(--f-mono);font-size:17px}
+.small{color:var(--muted);font-size:14px;margin-top:12px}
+.guarantee{border:2px solid var(--seam);border-radius:8px;padding:16px 20px;margin-top:20px}
+.guarantee b{color:var(--seam)}
+footer{border-top:1px solid var(--line);padding-block:28px 40px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:640px){
+  .hero{grid-template-columns:1fr;padding-block:32px}
+  .grid2,ol.steps{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){
+  .readout .big{animation:tick .9s ease-out both}
+  @keyframes tick{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">J-Velo <span>/</span> NEOLAB</div>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-lang="ko" id="lang-ko">한국어</button>
+      <button type="button" data-lang="en" id="lang-en">EN</button>
+      <button type="button" data-lang="ja" id="lang-ja">日本語</button>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div>
+      <p class="eyebrow" data-i="eyebrow"></p>
+      <h1 data-i="h1"></h1>
+      <p class="lede" data-i="lede"></p>
+      <div class="cta">
+        <a class="btn primary" href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" data-i="cta"></a>
+        <a class="btn ghost" href="#pricing" data-i="cta2"></a>
+      </div>
+    </div>
+    <div class="readout" aria-label="Rapsodo sample readout">
+      <div class="k">RAPSODO · FASTBALL · 12 WKS</div>
+      <div class="big">139<small style="font-size:20px"> km/h</small></div>
+      <div class="row"><span class="k">BEFORE</span><span class="v">128 km/h · 79.5 mph</span></div>
+      <div class="row"><span class="k">AFTER</span><span class="v">139 km/h · 86.4 mph</span></div>
+      <div class="row"><span class="k">GAIN</span><span class="v">+11 km/h</span></div>
+      <div class="note" data-i="sample"></div>
+    </div>
+  </div>
+
+  <div class="seam" aria-hidden="true"></div>
+
+  <section id="coach">
+    <h2 data-i="coachH"></h2>
+    <div class="grid2">
+      <div class="cred"><b>NPB · KBO</b><p data-i="c1"></p></div>
+      <div class="cred"><b>NASM-PES</b><p data-i="c2"></p></div>
+      <div class="cred"><b>Rapsodo</b><p data-i="c3"></p></div>
+      <div class="cred"><b data-i="c4h"></b><p data-i="c4"></p></div>
+    </div>
+  </section>
+
+  <section id="for">
+    <h2 data-i="forH"></h2>
+    <ul class="for">
+      <li data-i="f1"></li><li data-i="f2"></li><li data-i="f3"></li><li data-i="f4"></li>
+    </ul>
+  </section>
+
+  <section id="how">
+    <h2 data-i="howH"></h2>
+    <ol class="steps">
+      <li data-i="s1"></li><li data-i="s2"></li><li data-i="s3"></li>
+    </ol>
+  </section>
+
+  <section id="watch">
+    <h2 data-i="watchH"></h2>
+    <p data-i="watch"></p>
+    <div class="cta">
+      <a class="btn ghost" href="https://www.tiktok.com/@neolab.boda" target="_blank" rel="noopener">TikTok @neolab.boda</a>
+      <a class="btn ghost" href="https://www.instagram.com/neolab.boda/" target="_blank" rel="noopener">Instagram @neolab.boda</a>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <h2 data-i="priceH"></h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th data-i="tPlan"></th><th data-i="tAdult"></th><th data-i="tKid"></th></tr></thead>
+        <tbody>
+          <tr><td data-i="pSingle"></td><td class="p" data-i="pS1"></td><td class="p" data-i="pS2"></td></tr>
+          <tr><td data-i="pMonthly"></td><td class="p" data-i="pM1"></td><td class="p" data-i="pM2"></td></tr>
+          <tr><td data-i="pLive"></td><td class="p" data-i="pL1"></td><td class="p" data-i="pL2"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small" data-i="kidNote"></p>
+    <div class="guarantee"><b data-i="gH"></b> <span data-i="g"></span></div>
+    <p class="small" data-i="notes"></p>
+  </section>
+
+  <footer>
+    <span>© NEOLAB · J-Velo</span>
+    <span class="social"><a href="https://www.instagram.com/neolab.boda/" target="_blank" rel="noopener">Instagram @neolab.boda</a> · <a href="https://www.tiktok.com/@neolab.boda" target="_blank" rel="noopener">TikTok @neolab.boda</a></span>
+  </footer>
+</div>
+
+<script>
+const T={
+ko:{eyebrow:"일본식 구속 향상 프로그램",h1:"감이 아니라 데이터로 구속을 올린다",
+lede:"NPB·KBO 선수를 지도한 일본 피칭 코치가 당신의 투구 영상을 분석하고, 3일 이내에 해설 영상과 맞춤 훈련 메뉴를 보내드립니다.",
+cta:"Instagram DM으로 신청",cta2:"요금 보기",sample:"측정 예시입니다. 실제 지도 사례로 교체 예정.",
+coachH:"코치 소개",c1:"NPB·KBO 선수 지도 경험",c2:"미국 NASM 퍼포먼스 향상 전문가 자격",c3:"구속·회전수를 측정해 데이터로 지도",c4h:"현장 클리닉",c4:"한국에서 직접 클리닉 개최 경험",
+forH:"이런 분께 추천합니다",f1:"프로 진출을 목표로 구속을 올리고 싶은 선수",f2:"더 높은 무대를 목표로 하는 고등학생 투수",f3:"자녀가 부상 없이 성장하기를 바라는 학부모",f4:"올바른 폼부터 배우고 싶은 초·중학생",
+howH:"진행 방법",s1:"플랜을 선택하고 Instagram DM으로 신청합니다.",s2:"투구 영상(정면·측면 각 1개)을 보내주세요.",s3:"3일 이내에 해설 영상과 맞춤 훈련 메뉴를 받습니다.",
+priceH:"요금",tPlan:"플랜",tAdult:"고등학생 이상",tKid:"초·중학생",pSingle:"1회 피드백",pMonthly:"월 4회 플랜",pLive:"라이브 지도 (60분, 통역 포함)",
+pS1:"110,000원",pS2:"88,000원",pM1:"월 340,000원",pM2:"월 270,000원",pL1:"190,000원",pL2:"150,000원",
+kidNote:"초·중학생은 구속보다 올바른 폼과 부상 예방을 중심으로 지도합니다.",gH:"첫 피드백 만족 보장.",g:"첫 피드백에 만족하지 못하시면 전액 환불해 드립니다.",
+watchH:"무료 드릴 영상",watch:"구속 향상 드릴과 지도 사례를 TikTok과 Instagram에서 매주 공개합니다.",notes:"만 19세 미만은 보호자 동의가 필요합니다. 영상은 지도 목적으로만 사용하며, 사례 소개 시에는 사전 동의 후 수치만 사용합니다."},
+en:{eyebrow:"The Japanese velocity program",h1:"Throw harder, measured in data",
+lede:"A Japanese pitching coach who has worked with NPB and KBO players analyzes your delivery and sends a breakdown video and a personal training plan within 3 days.",
+cta:"Apply via Instagram DM",cta2:"See pricing",sample:"Sample readout. To be replaced with a real client case.",
+coachH:"Your coach",c1:"Has coached players in NPB (Japan) and KBO (Korea)",c2:"NASM Performance Enhancement Specialist",c3:"Velocity and spin measured, every plan built on data",c4h:"On-site clinics",c4:"Has run clinics in Korea in person",
+forH:"Who it's for",f1:"Pitchers who want to throw harder and reach the next level",f2:"High school players aiming for college or pro baseball",f3:"Parents who want their kids to develop without injury",f4:"Coaches who want a second opinion on their pitchers",
+howH:"How it works",s1:"Choose a plan and apply via Instagram DM.",s2:"Send your pitching video: one from the front, one from the side.",s3:"Within 3 days, get a breakdown video and a personal training plan.",
+priceH:"Pricing",tPlan:"Plan",tAdult:"Age 16+",tKid:"Ages 15 and under",pSingle:"Single analysis",pMonthly:"Monthly plan (4 analyses)",pLive:"Live session (60 min)",
+pS1:"$99",pS2:"$79",pM1:"$299 / month",pM2:"$239 / month",pL1:"$149",pL2:"$119",
+kidNote:"For younger players, we focus on proper mechanics and injury prevention rather than chasing velocity.",gH:"First-analysis guarantee.",g:"Not satisfied with your first analysis? You get a full refund.",
+watchH:"Free drills",watch:"Velocity drills and coaching breakdowns, posted every week on TikTok and Instagram.",notes:"Players under 18 need a parent's or guardian's consent. Videos are used only for coaching; results are shared only with permission, as numbers, never names or video."},
+ja:{eyebrow:"日本式 球速アップ・プログラム",h1:"感覚ではなく、データで球速を上げる",
+lede:"NPB・KBOの選手を指導してきた日本のピッチングコーチが、あなたの投球動画を分析し、3日以内に解説動画と個別の練習メニューを届けます。",
+cta:"Instagram DMで申し込む",cta2:"料金を見る",sample:"計測の表示例です。実際の指導事例に差し替え予定。",
+coachH:"コーチ紹介",c1:"NPB・KBOの選手の指導経験",c2:"米国NASMのパフォーマンス向上スペシャリスト資格",c3:"球速と回転数を測り、データで指導",c4h:"出張クリニック",c4:"韓国での対面クリニックの実施経験",
+forH:"こんな人に",f1:"プロを目指して球速を上げたい選手",f2:"より高い舞台を目指す高校生投手",f3:"子どもに故障なく成長してほしい保護者",f4:"正しいフォームから学びたい小中学生",
+howH:"申込の流れ",s1:"プランを選び、Instagram DMで申し込みます。",s2:"投球動画（正面と側面を1本ずつ）を送ります。",s3:"3日以内に、解説動画と個別の練習メニューが届きます。",
+priceH:"料金（海外向け）",tPlan:"プラン",tAdult:"16歳以上",tKid:"15歳以下",pSingle:"1回の添削",pMonthly:"月4回プラン",pLive:"ライブ指導（60分）",
+pS1:"$99",pS2:"$79",pM1:"$299 / 月",pM2:"$239 / 月",pL1:"$149",pL2:"$119",
+kidNote:"小中学生は、球速よりも正しいフォームと故障予防を中心に指導します。",gH:"初回の添削の満足保証。",g:"初回の添削に満足できなければ、全額を返金します。",
+watchH:"無料のドリル動画",watch:"球速アップのドリルと指導事例を、TikTokとInstagramで毎週公開しています。",notes:"18歳未満は保護者の同意が必要です。動画は指導にだけ使い、事例として紹介するときは事前に同意を得て、数字だけを使います。"}
+};
+function setLang(l){
+  if(!T[l]) l="en";
+  document.documentElement.lang=l;
+  document.querySelectorAll("[data-i]").forEach(el=>{const v=T[l][el.dataset.i]; if(v!==undefined) el.textContent=v;});
+  document.querySelectorAll(".langs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===l)));
+  try{localStorage.setItem("jvelo-lang",l)}catch(e){}
+}
+document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
+let start="ko";
+try{const s=localStorage.getItem("jvelo-lang"); if(s) start=s; else {const n=(navigator.language||"").slice(0,2); if(T[n]) start=n; else start="en";}}catch(e){}
+setLang(start);
+</script>
+</body>
+</html>
