@@ -8,28 +8,28 @@
 <meta name="description" content="BE THE BRIDGE by Yudai Boda. J-Velo, the Japanese pitching velocity program: video analysis and online coaching from Japan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a house-of-brands storefront. Thin announcement bar, centered seal-and-wordmark header, one full-bleed campaign, four division tiles, then the open division (J-Velo) in full. Paper, sumi, one vermilion. */
+/* Layout: a KITH-like monochrome storefront. Thin announcement bar, centered flag-and-wordmark header, one full-bleed campaign, then J-Velo in full. Black and white; the only colour is the red disc of the flag. */
 :root{
   --paper:#FFFFFF; --sumi:#111111; --ink2:#6B6966; --rule:#E4E2DE; --tint:#F3F2EF;
-  --shu:#C8361E; --on-shu:#FFFFFF;
+  --flag-white:#FFFFFF; --flag-red:#BC002D;
   --night:#0E0E0E; --on-night:#F2F1ED; --night-2:#9C9A95;
-  --f-mincho:"Shippori Mincho B1","Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-display:"Archivo","Helvetica Neue",Arial,system-ui,sans-serif;
   --f-sans:"Noto Sans JP","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#0B0B0B; --sumi:#EEEDE9; --ink2:#A09D97; --rule:#262523; --tint:#161615;
-  --shu:#E4553A; --on-shu:#0B0B0B; --night:#161615; --on-night:#F2F1ED; --night-2:#A09D97; color-scheme:dark}}
+  --night:#161615; --on-night:#F2F1ED; --night-2:#A09D97; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#0B0B0B; --sumi:#EEEDE9; --ink2:#A09D97; --rule:#262523; --tint:#161615;
-  --shu:#E4553A; --on-shu:#0B0B0B; --night:#161615; --on-night:#F2F1ED; --night-2:#A09D97; color-scheme:dark}
+  --night:#161615; --on-night:#F2F1ED; --night-2:#A09D97; color-scheme:dark}
 
 html:lang(ko) body{font-family:"Noto Sans KR","Noto Sans JP",system-ui,sans-serif}
 body{background:var(--paper);color:var(--sumi);font-family:var(--f-sans);font-size:15px;line-height:1.75}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--shu);outline-offset:3px}
+:focus-visible{outline:2px solid var(--sumi);outline-offset:3px}
 .g{padding-inline:max(16px,3vw)}
 .label{font:500 11px var(--f-mono);letter-spacing:.18em;text-transform:uppercase}
 .caps{font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
@@ -43,34 +43,28 @@ header.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;ga
 header.top>*{min-width:0}
 nav.main{display:flex;gap:22px;flex-wrap:wrap}
 nav.main a{text-decoration:none}
-nav.main a:hover{color:var(--shu)}
+nav.main a:hover{text-decoration:underline;text-underline-offset:4px}
 .mark{display:flex;align-items:center;gap:10px;text-decoration:none;justify-self:center}
-.hanko{width:34px;height:34px;flex:none;background:var(--shu);color:var(--on-shu);display:grid;place-items:center;border-radius:3px;font:800 12px/1.05 var(--f-mincho);writing-mode:vertical-rl}
+.flag{width:36px;height:24px;flex:none;background:var(--flag-white);border:1px solid var(--rule);display:grid;place-items:center}
+.flag::after{content:"";width:14px;height:14px;border-radius:50%;background:var(--flag-red)}
 .wordmark{font:900 18px var(--f-sans);letter-spacing:.28em;white-space:nowrap}
 .tools{display:flex;justify-content:flex-end;align-items:center;gap:14px;flex-wrap:wrap}
 .langs{display:flex;gap:2px}
 .langs button{font:500 11px var(--f-mono);background:transparent;color:var(--ink2);border:0;border-bottom:1px solid transparent;padding:4px 6px;cursor:pointer;letter-spacing:.08em}
-.langs button[aria-pressed="true"]{color:var(--sumi);border-bottom-color:var(--shu)}
+.langs button[aria-pressed="true"]{color:var(--sumi);border-bottom-color:var(--sumi)}
 .apply{background:var(--sumi);color:var(--paper);text-decoration:none;padding:8px 14px}
 
 /* campaign */
 .campaign{background:var(--night);color:var(--on-night);position:relative;overflow:hidden}
-.campaign .inner{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,56px);align-items:end;padding-block:clamp(56px,10vw,128px) clamp(40px,6vw,72px)}
+.campaign .inner{display:grid;grid-template-columns:1fr;gap:clamp(20px,4vw,56px);align-items:end;padding-block:clamp(56px,10vw,128px) clamp(40px,6vw,72px)}
 .campaign .inner>*{min-width:0}
-.spine{writing-mode:vertical-rl;font:800 clamp(56px,9vw,112px)/1 var(--f-mincho);color:var(--shu);margin:0;letter-spacing:.08em}
 .season{color:var(--night-2);margin:0 0 18px}
 .campaign h1{font:900 clamp(40px,8vw,104px)/.98 var(--f-sans);letter-spacing:-.02em;text-transform:uppercase;margin:0 0 22px;text-wrap:balance}
-.campaign h1 em{font-style:normal;color:var(--shu)}
+.campaign h1 em{font-style:normal}
 .campaign .sub{font-size:16px;color:var(--night-2);max-width:34em;margin:0 0 28px}
 .btns{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-block;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:14px 22px;border:1px solid currentColor}
-.btn.fill{background:var(--shu);border-color:var(--shu);color:var(--on-shu)}
-.campaign svg{position:absolute;inset:auto 0 0 0;width:100%;height:auto;max-width:100%;pointer-events:none}
-.campaign svg path{fill:none;stroke:var(--shu);stroke-width:2;opacity:.55}
-@media (prefers-reduced-motion:no-preference){
-  .campaign svg path{stroke-dasharray:1600;animation:draw 2s cubic-bezier(.4,0,.2,1) both}
-  @keyframes draw{from{stroke-dashoffset:1600}to{stroke-dashoffset:0}}
-}
+.btn.fill{background:var(--on-night);border-color:var(--on-night);color:var(--night)}
 
 /* program */
 .sechead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-block:64px 24px;border-bottom:1px solid var(--sumi)}
@@ -78,48 +72,46 @@ nav.main a:hover{color:var(--shu)}
 .sechead p{margin:0;color:var(--ink2)}
 .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-block:28px;font-variant-numeric:tabular-nums;border-bottom:1px solid var(--rule)}
 .proof>div{min-width:0}
-.proof .v{font:800 clamp(34px,5vw,56px)/1.05 var(--f-mincho);margin-top:4px}
+.proof .v{font:800 clamp(34px,5vw,56px)/1.05 var(--f-display);margin-top:4px}
 .proof .v small{font:400 12px var(--f-mono);color:var(--ink2);margin-left:6px}
-.proof .gain .v{color:var(--shu)}
+.proof .gain{border-top:3px solid var(--sumi);padding-top:6px;margin-top:-9px}
 .proof .note{grid-column:1/-1;font-size:12px;color:var(--ink2);margin:0}
 .rows{display:grid}
 .row{display:grid;grid-template-columns:200px 1fr;gap:24px;padding-block:36px;border-bottom:1px solid var(--rule)}
 .row>*{min-width:0}
 .row h3{margin:0;font:700 12px var(--f-sans);letter-spacing:.16em;text-transform:uppercase}
-.row h3 span{display:block;font:800 26px/1.2 var(--f-mincho);color:var(--shu);letter-spacing:.06em;margin-bottom:6px;text-transform:none}
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 32px}
 .grid2>*{min-width:0}
-.cred b{display:block;font:800 18px var(--f-mincho);letter-spacing:.04em}
+.cred b{display:block;font:800 18px var(--f-display);letter-spacing:.04em}
 .cred p{margin:2px 0 0;color:var(--ink2);font-size:14px}
 ul.for{margin:0;padding:0;list-style:none;display:grid;gap:10px}
 ul.for li{padding-left:22px;position:relative}
-ul.for li::before{content:"";position:absolute;left:0;top:.85em;width:10px;height:1px;background:var(--shu)}
+ul.for li::before{content:"";position:absolute;left:0;top:.85em;width:10px;height:1px;background:var(--sumi)}
 ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s}
 ol.steps li{counter-increment:s;min-width:0;font-size:14px}
-ol.steps li::before{content:counter(s,cjk-ideographic);display:block;font:800 24px var(--f-mincho);color:var(--shu);margin-bottom:4px}
+ol.steps li::before{content:counter(s,decimal-leading-zero);display:block;font:800 22px var(--f-display);margin-bottom:4px}
 .tablewrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
 th,td{text-align:left;padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);white-space:nowrap}
 th{font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
-td.p{font:800 17px var(--f-mincho)}
+td.p{font:800 17px var(--f-display)}
 .small{color:var(--ink2);font-size:13px;margin:12px 0 0}
 .guarantee{display:flex;gap:14px;align-items:flex-start;margin-top:20px;padding:16px 18px;background:var(--tint)}
-.guarantee .seal{flex:none;width:32px;height:32px;border:2px solid var(--shu);color:var(--shu);display:grid;place-items:center;font:800 14px var(--f-mincho);border-radius:50%}
 .guarantee b{display:block}
 
 /* weekly program strip */
-.weekly{background:var(--shu);color:var(--on-shu);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding-block:44px;margin-top:64px}
+.weekly{background:var(--sumi);color:var(--paper);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding-block:44px;margin-top:64px}
 .weekly>*{min-width:0}
 .weekly h2{margin:0 0 6px;font:900 clamp(24px,3.4vw,38px)/1.1 var(--f-sans);text-transform:uppercase}
 .weekly p{margin:0;max-width:40em}
-.weekly .btn{border-color:var(--on-shu)}
+.weekly .btn{border-color:var(--paper)}
 
 footer{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px;padding-block:56px 40px;border-top:1px solid var(--rule);font-size:13px;color:var(--ink2)}
 footer>*{min-width:0}
 footer h4{margin:0 0 10px;color:var(--sumi)}
 footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 footer a{text-decoration:none}
-footer a:hover{color:var(--shu)}
+footer a:hover{color:var(--sumi)}
 .fbrand .wordmark{color:var(--sumi);font-size:16px}
 .legal{grid-column:1/-1;border-top:1px solid var(--rule);padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
@@ -134,9 +126,7 @@ footer a:hover{color:var(--shu)}
   .row{grid-template-columns:1fr;gap:14px}
   .grid2,ol.steps{grid-template-columns:1fr}
   .weekly{grid-template-columns:1fr}
-  .campaign .inner{grid-template-columns:1fr}
-  .spine{writing-mode:horizontal-tb;font-size:44px}
-  .proof{gap:10px}
+    .proof{gap:10px}
   .apply{display:none}
   .wordmark{font-size:14px;letter-spacing:.16em}
   header.top{grid-template-columns:1fr}
@@ -158,7 +148,7 @@ footer a:hover{color:var(--shu)}
     <a href="#weekly">Journal</a>
   </nav>
   <a class="mark" href="#top" aria-label="BE THE BRIDGE">
-    <span class="hanko" aria-hidden="true">棒田</span>
+    <span class="flag" role="img" aria-label="Japan"></span>
     <span class="wordmark">BE THE BRIDGE</span>
   </a>
   <div class="tools">
@@ -174,7 +164,6 @@ footer a:hover{color:var(--shu)}
 <main id="top">
   <section class="campaign" aria-label="Campaign">
     <div class="inner g">
-      <p class="spine" aria-hidden="true">架け橋</p>
       <div>
         <p class="season label">BE THE BRIDGE · Fall 2026 · <span data-i="season"></span></p>
         <h1>What you do <em>next</em> does.</h1>
@@ -185,7 +174,6 @@ footer a:hover{color:var(--shu)}
         </div>
       </div>
     </div>
-    <svg viewBox="0 0 1440 220" aria-hidden="true"><path d="M-20 220 Q720 -60 1460 220"/></svg>
   </section>
 
   <div class="g" id="jvelo">
@@ -204,7 +192,7 @@ footer a:hover{color:var(--shu)}
 
     <div class="rows">
       <div class="row" id="coach">
-        <h3><span aria-hidden="true">師</span><span data-i="coachH" style="all:unset"></span></h3>
+        <h3><span data-i="coachH"></span></h3>
         <div class="grid2">
           <div class="cred"><b>NPB · KBO</b><p data-i="c1"></p></div>
           <div class="cred"><b>NASM-PES</b><p data-i="c2"></p></div>
@@ -213,15 +201,15 @@ footer a:hover{color:var(--shu)}
         </div>
       </div>
       <div class="row" id="for">
-        <h3><span aria-hidden="true">志</span><span data-i="forH" style="all:unset"></span></h3>
+        <h3><span data-i="forH"></span></h3>
         <ul class="for"><li data-i="f1"></li><li data-i="f2"></li><li data-i="f3"></li><li data-i="f4"></li></ul>
       </div>
       <div class="row" id="how">
-        <h3><span aria-hidden="true">流</span><span data-i="howH" style="all:unset"></span></h3>
+        <h3><span data-i="howH"></span></h3>
         <ol class="steps"><li data-i="s1"></li><li data-i="s2"></li><li data-i="s3"></li></ol>
       </div>
       <div class="row" id="pricing">
-        <h3><span aria-hidden="true">価</span><span data-i="priceH" style="all:unset"></span></h3>
+        <h3><span data-i="priceH"></span></h3>
         <div>
           <div class="tablewrap">
             <table>
@@ -234,7 +222,7 @@ footer a:hover{color:var(--shu)}
             </table>
           </div>
           <p class="small" data-i="kidNote"></p>
-          <div class="guarantee"><span class="seal" aria-hidden="true">証</span><div><b data-i="gH"></b><span data-i="g"></span></div></div>
+          <div class="guarantee"><div><b data-i="gH"></b><span data-i="g"></span></div></div>
           <p class="small" data-i="notes"></p>
         </div>
       </div>
