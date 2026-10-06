@@ -5,220 +5,300 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>BE THE BRIDGE | J-Velo</title>
-<meta name="description" content="BE THE BRIDGE: J-Velo, a Japanese pitching velocity program by Yudai Boda. Video analysis and online coaching from Japan.">
+<meta name="description" content="BE THE BRIDGE by Yudai Boda. Training (J-Velo), apparel, community and more, from Japan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a single column on paper, a vertical kanji spine at the left edge, one vermilion arch (a taiko bridge and a pitch's flight) as the only ornament */
+/* Layout: a house-of-brands storefront. Thin announcement bar, centered seal-and-wordmark header, one full-bleed campaign, four division tiles, then the open division (J-Velo) in full. Paper, sumi, one vermilion. */
 :root{
-  --paper:#F6F6F3; --sumi:#141414; --ink2:#5C5A57; --rule:#DEDCD7;
-  --shu:#C8361E; --shu-ink:#FFFFFF; --surface:#FFFFFF;
+  --paper:#FFFFFF; --sumi:#111111; --ink2:#6B6966; --rule:#E4E2DE; --tint:#F3F2EF;
+  --shu:#C8361E; --on-shu:#FFFFFF;
+  --night:#0E0E0E; --on-night:#F2F1ED; --night-2:#9C9A95;
   --f-mincho:"Shippori Mincho B1","Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
-  --f-body:"Noto Sans JP","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-sans:"Noto Sans JP","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#121212; --sumi:#EDECE8; --ink2:#A3A09A; --rule:#2C2B29;
-  --shu:#E4553A; --shu-ink:#121212; --surface:#1A1A19; color-scheme:dark}}
+  --paper:#0B0B0B; --sumi:#EEEDE9; --ink2:#A09D97; --rule:#262523; --tint:#161615;
+  --shu:#E4553A; --on-shu:#0B0B0B; --night:#161615; --on-night:#F2F1ED; --night-2:#A09D97; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#121212; --sumi:#EDECE8; --ink2:#A3A09A; --rule:#2C2B29;
-  --shu:#E4553A; --shu-ink:#121212; --surface:#1A1A19; color-scheme:dark}
+  --paper:#0B0B0B; --sumi:#EEEDE9; --ink2:#A09D97; --rule:#262523; --tint:#161615;
+  --shu:#E4553A; --on-shu:#0B0B0B; --night:#161615; --on-night:#F2F1ED; --night-2:#A09D97; color-scheme:dark}
 
 html:lang(ko) body{font-family:"Noto Sans KR","Noto Sans JP",system-ui,sans-serif}
-body{background:var(--paper);color:var(--sumi);font-family:var(--f-body);font-size:16px;line-height:1.8;padding-inline:16px;padding-block:0}
-.wrap{max-width:960px;margin:0 auto;position:relative}
+body{background:var(--paper);color:var(--sumi);font-family:var(--f-sans);font-size:15px;line-height:1.75}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--shu);outline-offset:3px}
+.g{padding-inline:max(16px,3vw)}
+.label{font:500 11px var(--f-mono);letter-spacing:.18em;text-transform:uppercase}
+.caps{font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+
+/* announcement */
+.ann{background:var(--sumi);color:var(--paper);text-align:center;padding-block:9px;font-size:12px;letter-spacing:.08em}
+.ann a{text-decoration:underline;text-underline-offset:3px}
 
 /* header */
-header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:24px}
-.mark{display:flex;align-items:center;gap:12px;text-decoration:none}
-.hanko{width:40px;height:40px;flex:none;background:var(--shu);color:var(--shu-ink);display:grid;place-items:center;border-radius:4px;font:800 14px/1.05 var(--f-mincho);writing-mode:vertical-rl;letter-spacing:.05em}
-.wordmark{display:flex;flex-direction:column;line-height:1.15}
-.wordmark b{font:700 17px var(--f-mincho);letter-spacing:.22em}
-.wordmark small{font:400 11px var(--f-mono);letter-spacing:.14em;color:var(--ink2);text-transform:uppercase}
+header.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding-block:18px;border-bottom:1px solid var(--rule);position:sticky;top:env(safe-area-inset-top,0px);background:var(--paper);z-index:5}
+header.top>*{min-width:0}
+nav.main{display:flex;gap:22px;flex-wrap:wrap}
+nav.main a{text-decoration:none}
+nav.main a:hover{color:var(--shu)}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;justify-self:center}
+.hanko{width:34px;height:34px;flex:none;background:var(--shu);color:var(--on-shu);display:grid;place-items:center;border-radius:3px;font:800 12px/1.05 var(--f-mincho);writing-mode:vertical-rl}
+.wordmark{font:900 18px var(--f-sans);letter-spacing:.28em;white-space:nowrap}
+.tools{display:flex;justify-content:flex-end;align-items:center;gap:14px;flex-wrap:wrap}
 .langs{display:flex;gap:2px}
-.langs button{font:500 12px var(--f-mono);background:transparent;color:var(--ink2);border:0;border-bottom:1px solid transparent;padding:6px 8px;cursor:pointer;letter-spacing:.06em}
+.langs button{font:500 11px var(--f-mono);background:transparent;color:var(--ink2);border:0;border-bottom:1px solid transparent;padding:4px 6px;cursor:pointer;letter-spacing:.08em}
 .langs button[aria-pressed="true"]{color:var(--sumi);border-bottom-color:var(--shu)}
+.apply{background:var(--sumi);color:var(--paper);text-decoration:none;padding:8px 14px}
 
-/* hero */
-.hero{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,5vw,56px);padding-block:clamp(40px,8vw,88px) 24px}
-.hero>*{min-width:0}
-.spine{writing-mode:vertical-rl;font:800 clamp(40px,7vw,72px)/1 var(--f-mincho);color:var(--shu);letter-spacing:.12em;margin:0;user-select:none}
-.spine span{display:block;font:500 12px var(--f-mono);letter-spacing:.3em;color:var(--ink2);margin-right:12px;text-transform:uppercase}
-.origin{font:500 12px var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);margin:0 0 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.origin i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--shu)}
-h1{font:700 clamp(30px,4.8vw,50px)/1.35 var(--f-mincho);margin:0 0 24px;text-wrap:balance;letter-spacing:.01em}
-.lede{color:var(--ink2);font-size:16px;margin:0 0 32px;max-width:36em}
-.cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;text-decoration:none;font-weight:500;font-size:15px;padding:13px 24px;border:1px solid var(--sumi);letter-spacing:.04em}
-.btn.primary{background:var(--shu);border-color:var(--shu);color:var(--shu-ink)}
-.btn.ghost{background:transparent;color:var(--sumi)}
-.btn:hover{opacity:.88}
-
-/* the arch */
-.arch{display:block;width:100%;height:auto;max-width:100%;margin-block:8px 0}
-.arch path{fill:none;stroke:var(--shu);stroke-width:2.5;stroke-linecap:round}
-.arch line{stroke:var(--rule);stroke-width:1}
-.arch circle{fill:var(--shu)}
+/* campaign */
+.campaign{background:var(--night);color:var(--on-night);position:relative;overflow:hidden}
+.campaign .inner{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,56px);align-items:end;padding-block:clamp(56px,10vw,128px) clamp(40px,6vw,72px)}
+.campaign .inner>*{min-width:0}
+.spine{writing-mode:vertical-rl;font:800 clamp(56px,9vw,112px)/1 var(--f-mincho);color:var(--shu);margin:0;letter-spacing:.08em}
+.season{color:var(--night-2);margin:0 0 18px}
+.campaign h1{font:900 clamp(40px,8vw,104px)/.98 var(--f-sans);letter-spacing:-.02em;text-transform:uppercase;margin:0 0 22px;text-wrap:balance}
+.campaign h1 em{font-style:normal;color:var(--shu)}
+.campaign .sub{font-size:16px;color:var(--night-2);max-width:34em;margin:0 0 28px}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:14px 22px;border:1px solid currentColor}
+.btn.fill{background:var(--shu);border-color:var(--shu);color:var(--on-shu)}
+.campaign svg{position:absolute;inset:auto 0 0 0;width:100%;height:auto;max-width:100%;pointer-events:none}
+.campaign svg path{fill:none;stroke:var(--shu);stroke-width:2;opacity:.55}
 @media (prefers-reduced-motion:no-preference){
-  .arch path{stroke-dasharray:1200;stroke-dashoffset:0;animation:draw 1.6s cubic-bezier(.4,0,.2,1) both}
-  @keyframes draw{from{stroke-dashoffset:1200}to{stroke-dashoffset:0}}
+  .campaign svg path{stroke-dasharray:1600;animation:draw 2s cubic-bezier(.4,0,.2,1) both}
+  @keyframes draw{from{stroke-dashoffset:1600}to{stroke-dashoffset:0}}
 }
 
-/* proof */
-.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-block:8px 48px;font-variant-numeric:tabular-nums}
-.proof>div{min-width:0;border-top:1px solid var(--sumi);padding-top:14px}
-.proof .k{font:500 11px var(--f-mono);letter-spacing:.18em;color:var(--ink2);text-transform:uppercase}
-.proof .v{font:700 clamp(30px,5vw,44px)/1.1 var(--f-mincho);margin-top:6px}
-.proof .v small{font:400 13px var(--f-mono);color:var(--ink2);margin-left:6px}
+/* divisions */
+.divisions{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--paper);padding-block:2px}
+.div{position:relative;aspect-ratio:3/4;max-width:100%;background:var(--tint);display:flex;flex-direction:column;justify-content:space-between;padding:20px;text-decoration:none;overflow:hidden;min-width:0}
+.div .kanji{font:800 clamp(56px,8vw,112px)/1 var(--f-mincho);color:var(--sumi);opacity:.09;position:absolute;right:14px;top:14px}
+.div>div{position:relative;z-index:1}
+.div.open{background:var(--sumi);color:var(--paper)}
+.div.open .kanji{color:var(--shu);opacity:1}
+.div h3{margin:0;font:900 22px var(--f-sans);letter-spacing:.06em;text-transform:uppercase}
+.div p{margin:6px 0 0;font-size:13px;color:var(--ink2);max-width:22em}
+.div.open p{color:var(--night-2)}
+.badge{align-self:flex-start;font:500 10px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;padding:4px 8px;border:1px solid currentColor}
+.div.open .badge{background:var(--shu);border-color:var(--shu);color:var(--on-shu)}
+
+/* program */
+.sechead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-block:64px 24px;border-bottom:1px solid var(--sumi)}
+.sechead h2{margin:0;font:900 clamp(28px,4vw,44px)/1.05 var(--f-sans);text-transform:uppercase;letter-spacing:.02em}
+.sechead p{margin:0;color:var(--ink2)}
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-block:28px;font-variant-numeric:tabular-nums;border-bottom:1px solid var(--rule)}
+.proof>div{min-width:0}
+.proof .v{font:800 clamp(34px,5vw,56px)/1.05 var(--f-mincho);margin-top:4px}
+.proof .v small{font:400 12px var(--f-mono);color:var(--ink2);margin-left:6px}
 .proof .gain .v{color:var(--shu)}
-.proof-note{grid-column:1/-1;font-size:12px;color:var(--ink2);margin:0}
-
-/* sections */
-section{padding-block:56px;border-top:1px solid var(--rule);display:grid;grid-template-columns:180px 1fr;gap:24px}
-section>*{min-width:0}
-.sh{margin:0}
-.sh .kanji{display:block;font:800 30px/1 var(--f-mincho);color:var(--shu);letter-spacing:.1em;margin-bottom:10px}
-.sh h2{font:700 18px/1.4 var(--f-mincho);margin:0;letter-spacing:.04em;text-wrap:balance}
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 32px}
+.proof .note{grid-column:1/-1;font-size:12px;color:var(--ink2);margin:0}
+.rows{display:grid}
+.row{display:grid;grid-template-columns:200px 1fr;gap:24px;padding-block:36px;border-bottom:1px solid var(--rule)}
+.row>*{min-width:0}
+.row h3{margin:0;font:700 12px var(--f-sans);letter-spacing:.16em;text-transform:uppercase}
+.row h3 span{display:block;font:800 26px/1.2 var(--f-mincho);color:var(--shu);letter-spacing:.06em;margin-bottom:6px;text-transform:none}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 32px}
 .grid2>*{min-width:0}
-.cred b{display:block;font:700 20px var(--f-mincho);letter-spacing:.06em}
-.cred p{margin:4px 0 0;color:var(--ink2);font-size:15px}
-ul.for{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.cred b{display:block;font:800 18px var(--f-mincho);letter-spacing:.04em}
+.cred p{margin:2px 0 0;color:var(--ink2);font-size:14px}
+ul.for{margin:0;padding:0;list-style:none;display:grid;gap:10px}
 ul.for li{padding-left:22px;position:relative}
-ul.for li::before{content:"";position:absolute;left:0;top:.8em;width:10px;height:1px;background:var(--shu)}
+ul.for li::before{content:"";position:absolute;left:0;top:.85em;width:10px;height:1px;background:var(--shu)}
 ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s}
-ol.steps li{counter-increment:s;min-width:0;font-size:15px}
-ol.steps li::before{content:counter(s,cjk-ideographic);display:block;font:800 26px var(--f-mincho);color:var(--shu);margin-bottom:6px}
-
+ol.steps li{counter-increment:s;min-width:0;font-size:14px}
+ol.steps li::before{content:counter(s,cjk-ideographic);display:block;font:800 24px var(--f-mincho);color:var(--shu);margin-bottom:4px}
 .tablewrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
-th,td{text-align:left;padding:14px 12px 14px 0;border-bottom:1px solid var(--rule);white-space:nowrap}
+th,td{text-align:left;padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);white-space:nowrap}
 th{font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
-td.p{font:500 18px var(--f-mincho)}
-.small{color:var(--ink2);font-size:14px;margin:14px 0 0}
-.guarantee{display:flex;gap:14px;align-items:flex-start;margin-top:24px;padding:18px 20px;background:var(--surface);border:1px solid var(--rule)}
-.guarantee .seal{flex:none;width:34px;height:34px;border:2px solid var(--shu);color:var(--shu);display:grid;place-items:center;font:800 15px var(--f-mincho);border-radius:50%}
-.guarantee b{display:block;font-family:var(--f-mincho)}
-.links{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+td.p{font:800 17px var(--f-mincho)}
+.small{color:var(--ink2);font-size:13px;margin:12px 0 0}
+.guarantee{display:flex;gap:14px;align-items:flex-start;margin-top:20px;padding:16px 18px;background:var(--tint)}
+.guarantee .seal{flex:none;width:32px;height:32px;border:2px solid var(--shu);color:var(--shu);display:grid;place-items:center;font:800 14px var(--f-mincho);border-radius:50%}
+.guarantee b{display:block}
 
-footer{border-top:1px solid var(--sumi);padding-block:32px 48px;color:var(--ink2);font-size:13px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-footer .fmark{font:700 14px var(--f-mincho);letter-spacing:.2em;color:var(--sumi)}
+/* weekly program strip */
+.weekly{background:var(--shu);color:var(--on-shu);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding-block:44px;margin-top:64px}
+.weekly>*{min-width:0}
+.weekly h2{margin:0 0 6px;font:900 clamp(24px,3.4vw,38px)/1.1 var(--f-sans);text-transform:uppercase}
+.weekly p{margin:0;max-width:40em}
+.weekly .btn{border-color:var(--on-shu)}
 
-@media (max-width:720px){
-  section{grid-template-columns:1fr;gap:20px}
-  .grid2,ol.steps{grid-template-columns:1fr}
-  .proof{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+footer{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px;padding-block:56px 40px;border-top:1px solid var(--rule);font-size:13px;color:var(--ink2)}
+footer>*{min-width:0}
+footer h4{margin:0 0 10px;color:var(--sumi)}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--shu)}
+.fbrand .wordmark{color:var(--sumi);font-size:16px}
+.legal{grid-column:1/-1;border-top:1px solid var(--rule);padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  header.top{grid-template-columns:1fr auto}
+  nav.main{grid-column:1/-1;grid-row:2;justify-content:center;gap:16px}
+  .mark{justify-self:start}
+  .divisions{grid-template-columns:repeat(2,1fr)}
+  footer{grid-template-columns:1fr 1fr}
+  .fbrand{grid-column:1/-1}
 }
-@media (max-width:440px){
-  .hero{grid-template-columns:1fr}
-  .spine{writing-mode:horizontal-tb;font-size:34px}
-  .spine span{display:inline;margin:0 0 0 10px}
+@media (max-width:640px){
+  .row{grid-template-columns:1fr;gap:14px}
+  .grid2,ol.steps{grid-template-columns:1fr}
+  .weekly{grid-template-columns:1fr}
+  .campaign .inner{grid-template-columns:1fr}
+  .spine{writing-mode:horizontal-tb;font-size:44px}
+  .proof{gap:10px}
+  .apply{display:none}
+  .wordmark{font-size:14px;letter-spacing:.16em}
+  header.top{grid-template-columns:1fr}
+  .mark{order:-1}
+  .tools{justify-content:flex-start}
+  nav.main{grid-row:auto;justify-content:flex-start}
 }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <header class="top">
-    <a class="mark" href="#top" aria-label="BE THE BRIDGE">
-      <span class="hanko" aria-hidden="true">棒田</span>
-      <span class="wordmark"><b>BE THE BRIDGE</b><small>J-Velo · Tokyo, Japan</small></span>
-    </a>
+<div class="ann g"><span data-i="ann"></span> <a href="#jvelo" data-i="annLink"></a></div>
+
+<header class="top g">
+  <nav class="main caps" aria-label="Main">
+    <a href="#jvelo">Training</a>
+    <a href="#divisions">Apparel</a>
+    <a href="#divisions">Community</a>
+    <a href="#divisions">Estate</a>
+    <a href="#weekly">Journal</a>
+  </nav>
+  <a class="mark" href="#top" aria-label="BE THE BRIDGE">
+    <span class="hanko" aria-hidden="true">棒田</span>
+    <span class="wordmark">BE THE BRIDGE</span>
+  </a>
+  <div class="tools">
     <div class="langs" role="group" aria-label="Language">
       <button type="button" data-lang="ko" id="lang-ko">한국어</button>
       <button type="button" data-lang="en" id="lang-en">EN</button>
       <button type="button" data-lang="ja" id="lang-ja">日本語</button>
     </div>
-  </header>
+    <a class="apply caps" href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" data-i="applyShort"></a>
+  </div>
+</header>
 
-  <div class="hero" id="top">
-    <p class="spine" aria-hidden="true">架け橋<span>Kakehashi</span></p>
-    <div>
-      <p class="origin"><i aria-hidden="true"></i><span data-i="eyebrow"></span></p>
-      <h1 data-i="h1"></h1>
-      <p class="lede" data-i="lede"></p>
-      <div class="cta">
-        <a class="btn primary" href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" data-i="cta"></a>
-        <a class="btn ghost" href="#pricing" data-i="cta2"></a>
+<main id="top">
+  <section class="campaign" aria-label="Campaign">
+    <div class="inner g">
+      <p class="spine" aria-hidden="true">架け橋</p>
+      <div>
+        <p class="season label">BE THE BRIDGE · Fall 2026 · <span data-i="season"></span></p>
+        <h1>What you do <em>next</em> does.</h1>
+        <p class="sub" data-i="h1"></p>
+        <div class="btns">
+          <a class="btn fill" href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" data-i="cta"></a>
+          <a class="btn" href="#jvelo" data-i="learn"></a>
+        </div>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 220" aria-hidden="true"><path d="M-20 220 Q720 -60 1460 220"/></svg>
+  </section>
+
+  <div class="divisions" id="divisions">
+    <a class="div open" href="#jvelo">
+      <span class="badge" data-i="bOpen"></span>
+      <div><h3>J-Velo</h3><p data-i="dTrain"></p></div>
+      <span class="kanji" aria-hidden="true">速</span>
+    </a>
+    <div class="div">
+      <span class="badge" data-i="bSoon"></span>
+      <div><h3>Apparel</h3><p data-i="dApparel"></p></div>
+      <span class="kanji" aria-hidden="true">衣</span>
+    </div>
+    <div class="div">
+      <span class="badge" data-i="bSoon"></span>
+      <div><h3>Community</h3><p data-i="dCommunity"></p></div>
+      <span class="kanji" aria-hidden="true">輪</span>
+    </div>
+    <div class="div">
+      <span class="badge" data-i="bLater"></span>
+      <div><h3>Estate</h3><p data-i="dEstate"></p></div>
+      <span class="kanji" aria-hidden="true">住</span>
+    </div>
+  </div>
+
+  <div class="g" id="jvelo">
+    <div class="sechead">
+      <h2>J-Velo</h2>
+      <p data-i="eyebrow"></p>
+    </div>
+    <p class="small" style="margin-top:20px;max-width:44em;font-size:15px;color:var(--sumi)" data-i="lede"></p>
+
+    <div class="proof" aria-label="Rapsodo sample">
+      <div><div class="label" style="color:var(--ink2)">Before</div><div class="v">128<small>km/h</small></div></div>
+      <div><div class="label" style="color:var(--ink2)">After · 12 wks</div><div class="v">139<small>km/h</small></div></div>
+      <div class="gain"><div class="label" style="color:var(--ink2)">Gain</div><div class="v">+11<small>km/h</small></div></div>
+      <p class="note" data-i="sample"></p>
+    </div>
+
+    <div class="rows">
+      <div class="row" id="coach">
+        <h3><span aria-hidden="true">師</span><span data-i="coachH" style="all:unset"></span></h3>
+        <div class="grid2">
+          <div class="cred"><b>NPB · KBO</b><p data-i="c1"></p></div>
+          <div class="cred"><b>NASM-PES</b><p data-i="c2"></p></div>
+          <div class="cred"><b>Rapsodo</b><p data-i="c3"></p></div>
+          <div class="cred"><b data-i="c4h"></b><p data-i="c4"></p></div>
+        </div>
+      </div>
+      <div class="row" id="for">
+        <h3><span aria-hidden="true">志</span><span data-i="forH" style="all:unset"></span></h3>
+        <ul class="for"><li data-i="f1"></li><li data-i="f2"></li><li data-i="f3"></li><li data-i="f4"></li></ul>
+      </div>
+      <div class="row" id="how">
+        <h3><span aria-hidden="true">流</span><span data-i="howH" style="all:unset"></span></h3>
+        <ol class="steps"><li data-i="s1"></li><li data-i="s2"></li><li data-i="s3"></li></ol>
+      </div>
+      <div class="row" id="pricing">
+        <h3><span aria-hidden="true">価</span><span data-i="priceH" style="all:unset"></span></h3>
+        <div>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th data-i="tPlan"></th><th data-i="tAdult"></th><th data-i="tKid"></th></tr></thead>
+              <tbody>
+                <tr><td data-i="pSingle"></td><td class="p" data-i="pS1"></td><td class="p" data-i="pS2"></td></tr>
+                <tr><td data-i="pMonthly"></td><td class="p" data-i="pM1"></td><td class="p" data-i="pM2"></td></tr>
+                <tr><td data-i="pLive"></td><td class="p" data-i="pL1"></td><td class="p" data-i="pL2"></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small" data-i="kidNote"></p>
+          <div class="guarantee"><span class="seal" aria-hidden="true">証</span><div><b data-i="gH"></b><span data-i="g"></span></div></div>
+          <p class="small" data-i="notes"></p>
+        </div>
       </div>
     </div>
   </div>
 
-  <svg class="arch" viewBox="0 0 960 120" role="img" aria-label="Bridge arch">
-    <line x1="0" y1="110" x2="960" y2="110"/>
-    <path d="M40 110 Q480 -50 920 110"/>
-    <circle cx="920" cy="110" r="5"/>
-  </svg>
+  <section class="weekly g" id="weekly">
+    <div>
+      <p class="label" style="margin:0 0 8px">Weekly · #BeTheBridge</p>
+      <h2>Next Pitch Challenge</h2>
+      <p data-i="weekly"></p>
+    </div>
+    <a class="btn" href="https://www.instagram.com/neolab.boda/" target="_blank" rel="noopener">Instagram @neolab.boda</a>
+  </section>
+</main>
 
-  <div class="proof" aria-label="Rapsodo sample">
-    <div><div class="k">Before</div><div class="v">128<small>km/h</small></div></div>
-    <div><div class="k">After · 12 wks</div><div class="v">139<small>km/h</small></div></div>
-    <div class="gain"><div class="k">Gain</div><div class="v">+11<small>km/h</small></div></div>
-    <p class="proof-note" data-i="sample"></p>
+<footer class="g">
+  <div class="fbrand">
+    <span class="wordmark">BE THE BRIDGE</span>
+    <p style="margin:10px 0 0;max-width:30em" data-i="fAbout"></p>
   </div>
-
-  <section id="coach">
-    <div class="sh"><span class="kanji" aria-hidden="true">師</span><h2 data-i="coachH"></h2></div>
-    <div class="grid2">
-      <div class="cred"><b>NPB · KBO</b><p data-i="c1"></p></div>
-      <div class="cred"><b>NASM-PES</b><p data-i="c2"></p></div>
-      <div class="cred"><b>Rapsodo</b><p data-i="c3"></p></div>
-      <div class="cred"><b data-i="c4h"></b><p data-i="c4"></p></div>
-    </div>
-  </section>
-
-  <section id="for">
-    <div class="sh"><span class="kanji" aria-hidden="true">志</span><h2 data-i="forH"></h2></div>
-    <ul class="for">
-      <li data-i="f1"></li><li data-i="f2"></li><li data-i="f3"></li><li data-i="f4"></li>
-    </ul>
-  </section>
-
-  <section id="how">
-    <div class="sh"><span class="kanji" aria-hidden="true">流</span><h2 data-i="howH"></h2></div>
-    <ol class="steps">
-      <li data-i="s1"></li><li data-i="s2"></li><li data-i="s3"></li>
-    </ol>
-  </section>
-
-  <section id="pricing">
-    <div class="sh"><span class="kanji" aria-hidden="true">価</span><h2 data-i="priceH"></h2></div>
-    <div>
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th data-i="tPlan"></th><th data-i="tAdult"></th><th data-i="tKid"></th></tr></thead>
-          <tbody>
-            <tr><td data-i="pSingle"></td><td class="p" data-i="pS1"></td><td class="p" data-i="pS2"></td></tr>
-            <tr><td data-i="pMonthly"></td><td class="p" data-i="pM1"></td><td class="p" data-i="pM2"></td></tr>
-            <tr><td data-i="pLive"></td><td class="p" data-i="pL1"></td><td class="p" data-i="pL2"></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="small" data-i="kidNote"></p>
-      <div class="guarantee"><span class="seal" aria-hidden="true">証</span><div><b data-i="gH"></b><span data-i="g"></span></div></div>
-      <p class="small" data-i="notes"></p>
-    </div>
-  </section>
-
-  <section id="watch">
-    <div class="sh"><span class="kanji" aria-hidden="true">学</span><h2 data-i="watchH"></h2></div>
-    <div>
-      <p style="margin:0" data-i="watch"></p>
-      <div class="links">
-        <a class="btn ghost" href="https://www.instagram.com/neolab.boda/" target="_blank" rel="noopener">Instagram @neolab.boda</a>
-        <a class="btn ghost" href="https://www.tiktok.com/@neolab.boda" target="_blank" rel="noopener">TikTok @neolab.boda</a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <span class="fmark">BE THE BRIDGE</span>
-    <span>© BE THE BRIDGE · J-Velo by Yudai Boda · Made in Japan</span>
-  </footer>
-</div>
+  <div><h4 class="caps">Training</h4><ul><li><a href="#jvelo">J-Velo</a></li><li><a href="#pricing" data-i="priceH"></a></li><li><a href="#how" data-i="howH"></a></li></ul></div>
+  <div><h4 class="caps">Brand</h4><ul><li>Apparel</li><li>Community</li><li>Estate</li></ul></div>
+  <div><h4 class="caps">Social</h4><ul><li><a href="https://www.instagram.com/neolab.boda/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.tiktok.com/@neolab.boda" target="_blank" rel="noopener">TikTok</a></li><li>@neolab.boda</li></ul></div>
+  <div class="legal"><span>© 2026 BE THE BRIDGE · Yudai Boda</span><span>Made in Japan</span></div>
+</footer>
 
 <script>
 const T={
@@ -253,6 +333,18 @@ pS1:"$99",pS2:"$79",pM1:"$299 / 月",pM2:"$239 / 月",pL1:"$149",pL2:"$119",
 kidNote:"小中学生は、球速よりも正しいフォームと故障予防を中心に指導します。",gH:"初回の添削の満足保証。",g:"初回の添削に満足できなければ、全額を返金します。",
 watchH:"無料のドリル動画",watch:"球速アップのドリルと指導事例を、TikTokとInstagramで毎週公開しています。",notes:"18歳未満は保護者の同意が必要です。動画は指導にだけ使い、事例として紹介するときは事前に同意を得て、数字だけを使います。"}
 };
+const T2={
+ko:{ann:"J-Velo 온라인 영상 피드백, 한국에서 접수 시작.",annLink:"자세히 보기",applyShort:"신청",season:"J-Velo 한국 런칭",learn:"자세히 보기",
+bOpen:"Open",bSoon:"Coming soon",bLater:"Future",dTrain:"일본식 구속 향상 프로그램. 영상 피드백과 온라인 지도.",dApparel:"훈련과 일상을 잇는 웨어.",dCommunity:"국경을 넘어 선수와 코치가 연결되는 곳.",dEstate:"선수가 머물고 훈련하는 공간.",
+weekly:"#BeTheBridge 를 달아 당신의 1구를 올려주세요. 매주 1명을 무료로 피드백합니다.",fAbout:"일본과 세계의 야구를 잇는 브랜드. 운영: 棒田雄大 (Yudai Boda)."},
+en:{ann:"J-Velo online video analysis is now open in Korea.",annLink:"Learn more",applyShort:"Apply",season:"J-Velo Korea launch",learn:"Learn more",
+bOpen:"Open",bSoon:"Coming soon",bLater:"Future",dTrain:"The Japanese velocity program. Video analysis and online coaching.",dApparel:"Wear that carries training into everyday life.",dCommunity:"Where players and coaches connect across borders.",dEstate:"Places for players to stay and train.",
+weekly:"Post one pitch with #BeTheBridge. Every week, one player gets a free analysis.",fAbout:"A brand that bridges Japanese and world baseball. Run by Yudai Boda."},
+ja:{ann:"J-Veloのオンライン動画添削、韓国で受付を始めました。",annLink:"詳しく見る",applyShort:"申し込む",season:"J-Velo 韓国ローンチ",learn:"詳しく見る",
+bOpen:"Open",bSoon:"Coming soon",bLater:"Future",dTrain:"日本式の球速アップ・プログラム。動画添削とオンライン指導。",dApparel:"練習と日常をつなぐウェア。",dCommunity:"国をこえて選手とコーチがつながる場所。",dEstate:"選手が滞在し、練習できる場所。",
+weekly:"#BeTheBridge を付けて、あなたの1球を投稿してください。毎週1人を無料で添削します。",fAbout:"日本と世界の野球をつなぐブランド。運営：棒田雄大。"}
+};
+for(const k in T2) Object.assign(T[k],T2[k]);
 function setLang(l){
   if(!T[l]) l="en";
   document.documentElement.lang=l;
