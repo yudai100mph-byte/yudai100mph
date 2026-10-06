@@ -5,265 +5,838 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>BE THE BRIDGE | J-Velo</title>
-<meta name="description" content="BE THE BRIDGE: J-Velo, a Japanese pitching velocity program by Yudai Boda. Video analysis and online coaching from Japan.">
+<meta name="description" content="BE THE BRIDGE by Yudai Boda. J-Velo, the Japanese pitching velocity program: video analysis and online coaching from Japan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a single column on paper, a vertical kanji spine at the left edge, one vermilion arch (a taiko bridge and a pitch's flight) as the only ornament */
+/* Layout: KITH / TERROIR TOKYO patterns. Minimal header (flag + wordmark, small utility links), full-bleed black hero with the brand set huge,
+   then modular card grids, a dated News list, Events, Follow, footer. Black and white; the only colour is the red of the flag. */
 :root{
-  --paper:#F6F6F3; --sumi:#141414; --ink2:#5C5A57; --rule:#DEDCD7;
-  --shu:#C8361E; --shu-ink:#FFFFFF; --surface:#FFFFFF;
-  --f-mincho:"Shippori Mincho B1","Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
-  --f-body:"Noto Sans JP","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --paper:#FFFFFF; --sumi:#111111; --ink2:#6B6966; --rule:#E4E2DE; --tint:#F3F2EF; --tint2:#E9E8E4;
+  --flag-white:#FFFFFF; --flag-red:#BC002D;
+  --night:#EEF0EF; --on-night:#111111; --night-2:#6B6E6C; --night-rule:#D6D9D7;
+  --haze-top:#F9FAF9; --haze-mid:#E6EAE9; --haze-fog:rgba(255,255,255,.75);
+  --f-display:"Archivo","Helvetica Neue",Arial,system-ui,sans-serif;
+  --f-sans:"Noto Sans JP","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --gut:max(16px,3vw);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#121212; --sumi:#EDECE8; --ink2:#A3A09A; --rule:#2C2B29;
-  --shu:#E4553A; --shu-ink:#121212; --surface:#1A1A19; color-scheme:dark}}
+  --paper:#0B0B0B; --sumi:#EEEDE9; --ink2:#A09D97; --rule:#262523; --tint:#161615; --tint2:#1E1E1C;
+  --night:#141413; --on-night:#F2F1ED; --night-2:#A09D97; --night-rule:#2E2D2B;
+  --haze-top:#1A1B1B; --haze-mid:#121313; --haze-fog:rgba(30,32,32,.7); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#121212; --sumi:#EDECE8; --ink2:#A3A09A; --rule:#2C2B29;
-  --shu:#E4553A; --shu-ink:#121212; --surface:#1A1A19; color-scheme:dark}
+  --paper:#0B0B0B; --sumi:#EEEDE9; --ink2:#A09D97; --rule:#262523; --tint:#161615; --tint2:#1E1E1C;
+  --night:#141413; --on-night:#F2F1ED; --night-2:#A09D97; --night-rule:#2E2D2B;
+  --haze-top:#1A1B1B; --haze-mid:#121313; --haze-fog:rgba(30,32,32,.7); color-scheme:dark}
 
+html{scroll-behavior:smooth;scroll-padding-top:110px}
 html:lang(ko) body{font-family:"Noto Sans KR","Noto Sans JP",system-ui,sans-serif}
-body{background:var(--paper);color:var(--sumi);font-family:var(--f-body);font-size:16px;line-height:1.8;padding-inline:16px;padding-block:0}
-.wrap{max-width:960px;margin:0 auto;position:relative}
+body{background:var(--paper);color:var(--sumi);font-family:var(--f-sans);font-size:15px;line-height:1.75;overflow-x:clip;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--shu);outline-offset:3px}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.g{padding-inline:var(--gut)}
+.label{font:500 11px/1.5 var(--f-mono);letter-spacing:.18em;text-transform:uppercase}
+.caps{font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.muted{color:var(--ink2)}
+
+/* announcement */
+.ann{background:var(--tint);color:var(--sumi);border-bottom:1px solid var(--rule);text-align:center;padding-block:9px;font-size:12px;letter-spacing:.06em;line-height:1.5}
+.ann a{text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 
 /* header */
-header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:24px}
-.mark{display:flex;align-items:center;gap:12px;text-decoration:none}
-.hanko{width:40px;height:40px;flex:none;background:var(--shu);color:var(--shu-ink);display:grid;place-items:center;border-radius:4px;font:800 14px/1.05 var(--f-mincho);writing-mode:vertical-rl;letter-spacing:.05em}
-.wordmark{display:flex;flex-direction:column;line-height:1.15}
-.wordmark b{font:700 17px var(--f-mincho);letter-spacing:.22em}
-.wordmark small{font:400 11px var(--f-mono);letter-spacing:.14em;color:var(--ink2);text-transform:uppercase}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:12px 24px;flex-wrap:wrap;padding-block:16px;border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--paper);z-index:20}
+.mark{display:inline-flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.flag{width:30px;height:20px;flex:none;background:var(--flag-white);box-shadow:inset 0 0 0 1px var(--rule);display:grid;place-items:center}
+.flag::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--flag-red)}
+.wordmark{font:900 16px/1 var(--f-display);letter-spacing:.2em;white-space:nowrap}
+.util{display:flex;align-items:center;gap:8px 22px;flex-wrap:wrap}
+nav.main{display:flex;gap:4px 20px;flex-wrap:wrap}
+nav.main a,.util a.u{text-decoration:none;padding-block:4px;border-bottom:1px solid transparent}
+nav.main a:hover,.util a.u:hover{border-bottom-color:currentColor}
 .langs{display:flex;gap:2px}
-.langs button{font:500 12px var(--f-mono);background:transparent;color:var(--ink2);border:0;border-bottom:1px solid transparent;padding:6px 8px;cursor:pointer;letter-spacing:.06em}
-.langs button[aria-pressed="true"]{color:var(--sumi);border-bottom-color:var(--shu)}
+.langs button{font:500 11px var(--f-mono);background:transparent;color:var(--ink2);border:0;border-bottom:1px solid transparent;padding:4px 6px;cursor:pointer;letter-spacing:.06em}
+.langs button[aria-pressed="true"]{color:var(--sumi);border-bottom-color:var(--sumi)}
+.apply{background:var(--sumi);color:var(--paper);text-decoration:none;padding:9px 14px}
 
 /* hero */
-.hero{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,5vw,56px);padding-block:clamp(40px,8vw,88px) 24px}
-.hero>*{min-width:0}
-.spine{writing-mode:vertical-rl;font:800 clamp(40px,7vw,72px)/1 var(--f-mincho);color:var(--shu);letter-spacing:.12em;margin:0;user-select:none}
-.spine span{display:block;font:500 12px var(--f-mono);letter-spacing:.3em;color:var(--ink2);margin-right:12px;text-transform:uppercase}
-.origin{font:500 12px var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);margin:0 0 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.origin i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--shu)}
-h1{font:700 clamp(30px,4.8vw,50px)/1.35 var(--f-mincho);margin:0 0 24px;text-wrap:balance;letter-spacing:.01em}
-.lede{color:var(--ink2);font-size:16px;margin:0 0 32px;max-width:36em}
-.cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;text-decoration:none;font-weight:500;font-size:15px;padding:13px 24px;border:1px solid var(--sumi);letter-spacing:.04em}
-.btn.primary{background:var(--shu);border-color:var(--shu);color:var(--shu-ink)}
-.btn.ghost{background:transparent;color:var(--sumi)}
-.btn:hover{opacity:.88}
-
-/* the arch */
-.arch{display:block;width:100%;height:auto;max-width:100%;margin-block:8px 0}
-.arch path{fill:none;stroke:var(--shu);stroke-width:2.5;stroke-linecap:round}
-.arch line{stroke:var(--rule);stroke-width:1}
-.arch circle{fill:var(--shu)}
+.hero{background:linear-gradient(180deg,var(--haze-top) 0%,var(--haze-mid) 62%,var(--night) 100%);color:var(--on-night);position:relative;overflow:hidden;isolation:isolate}
+/* haze: soft fog banks drifting across the hero, over the bridge, under the type */
+.hero::before,.hero::after{content:"";position:absolute;left:-20%;right:-20%;pointer-events:none;z-index:0;filter:blur(40px)}
+.hero::before{top:8%;height:46%;background:radial-gradient(60% 50% at 30% 50%,var(--haze-fog),transparent 70%),radial-gradient(40% 40% at 78% 40%,var(--haze-fog),transparent 70%)}
+.hero::after{bottom:12%;height:34%;background:radial-gradient(55% 60% at 65% 60%,var(--haze-fog),transparent 72%),radial-gradient(35% 50% at 15% 50%,var(--haze-fog),transparent 70%)}
 @media (prefers-reduced-motion:no-preference){
-  .arch path{stroke-dasharray:1200;stroke-dashoffset:0;animation:draw 1.6s cubic-bezier(.4,0,.2,1) both}
-  @keyframes draw{from{stroke-dashoffset:1200}to{stroke-dashoffset:0}}
+  .hero::before{animation:drift 38s ease-in-out infinite alternate}
+  .hero::after{animation:drift 46s ease-in-out infinite alternate-reverse}
+  @keyframes drift{from{transform:translateX(-4%)}to{transform:translateX(4%)}}
 }
-
-/* proof */
-.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-block:8px 48px;font-variant-numeric:tabular-nums}
-.proof>div{min-width:0;border-top:1px solid var(--sumi);padding-top:14px}
-.proof .k{font:500 11px var(--f-mono);letter-spacing:.18em;color:var(--ink2);text-transform:uppercase}
-.proof .v{font:700 clamp(30px,5vw,44px)/1.1 var(--f-mincho);margin-top:6px}
-.proof .v small{font:400 13px var(--f-mono);color:var(--ink2);margin-left:6px}
-.proof .gain .v{color:var(--shu)}
-.proof-note{grid-column:1/-1;font-size:12px;color:var(--ink2);margin:0}
-
-/* sections */
-section{padding-block:56px;border-top:1px solid var(--rule);display:grid;grid-template-columns:180px 1fr;gap:24px}
-section>*{min-width:0}
-.sh{margin:0}
-.sh .kanji{display:block;font:800 30px/1 var(--f-mincho);color:var(--shu);letter-spacing:.1em;margin-bottom:10px}
-.sh h2{font:700 18px/1.4 var(--f-mincho);margin:0;letter-spacing:.04em;text-wrap:balance}
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 32px}
-.grid2>*{min-width:0}
-.cred b{display:block;font:700 20px var(--f-mincho);letter-spacing:.06em}
-.cred p{margin:4px 0 0;color:var(--ink2);font-size:15px}
-ul.for{margin:0;padding:0;list-style:none;display:grid;gap:12px}
-ul.for li{padding-left:22px;position:relative}
-ul.for li::before{content:"";position:absolute;left:0;top:.8em;width:10px;height:1px;background:var(--shu)}
-ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s}
-ol.steps li{counter-increment:s;min-width:0;font-size:15px}
-ol.steps li::before{content:counter(s,cjk-ideographic);display:block;font:800 26px var(--f-mincho);color:var(--shu);margin-bottom:6px}
-
-.tablewrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
-th,td{text-align:left;padding:14px 12px 14px 0;border-bottom:1px solid var(--rule);white-space:nowrap}
-th{font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
-td.p{font:500 18px var(--f-mincho)}
-.small{color:var(--ink2);font-size:14px;margin:14px 0 0}
-.guarantee{display:flex;gap:14px;align-items:flex-start;margin-top:24px;padding:18px 20px;background:var(--surface);border:1px solid var(--rule)}
-.guarantee .seal{flex:none;width:34px;height:34px;border:2px solid var(--shu);color:var(--shu);display:grid;place-items:center;font:800 15px var(--f-mincho);border-radius:50%}
-.guarantee b{display:block;font-family:var(--f-mincho)}
-.links{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
-
-footer{border-top:1px solid var(--sumi);padding-block:32px 48px;color:var(--ink2);font-size:13px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-footer .fmark{font:700 14px var(--f-mincho);letter-spacing:.2em;color:var(--sumi)}
-
-@media (max-width:720px){
-  section{grid-template-columns:1fr;gap:20px}
-  .grid2,ol.steps{grid-template-columns:1fr}
-  .proof{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.hero-in{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end;padding-block:clamp(48px,8vw,112px) calc(var(--bridge-h,300px) + 24px)}
+.hero-in>*{min-width:0}
+.hero .label{color:var(--night-2);margin:0 0 clamp(20px,3vw,36px)}
+.brand{font:900 clamp(60px,13.2vw,208px)/.84 var(--f-display);letter-spacing:-.035em;text-transform:uppercase;margin:0}
+.kake{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;margin:clamp(18px,2.4vw,30px) 0 0;padding-top:16px;border-top:1px solid var(--night-rule)}
+.kake b{font:700 clamp(15px,1.6vw,19px)/1.4 "Noto Sans JP",sans-serif;letter-spacing:.12em}
+.kake span{color:var(--night-2);font-size:13px}
+.hero h1{font:900 clamp(30px,5.2vw,76px)/.98 var(--f-display);letter-spacing:-.02em;text-transform:uppercase;margin:clamp(32px,5vw,64px) 0 16px;text-wrap:balance}
+.hero h1 span{display:block}
+.hero h1 em{font-style:normal;color:var(--flag-red)}
+.hero .ja{font:700 clamp(16px,1.9vw,24px)/1.6 "Noto Sans JP",sans-serif;letter-spacing:.04em;margin:0 0 8px;line-break:strict}
+.hero .ja span{display:block}
+.hero .sub:empty{display:none}
+.hero .sub{font-size:15px;color:var(--night-2);margin:0 0 28px;max-width:38em}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font:700 11px/1.2 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;padding:15px 22px;border:1px solid currentColor;transition:background-color .2s,color .2s}
+.btn.fill{background:var(--on-night);border-color:var(--on-night);color:var(--night)}
+.hero .btn:not(.fill):hover{background:var(--on-night);color:var(--night)}
+.btn.ink{background:var(--sumi);border-color:var(--sumi);color:var(--paper)}
+.btn.line:hover{background:var(--sumi);color:var(--paper)}
+/* the bridge: a suspension bridge silhouette spanning the hero, drawn behind the type (geometry built in JS, 1 SVG unit = 1 CSS px) */
+.span{position:absolute;left:0;right:0;bottom:0;width:100%;max-width:100%;z-index:0;pointer-events:none;overflow:visible}
+.span{-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.85) 55%,#000 80%);mask-image:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.85) 55%,#000 80%)}
+.span *{vector-effect:non-scaling-stroke;fill:none}
+.span .tw{stroke:var(--flag-red);stroke-width:3;stroke-linecap:square}
+.span .beam{stroke:var(--flag-red);stroke-width:2}
+.span .cable{stroke:var(--flag-red);stroke-width:2.5;stroke-linecap:round}
+.span .deck{stroke:var(--on-night);stroke-opacity:.6;stroke-width:2}
+.span .deck2{stroke:var(--on-night);stroke-opacity:.28;stroke-width:1}
+.span .rail{stroke:var(--on-night);stroke-opacity:.2;stroke-width:1}
+.span .hanger{stroke:var(--on-night);stroke-opacity:.16;stroke-width:1}
+.span .anchor{fill:var(--on-night);fill-opacity:.22;stroke:none}
+.span .water{stroke:var(--on-night);stroke-opacity:.1;stroke-width:1}
+@media (prefers-reduced-motion:no-preference){
+  .span:not(.still) .draw{stroke-dasharray:1;animation:draw 1s cubic-bezier(.4,0,.2,1) both}
+  .span:not(.still) .tw{animation-duration:.8s}
+  .span:not(.still) .beam{animation-delay:.6s;animation-duration:.4s}
+  .span:not(.still) .cable{animation-delay:.7s;animation-duration:1.5s}
+  .span:not(.still) .hanger,.span:not(.still) .rail,.span:not(.still) .anchor{animation:fade .9s 1.5s ease-out both}
+  .span:not(.still) .water{animation:fade 1.4s .2s ease-out both}
+  @keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
 }
-@media (max-width:440px){
-  .hero{grid-template-columns:1fr}
-  .spine{writing-mode:horizontal-tb;font-size:34px}
-  .spine span{display:inline;margin:0 0 0 10px}
+.ticker{border-top:1px solid var(--night-rule);display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;padding-block:14px;color:var(--night-2)}
+
+/* section heads */
+section.s{padding-block:clamp(64px,8vw,112px) 0}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:8px 24px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--sumi);margin-bottom:clamp(24px,3vw,36px)}
+.sh h2{margin:0;font:900 clamp(34px,5.4vw,72px)/.92 var(--f-display);letter-spacing:-.02em;text-transform:uppercase}
+.sh p{margin:0;color:var(--ink2);font-size:14px}
+.sh .idx{font:500 11px var(--f-mono);letter-spacing:.18em;color:var(--ink2);display:block;margin-bottom:12px}
+
+/* J-Velo intro */
+.intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:start}
+.intro .lede{font-size:clamp(17px,1.6vw,21px);line-height:1.7;font-weight:500;margin:0}
+.proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;font-variant-numeric:tabular-nums}
+.proof .cell{background:var(--tint);padding:18px 16px 16px}
+.proof .cell.gain{background:var(--paper);color:var(--sumi);box-shadow:inset 0 0 0 2px var(--sumi)}
+.proof .cell.gain .label{color:inherit;opacity:.7}
+.proof .v{font:800 clamp(30px,3.6vw,48px)/1 var(--f-display);margin-top:14px;letter-spacing:-.02em}
+.proof .v small{display:block;font:400 11px var(--f-mono);letter-spacing:.1em;margin-top:6px;opacity:.7}
+.proof .note{grid-column:1/-1;font-size:12px;color:var(--ink2);margin:0}
+
+/* program cards */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,20px)}
+.card{display:flex;flex-direction:column;min-width:0;border:1px solid var(--rule);background:var(--paper)}
+.card .art{aspect-ratio:4/3;background:var(--tint);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:16px}
+.card .art .n{font:900 clamp(80px,10vw,150px)/.8 var(--f-display);letter-spacing:-.05em}
+.card .art .k{font:500 11px var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink2);display:flex;justify-content:space-between}
+.card.dark .art{background:var(--tint2);color:var(--sumi)}
+.card.dark .art .k{color:inherit;opacity:.7}
+.card .art .bars{position:absolute;right:16px;bottom:16px;display:flex;gap:6px;align-items:flex-end}
+.card .art .bars i{width:10px;background:currentColor;display:block}
+.card .art .dot{position:absolute;right:18px;bottom:18px;width:14px;height:14px;border-radius:50%;background:var(--flag-red)}
+.card .body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{margin:0;font:700 17px/1.4 var(--f-sans)}
+.card p{margin:0;color:var(--ink2);font-size:14px}
+.price{margin:auto 0 0;padding-top:14px;display:grid;gap:0;font-variant-numeric:tabular-nums}
+.price div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-block:9px;border-top:1px solid var(--rule)}
+.price dt{font-size:12px;color:var(--ink2)}
+.price dd{margin:0;font:800 18px var(--f-display);white-space:nowrap}
+.card .btn{text-align:center;margin-top:6px}
+.terms{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 32px;margin-top:24px}
+.guarantee{border:1px solid var(--sumi);padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
+.guarantee::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--flag-red);margin-top:8px}
+.guarantee b{display:block}
+.small{color:var(--ink2);font-size:13px;margin:0}
+
+/* coach */
+.coach{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px)}
+.portrait{background:var(--night);color:var(--on-night);min-height:300px;position:relative;overflow:hidden;padding:20px;display:flex;flex-direction:column;justify-content:space-between}
+.portrait .nm{writing-mode:vertical-rl;font:900 clamp(56px,7vw,104px)/1 "Noto Sans JP",sans-serif;letter-spacing:.08em;align-self:flex-end}
+.portrait .en{font:900 clamp(22px,2.4vw,32px)/1 var(--f-display);letter-spacing:.02em;text-transform:uppercase}
+.portrait .label{color:var(--night-2)}
+.portrait .dot{position:absolute;left:20px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--flag-red)}
+.portrait .label.tl{margin-left:24px}
+.creds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start}
+.cred{background:var(--tint);padding:20px 18px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+.cred b{display:block;font:800 clamp(20px,2vw,26px)/1.1 var(--f-display);letter-spacing:.01em}
+.cred p{margin:0;color:var(--ink2);font-size:14px}
+.coach .subname{grid-column:1/-1}
+
+/* for + how */
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tile{border-top:2px solid var(--sumi);padding:16px 0 0;min-width:0}
+.tile .label{color:var(--ink2);display:block;margin-bottom:10px}
+.tile p{margin:0;font-weight:500}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:s}
+ol.steps li{counter-increment:s;min-width:0;background:var(--tint);padding:20px 18px 22px;font-weight:500}
+ol.steps li::before{content:counter(s,decimal-leading-zero);display:block;font:900 44px/1 var(--f-display);letter-spacing:-.03em;margin-bottom:22px}
+
+/* weekly strip */
+.weekly{background:var(--tint);color:var(--sumi);margin-top:clamp(64px,8vw,112px)}
+.weekly .in{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding-block:clamp(44px,6vw,80px)}
+.weekly .in>*{min-width:0}
+.weekly h2{margin:0 0 12px;font:900 clamp(32px,5vw,64px)/.95 var(--f-display);letter-spacing:-.02em;text-transform:uppercase}
+.weekly p{margin:0;max-width:40em}
+.weekly .label{opacity:.7;margin:0 0 14px}
+.weekly .btn:hover{background:var(--paper);color:var(--sumi)}
+
+/* news */
+ul.news{list-style:none;margin:0;padding:0}
+ul.news a{display:grid;grid-template-columns:120px 110px minmax(0,1fr) auto;gap:8px 24px;align-items:baseline;padding-block:20px;border-bottom:1px solid var(--rule);text-decoration:none}
+ul.news a:hover .t{text-decoration:underline;text-underline-offset:4px}
+ul.news time{font:600 15px var(--f-display);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+ul.news .tag{font:500 11px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+ul.news .t{font-weight:500;min-width:0}
+ul.news .arr{font:500 14px var(--f-mono);color:var(--ink2)}
+
+/* events */
+.event{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);border:1px solid var(--sumi)}
+.event .when{background:var(--tint2);color:var(--sumi);padding:24px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:260px}
+.event .when .big{font:900 clamp(44px,6vw,88px)/.88 var(--f-display);letter-spacing:-.03em;text-transform:uppercase}
+.event .when .label{opacity:.75}
+.event .what{padding:24px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.event h3{margin:0;font:800 clamp(22px,2.4vw,30px)/1.25 var(--f-sans)}
+.event .meta{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--ink2)}
+.event .meta span{display:inline-flex;align-items:center;gap:8px}
+.live{width:8px;height:8px;border-radius:50%;background:var(--flag-red);display:inline-block}
+.event p{margin:0;color:var(--ink2)}
+.event .btns{margin-top:auto;padding-top:8px}
+
+/* follow */
+.follow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.soc{display:flex;flex-direction:column;justify-content:space-between;gap:40px;min-height:220px;padding:22px;text-decoration:none;background:var(--tint);transition:background-color .2s,color .2s}
+.soc:hover{background:var(--sumi);color:var(--paper)}
+.soc .nm{font:900 clamp(34px,5vw,64px)/.9 var(--f-display);letter-spacing:-.02em;text-transform:uppercase}
+.soc .h{display:flex;justify-content:space-between;gap:12px;font:500 12px var(--f-mono);letter-spacing:.1em}
+.follow .lead{grid-column:1/-1;margin:0 0 8px;max-width:44em}
+
+/* footer */
+footer{margin-top:clamp(80px,10vw,140px);border-top:1px solid var(--sumi);font-size:13px;color:var(--ink2)}
+footer .in{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px 24px;padding-block:48px 32px}
+footer .in>*{min-width:0}
+footer h4{margin:0 0 12px;color:var(--sumi)}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--sumi);text-decoration:underline;text-underline-offset:3px}
+.fbrand .mark{color:var(--sumi)}
+.fbig{font:900 calc((100vw - 2 * var(--gut)) / 8.5)/.82 var(--f-display);letter-spacing:-.04em;color:var(--sumi);text-transform:uppercase;padding-block:8px 0;white-space:nowrap;overflow:hidden}
+.legal{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--rule);padding-block:18px calc(18px + env(safe-area-inset-bottom,0px))}
+
+/* buttons that open the checkout */
+button.btn{background:transparent;color:inherit;cursor:pointer;width:auto}
+button.apply{border:0;cursor:pointer;font-family:inherit}
+
+/* checkout sheet: right drawer on desktop, full-height bottom sheet on phone */
+.co-scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;z-index:40}
+.co-scrim.open{opacity:1;visibility:visible}
+.co{position:fixed;top:0;right:0;bottom:0;width:min(480px,100%);background:var(--paper);color:var(--sumi);z-index:41;display:flex;flex-direction:column;border-left:1px solid var(--rule);transform:translateX(100%);visibility:hidden;transition:transform .32s cubic-bezier(.2,.7,.2,1),visibility .32s}
+.co.open{transform:none;visibility:visible}
+.co form{display:flex;flex-direction:column;height:100%;min-height:0;margin:0}
+.co-h{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 24px 18px;border-bottom:1px solid var(--rule)}
+.co-h .label{color:var(--ink2);margin:0}
+.co-h h2{margin:8px 0 0;font:800 26px/1.15 var(--f-sans);letter-spacing:-.01em}
+.co-h h2:focus{outline:none}
+.co-x{flex:none;width:44px;height:44px;display:grid;place-items:center;background:transparent;color:var(--sumi);border:1px solid var(--rule);cursor:pointer;padding:0}
+.co-x:hover{border-color:var(--sumi)}
+.co-b{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:22px 24px 24px;display:grid;gap:24px;align-content:start}
+.co fieldset{border:0;margin:0;padding:0;min-width:0}
+.co legend,.co .fl{display:block;padding:0;margin:0 0 10px;font:500 11px/1.5 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+.co .opt{position:relative}
+.co .opt input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.co .opt label{display:flex;align-items:center;gap:12px;min-height:52px;padding:12px 16px;border:1px solid var(--rule);cursor:pointer;font-weight:700;font-size:14px;line-height:1.35;transition:background-color .15s,color .15s,border-color .15s}
+.co .opt label::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 1px currentColor;opacity:.5}
+.co .opt label .pr{margin-left:auto;font:800 15px/1.2 var(--f-display);white-space:nowrap;font-variant-numeric:tabular-nums}
+.co .opt label:hover{border-color:var(--sumi)}
+.co .opt input:checked+label{background:var(--sumi);color:var(--paper);border-color:var(--sumi)}
+.co .opt input:checked+label::before{background:var(--flag-red);box-shadow:none;opacity:1}
+.co .opt input:focus-visible+label{outline:2px solid var(--sumi);outline-offset:2px}
+.co .plans{display:grid;gap:6px}
+.co .ages{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.co .ages label{justify-content:center;text-align:center}
+.co .ages label::before{display:none}
+.co input[type=email]{display:block;width:100%;font:500 16px/1.4 var(--f-sans);color:var(--sumi);background:var(--paper);border:1px solid var(--sumi);border-radius:0;padding:13px 14px;-webkit-appearance:none;appearance:none}
+.co input[type=email]::placeholder{color:var(--ink2);opacity:.7}
+.co input[type=email]:focus-visible{outline:2px solid var(--sumi);outline-offset:2px}
+.co input[aria-invalid=true]{border-width:2px;padding:12px 13px}
+.co .hint{margin:8px 0 0;font-size:12px;color:var(--ink2);line-height:1.5}
+.co .err{margin:8px 0 0;font-size:13px;font-weight:700;line-height:1.5;display:flex;gap:8px;align-items:baseline}
+.co .err::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--flag-red);transform:translateY(-1px)}
+.co .consent{background:var(--tint);padding:14px 16px}
+.co .consent .row{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.55}
+.co .consent input{flex:none;width:20px;height:20px;margin:1px 0 0;accent-color:var(--sumi)}
+.co .sum{border-top:1px solid var(--rule);padding-top:16px;display:grid;gap:14px}
+.co .total{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.co .total>span:first-child{display:grid;gap:2px}
+.co .total .small{font-size:12px}
+.co .total output{font:900 clamp(24px,6.4vw,30px)/1 var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;text-align:right}
+.co .gl{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.55;margin:0}
+.co .gl::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--flag-red);margin-top:6px}
+.co .gl b{font-weight:700}
+.co-f{border-top:1px solid var(--sumi);padding:14px 24px calc(14px + env(safe-area-inset-bottom,0px));display:grid;gap:12px;background:var(--paper)}
+.co-f #co-status:empty{display:none}
+.co-pay{display:block;text-align:center;font-size:12px;padding:18px 20px}
+.co-pay:hover{opacity:.88}
+.co-pay[aria-disabled=true]{background:var(--tint2);border-color:var(--tint2);color:var(--ink2);cursor:not-allowed;opacity:1}
+.co-f .small{font-size:12px;line-height:1.55}
+.co .next{margin:0;font-size:13px;line-height:1.55}
+.co .next b{display:block;font:500 11px/1.5 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin-bottom:2px}
+.co .meta{display:flex;justify-content:space-between;gap:6px 16px;flex-wrap:wrap;font-size:12px;color:var(--ink2)}
+.co .meta a{text-underline-offset:3px}
+.co .meta a:hover{color:var(--sumi)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+body.co-lock{overflow:hidden}
+
+@media (max-width:1000px){
+  .cards{grid-template-columns:1fr 1fr}
+  .cards .card:last-child{grid-column:1/-1}
+  .grid4{grid-template-columns:1fr 1fr;gap:24px 12px}
+  .coach,.intro,.event{grid-template-columns:1fr}
+  .portrait{min-height:340px}
+  footer .in{grid-template-columns:1fr 1fr 1fr}
+  .fbrand{grid-column:1/-1}
+}
+@media (max-width:700px){
+  html{scroll-padding-top:130px}
+  header.top{padding-block:12px}
+  .util{width:100%;justify-content:space-between;gap:8px 12px}
+  nav.main{gap:4px 14px}
+  .apply{display:none}
+  .wordmark{font-size:14px;letter-spacing:.16em}
+  .hero-in{grid-template-columns:1fr}
+  .hero-in{padding-top:28px}
+  .cards,.terms,ol.steps,.follow{grid-template-columns:1fr}
+  .proof{gap:8px}
+  .proof .cell{padding:14px 12px}
+  ul.news a{grid-template-columns:auto minmax(0,1fr) auto;gap:4px 14px}
+  ul.news .t{grid-column:1/-1;grid-row:2}
+  ul.news .arr{grid-column:3;grid-row:1}
+  .weekly .in{grid-template-columns:1fr}
+  .event .when{min-height:0}
+  .soc{min-height:160px}
+  footer .in{grid-template-columns:1fr 1fr}
+  .co{width:100%;height:100%;height:100dvh;border-left:0;transform:translateY(100%)}
+  .co-h{padding:16px 16px 14px}
+  .co-h h2{font-size:22px}
+  .co-b{padding:18px 16px 20px;gap:20px}
+  .co-f{padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px))}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
 }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <header class="top">
-    <a class="mark" href="#top" aria-label="BE THE BRIDGE">
-      <span class="hanko" aria-hidden="true">棒田</span>
-      <span class="wordmark"><b>BE THE BRIDGE</b><small>J-Velo · Tokyo, Japan</small></span>
-    </a>
+<div class="ann g"><span data-i="ann"></span> <a href="#jvelo" data-i="annLink"></a></div>
+
+<header class="top g">
+  <a class="mark" href="#top" aria-label="BE THE BRIDGE">
+    <span class="flag" role="img" aria-label="Japan"></span>
+    <span class="wordmark">BE THE BRIDGE</span>
+  </a>
+  <div class="util">
+    <nav class="main caps" aria-label="Main">
+      <a href="#jvelo">J-Velo</a>
+      <a href="#programs">Programs</a>
+      <a href="#coach">Coach</a>
+      <a href="#news">News</a>
+      <a href="#events">Events</a>
+    </nav>
     <div class="langs" role="group" aria-label="Language">
       <button type="button" data-lang="ko" id="lang-ko">한국어</button>
       <button type="button" data-lang="en" id="lang-en">EN</button>
       <button type="button" data-lang="ja" id="lang-ja">日本語</button>
     </div>
-  </header>
+    <button type="button" class="apply caps" id="apply-header" data-checkout="single" aria-haspopup="dialog" data-i="applyShort"></button>
+  </div>
+</header>
 
-  <div class="hero" id="top">
-    <p class="spine" aria-hidden="true">架け橋<span>Kakehashi</span></p>
-    <div>
-      <p class="origin"><i aria-hidden="true"></i><span data-i="eyebrow"></span></p>
-      <h1 data-i="h1"></h1>
-      <p class="lede" data-i="lede"></p>
-      <div class="cta">
-        <a class="btn primary" href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" data-i="cta"></a>
-        <a class="btn ghost" href="#pricing" data-i="cta2"></a>
+<main id="top">
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero-in g">
+      <div>
+        <p class="label">Fall 2026 · <span data-i="season"></span></p>
+        <p class="brand" aria-hidden="true">Be the<br>Bridge</p>
+        <p class="kake"><b lang="ja">BE THE BRIDGE — 架け橋になる</b><span lang="ja">日本の野球と世界をつなぐ。</span></p>
+        <h1 id="hero-h" lang="en"><span>Failure doesn&rsquo;t define you.</span><span>What you do <em>next</em> does.</span></h1>
+        <p class="ja" lang="ja"><span>失敗があなたを決めるんじゃない。</span><span>そのあとどうするかが、あなたをつくる。</span></p>
+        <p class="sub" data-i="heroSub"></p>
+        <div class="btns">
+          <button type="button" class="btn fill" id="hero-apply" data-checkout="single" aria-haspopup="dialog" data-i="cta"></button>
+          <a class="btn" href="#jvelo" data-i="learn"></a>
+        </div>
       </div>
     </div>
-  </div>
+    <svg class="span" id="span" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax meet" role="img" aria-label="架け橋: a bridge spanning the page"></svg>
+    <div class="ticker g label" style="position:relative;z-index:1"><span>J-Velo · Japan → Korea</span><span>NPB · KBO · NASM-PES · Rapsodo</span><span>@neolab.boda_</span></div>
+  </section>
 
-  <svg class="arch" viewBox="0 0 960 120" role="img" aria-label="Bridge arch">
-    <line x1="0" y1="110" x2="960" y2="110"/>
-    <path d="M40 110 Q480 -50 920 110"/>
-    <circle cx="920" cy="110" r="5"/>
-  </svg>
-
-  <div class="proof" aria-label="Rapsodo sample">
-    <div><div class="k">Before</div><div class="v">128<small>km/h</small></div></div>
-    <div><div class="k">After · 12 wks</div><div class="v">139<small>km/h</small></div></div>
-    <div class="gain"><div class="k">Gain</div><div class="v">+11<small>km/h</small></div></div>
-    <p class="proof-note" data-i="sample"></p>
-  </div>
-
-  <section id="coach">
-    <div class="sh"><span class="kanji" aria-hidden="true">師</span><h2 data-i="coachH"></h2></div>
-    <div class="grid2">
-      <div class="cred"><b>NPB · KBO</b><p data-i="c1"></p></div>
-      <div class="cred"><b>NASM-PES</b><p data-i="c2"></p></div>
-      <div class="cred"><b>Rapsodo</b><p data-i="c3"></p></div>
-      <div class="cred"><b data-i="c4h"></b><p data-i="c4"></p></div>
+  <section class="s g" id="jvelo" aria-labelledby="jv-h">
+    <div class="sh"><div><span class="idx">01</span><h2 id="jv-h">J-Velo</h2></div><p data-i="eyebrow"></p></div>
+    <div class="intro">
+      <p class="lede" data-i="lede"></p>
+      <div class="proof" aria-label="Rapsodo sample">
+        <div class="cell"><div class="label muted">Before</div><div class="v">128<small>km/h</small></div></div>
+        <div class="cell"><div class="label muted">After · 12 wks</div><div class="v">139<small>km/h</small></div></div>
+        <div class="cell gain"><div class="label">Gain</div><div class="v">+11<small>km/h</small></div></div>
+        <p class="note" data-i="sample"></p>
+      </div>
     </div>
   </section>
 
-  <section id="for">
-    <div class="sh"><span class="kanji" aria-hidden="true">志</span><h2 data-i="forH"></h2></div>
-    <ul class="for">
-      <li data-i="f1"></li><li data-i="f2"></li><li data-i="f3"></li><li data-i="f4"></li>
+  <section class="s g" id="programs" aria-labelledby="pg-h">
+    <div class="sh" id="pricing"><div><span class="idx">02</span><h2 id="pg-h">Programs</h2></div><p><span data-i="priceH"></span> · <span data-i="programsSub"></span></p></div>
+    <div class="cards">
+      <article class="card">
+        <div class="art" aria-hidden="true"><div class="k"><span>Single</span><span>×1</span></div><div class="n">01</div></div>
+        <div class="body">
+          <span class="label muted"><span data-i="tPlan"></span> 01</span>
+          <h3 data-i="pSingle"></h3>
+          <p data-i="o1d"></p>
+          <dl class="price">
+            <div><dt data-i="tPrice"></dt><dd data-i="pS1"></dd></div>
+          </dl>
+          <button type="button" class="btn line" id="plan-single-apply" data-checkout="single" aria-haspopup="dialog" data-i="cta"></button>
+        </div>
+      </article>
+      <article class="card dark">
+        <div class="art" aria-hidden="true"><div class="k"><span>Monthly</span><span>×4</span></div><div class="n">02</div><div class="bars"><i style="height:18px"></i><i style="height:28px"></i><i style="height:40px"></i><i style="height:54px"></i></div></div>
+        <div class="body">
+          <span class="label muted"><span data-i="tPlan"></span> 02</span>
+          <h3 data-i="pMonthly"></h3>
+          <p data-i="o2d"></p>
+          <dl class="price">
+            <div><dt data-i="tPrice"></dt><dd data-i="pM1"></dd></div>
+          </dl>
+          <button type="button" class="btn ink" id="plan-monthly-apply" data-checkout="monthly" aria-haspopup="dialog" data-i="cta"></button>
+        </div>
+      </article>
+      <article class="card">
+        <div class="art" aria-hidden="true"><div class="k"><span>Live</span><span>60 min</span></div><div class="n">03</div><span class="dot"></span></div>
+        <div class="body">
+          <span class="label muted"><span data-i="tPlan"></span> 03</span>
+          <h3 data-i="pLive"></h3>
+          <p data-i="o3d"></p>
+          <dl class="price">
+            <div><dt data-i="tPrice"></dt><dd data-i="pL1"></dd></div>
+          </dl>
+          <button type="button" class="btn line" id="plan-live-apply" data-checkout="live" aria-haspopup="dialog" data-i="cta"></button>
+        </div>
+      </article>
+    </div>
+    <div class="terms">
+      <div class="guarantee"><div><b data-i="gH"></b><span data-i="g"></span></div></div>
+      <div style="display:grid;gap:10px;align-content:start"><p class="small" data-i="kidNote"></p><p class="small" data-i="notes"></p></div>
+    </div>
+  </section>
+
+  <section class="s g" id="coach" aria-labelledby="co-h">
+    <div class="sh"><div><span class="idx">03</span><h2 id="co-h">Coach</h2></div><p><span data-i="coachH"></span> · <span data-i="coachSub"></span></p></div>
+    <div class="coach">
+      <div class="portrait" aria-hidden="true">
+        <span class="dot"></span><span class="label tl">Pitching coach · Japan</span>
+        
+        <span class="en">Yudai Boda</span>
+      </div>
+      <div class="creds">
+        <div class="cred"><b>NPB · KBO</b><p data-i="c1"></p></div>
+        <div class="cred"><b>NASM-PES</b><p data-i="c2"></p></div>
+        <div class="cred"><b>Rapsodo</b><p data-i="c3"></p></div>
+        <div class="cred"><b data-i="c4h"></b><p data-i="c4"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s g" id="for" aria-labelledby="for-h">
+    <div class="sh"><div><span class="idx">04</span><h2 id="for-h">Who it's for</h2></div><p data-i="forH"></p></div>
+    <div class="grid4">
+      <div class="tile"><span class="label">A</span><p data-i="f1"></p></div>
+      <div class="tile"><span class="label">B</span><p data-i="f2"></p></div>
+      <div class="tile"><span class="label">C</span><p data-i="f3"></p></div>
+      <div class="tile"><span class="label">D</span><p data-i="f4"></p></div>
+    </div>
+  </section>
+
+  <section class="s g" id="how" aria-labelledby="how-h">
+    <div class="sh"><div><span class="idx">05</span><h2 id="how-h">How it works</h2></div><p data-i="howH"></p></div>
+    <ol class="steps"><li data-i="s1"></li><li data-i="s2"></li><li data-i="s3"></li></ol>
+  </section>
+
+  <section class="weekly" id="weekly" aria-labelledby="wk-h">
+    <div class="in g">
+      <div>
+        <p class="label">Weekly · #BeTheBridge</p>
+        <h2 id="wk-h">Next Pitch<br>Challenge</h2>
+        <p data-i="weekly"></p>
+      </div>
+      <a class="btn" href="https://www.instagram.com/neolab.boda_/" target="_blank" rel="noopener">Instagram @neolab.boda_</a>
+    </div>
+  </section>
+
+  <section class="s g" id="news" aria-labelledby="nw-h">
+    <div class="sh"><div><span class="idx">06</span><h2 id="nw-h">News</h2></div><p data-i="newsSub"></p></div>
+    <ul class="news">
+      <li><a href="#jvelo"><time datetime="2026-10">2026.10</time><span class="tag">J-Velo</span><span class="t" data-i="n1"></span><span class="arr" aria-hidden="true">→</span></a></li>
+      <li><a href="#top"><time datetime="2026-10">2026.10</time><span class="tag">Brand</span><span class="t" data-i="n2"></span><span class="arr" aria-hidden="true">→</span></a></li>
     </ul>
   </section>
 
-  <section id="how">
-    <div class="sh"><span class="kanji" aria-hidden="true">流</span><h2 data-i="howH"></h2></div>
-    <ol class="steps">
-      <li data-i="s1"></li><li data-i="s2"></li><li data-i="s3"></li>
-    </ol>
+  <section class="s g" id="events" aria-labelledby="ev-h">
+    <div class="sh"><div><span class="idx">07</span><h2 id="ev-h">Events</h2></div><p data-i="eventsSub"></p></div>
+    <article class="event">
+      <div class="when">
+        <span class="label">Clinic · Korea</span>
+        <span class="big">Coming<br>soon</span>
+        <span class="label" data-i="e1when"></span>
+      </div>
+      <div class="what">
+        <div class="meta label"><span><i class="live" aria-hidden="true"></i>Coming soon</span><span>Korea</span><span>J-Velo</span></div>
+        <h3 data-i="e1t"></h3>
+        <p data-i="e1d"></p>
+        <div class="btns"><a class="btn ink" href="https://www.instagram.com/neolab.boda_/" target="_blank" rel="noopener" data-i="notify"></a></div>
+      </div>
+    </article>
   </section>
 
-  <section id="pricing">
-    <div class="sh"><span class="kanji" aria-hidden="true">価</span><h2 data-i="priceH"></h2></div>
-    <div>
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th data-i="tPlan"></th><th data-i="tAdult"></th><th data-i="tKid"></th></tr></thead>
-          <tbody>
-            <tr><td data-i="pSingle"></td><td class="p" data-i="pS1"></td><td class="p" data-i="pS2"></td></tr>
-            <tr><td data-i="pMonthly"></td><td class="p" data-i="pM1"></td><td class="p" data-i="pM2"></td></tr>
-            <tr><td data-i="pLive"></td><td class="p" data-i="pL1"></td><td class="p" data-i="pL2"></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="small" data-i="kidNote"></p>
-      <div class="guarantee"><span class="seal" aria-hidden="true">証</span><div><b data-i="gH"></b><span data-i="g"></span></div></div>
-      <p class="small" data-i="notes"></p>
+  <section class="s g" id="follow" aria-labelledby="fo-h">
+    <div class="sh"><div><span class="idx">08</span><h2 id="fo-h">Follow</h2></div><p data-i="watchH"></p></div>
+    <div class="follow">
+      <p class="lead" data-i="watch"></p>
+      <a class="soc" href="https://www.instagram.com/neolab.boda_/" target="_blank" rel="noopener"><span class="h"><span>01</span><span>↗</span></span><span><span class="nm">Instagram</span><span class="h" style="margin-top:12px"><span>@neolab.boda_</span></span></span></a>
+      <a class="soc" href="https://www.tiktok.com/@neolab.boda_" target="_blank" rel="noopener"><span class="h"><span>02</span><span>↗</span></span><span><span class="nm">TikTok</span><span class="h" style="margin-top:12px"><span>@neolab.boda_</span></span></span></a>
     </div>
   </section>
+</main>
 
-  <section id="watch">
-    <div class="sh"><span class="kanji" aria-hidden="true">学</span><h2 data-i="watchH"></h2></div>
-    <div>
-      <p style="margin:0" data-i="watch"></p>
-      <div class="links">
-        <a class="btn ghost" href="https://www.instagram.com/neolab.boda/" target="_blank" rel="noopener">Instagram @neolab.boda</a>
-        <a class="btn ghost" href="https://www.tiktok.com/@neolab.boda" target="_blank" rel="noopener">TikTok @neolab.boda</a>
+<footer>
+  <div class="in g">
+    <div class="fbrand">
+      <a class="mark" href="#top" aria-label="BE THE BRIDGE"><span class="flag" role="img" aria-label="Japan"></span><span class="wordmark">BE THE BRIDGE</span></a>
+      <p style="margin:14px 0 0;max-width:30em" data-i="fAbout"></p>
+    </div>
+    <div><h4 class="caps">Training</h4><ul><li><a href="#jvelo">J-Velo</a></li><li><a href="#pricing" data-i="priceH"></a></li><li><a href="#how" data-i="howH"></a></li><li><a href="https://billing.stripe.com/p/login/14A14o9NEciQfGH9KTfw400" target="_blank" rel="noopener" data-i="fManage"></a></li></ul></div>
+    <div><h4 class="caps">Info</h4><ul><li><a href="#news">News</a></li><li><a href="#events">Events</a></li><li><a href="#coach">Coach</a></li><li><a href="legal.html" data-i="fLegal"></a></li></ul></div>
+    <div><h4 class="caps">Social</h4><ul><li><a href="https://www.instagram.com/neolab.boda_/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.tiktok.com/@neolab.boda_" target="_blank" rel="noopener">TikTok</a></li><li>@neolab.boda_</li></ul></div>
+  </div>
+  <div class="g" aria-hidden="true"><div class="fbig">Be the Bridge</div></div>
+  <div class="g"><div class="legal"><span>© 2026 BE THE BRIDGE · Yudai Boda</span><span lang="ja">架け橋 · Made in Japan</span></div></div>
+</footer>
+
+<div class="co-scrim" id="co-scrim"></div>
+<div class="co" id="checkout" role="dialog" aria-modal="true" aria-labelledby="co-title" aria-hidden="true">
+  <form id="co-form" novalidate>
+    <div class="co-h">
+      <div><p class="label">J-Velo · <span data-i="coKicker"></span></p><h2 id="co-title" tabindex="-1" data-i="coTitle"></h2></div>
+      <button type="button" class="co-x" id="co-close"><span class="sr" data-i="coClose"></span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.6"/></svg></button>
+    </div>
+    <div class="co-b">
+      <fieldset id="co-plan">
+        <legend data-i="tPlan"></legend>
+        <div class="plans">
+          <div class="opt"><input type="radio" name="plan" id="co-plan-single" value="single"><label for="co-plan-single"><span data-i="pSingle"></span><span class="pr" data-price="single"></span></label></div>
+          <div class="opt"><input type="radio" name="plan" id="co-plan-monthly" value="monthly"><label for="co-plan-monthly"><span data-i="pMonthly"></span><span class="pr" data-price="monthly"></span></label></div>
+          <div class="opt"><input type="radio" name="plan" id="co-plan-live" value="live"><label for="co-plan-live"><span data-i="pLive"></span><span class="pr" data-price="live"></span></label></div>
+        </div>
+      </fieldset>
+      <div>
+        <label class="fl" for="co-email" data-i="coEmail"></label>
+        <input type="email" id="co-email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required placeholder="you@example.com" aria-describedby="co-email-hint">
+        <p class="hint" id="co-email-hint" data-i="coEmailHint"></p>
+        <p class="err" id="co-email-err" hidden data-i="coEmailErr"></p>
+      </div>
+      <div class="consent" id="co-consent-wrap">
+        <div class="row"><input type="checkbox" id="co-consent" name="consent"><label for="co-consent" data-i="coConsent"></label></div>
+        <p class="err" id="co-consent-err" hidden data-i="coConsentErr"></p>
+      </div>
+      <div class="sum">
+        <p class="gl"><span><b data-i="gH"></b> <span data-i="g"></span></span></p>
+        <p class="small" data-i="coPromo"></p>
+        <p class="next" id="co-next-wrap"><b data-i="coNextH"></b><span id="co-next"></span></p>
+        <div class="meta"><span data-i="coSecure"></span><a href="https://ig.me/m/neolab.boda_" target="_blank" rel="noopener" id="co-dm" data-i="coDm"></a></div>
       </div>
     </div>
-  </section>
-
-  <footer>
-    <span class="fmark">BE THE BRIDGE</span>
-    <span>© BE THE BRIDGE · J-Velo by Yudai Boda · Made in Japan</span>
-  </footer>
+    <div class="co-f">
+      <div class="total"><span><span class="label muted" data-i="coTotal"></span><span class="small" id="co-monthly" hidden data-i="coMonthly"></span></span><output id="co-total" for="co-plan" aria-live="polite"></output></div>
+      <a class="btn ink co-pay" id="co-pay" target="_blank" rel="noopener"><span id="co-pay-txt"></span><span class="sr" data-i="coNewTab"></span></a>
+      <p class="small" id="co-status" aria-live="polite"></p>
+    </div>
+  </form>
 </div>
 
 <script>
+/* ===== CHECKOUT: Stripe Payment Links =====================================================
+   Yudai: create one Payment Link per plan in the Stripe Dashboard (Payment Links > New),
+   then paste each URL (https://buy.stripe.com/...) between the quotes below.
+   - "monthly_*" links should use a recurring (monthly) price, so Stripe bills it as a subscription.
+   - The site appends ?prefilled_email=...&client_reference_id=<plan> to each link, so every
+     payment in Stripe shows which plan was chosen. Junior pricing (15 and under, about 20% off) is a
+     Stripe promotion code (e.g. JUNIOR20) sent by DM; the links have "allow promotion codes" on.
+   - Prices shown on the page come from the pS1/pM1/pL1 strings in T. Keep them identical to the
+     Stripe prices (the Korean page shows KRW, the EN/JA pages show USD).
+   - A link left empty shows "Payment link not set yet" and the Pay button stays disabled. */
+const CHECKOUT={
+  single:"https://buy.stripe.com/14A14o9NEciQfGH9KTfw400",  // Single analysis
+  monthly:"https://buy.stripe.com/aFa3cwgc22Ig3XZ1enfw401",  // Monthly plan, 4 analyses (recurring monthly price = subscription)
+  live:"https://buy.stripe.com/00w8wQ6Bs6YwbqrcX5fw402"      // Live online session, 60 min
+};
 const T={
 ko:{eyebrow:"일본식 구속 향상 프로그램",h1:"오늘의 구속이 당신을 정하지 않는다. 다음 한 구가 정한다.",
 lede:"NPB·KBO 선수를 지도한 일본 피칭 코치가 당신의 투구 영상을 분석하고, 3일 이내에 해설 영상과 맞춤 훈련 메뉴를 보내드립니다.",
-cta:"Instagram DM으로 신청",cta2:"요금 보기",sample:"측정 예시입니다. 실제 지도 사례로 교체 예정.",
+cta:"신청하기",cta2:"요금 보기",sample:"측정 예시입니다. 실제 지도 사례로 교체 예정.",
 coachH:"코치 소개",c1:"NPB·KBO 선수 지도 경험",c2:"미국 NASM 퍼포먼스 향상 전문가 자격",c3:"구속·회전수를 측정해 데이터로 지도",c4h:"현장 클리닉",c4:"한국에서 직접 클리닉 개최 경험",
 forH:"이런 분께 추천합니다",f1:"프로 진출을 목표로 구속을 올리고 싶은 선수",f2:"더 높은 무대를 목표로 하는 고등학생 투수",f3:"자녀가 부상 없이 성장하기를 바라는 학부모",f4:"올바른 폼부터 배우고 싶은 초·중학생",
-howH:"진행 방법",s1:"플랜을 선택하고 Instagram DM으로 신청합니다.",s2:"투구 영상(정면·측면 각 1개)을 보내주세요.",s3:"3일 이내에 해설 영상과 맞춤 훈련 메뉴를 받습니다.",
-priceH:"요금",tPlan:"플랜",tAdult:"고등학생 이상",tKid:"초·중학생",pSingle:"1회 피드백",pMonthly:"월 4회 플랜",pLive:"라이브 지도 (60분, 통역 포함)",
-pS1:"110,000원",pS2:"88,000원",pM1:"월 340,000원",pM2:"월 270,000원",pL1:"190,000원",pL2:"150,000원",
-kidNote:"초·중학생은 구속보다 올바른 폼과 부상 예방을 중심으로 지도합니다.",gH:"첫 피드백 만족 보장.",g:"첫 피드백에 만족하지 못하시면 전액 환불해 드립니다.",
+howH:"진행 방법",s1:"플랜을 선택하고 이 사이트에서 바로 결제합니다.",s2:"이메일로 받은 링크로 투구 영상(정면·측면 각 1개)을 올립니다.",s3:"3일 이내에 해설 영상과 맞춤 훈련 메뉴를 받습니다.",
+priceH:"요금",tPlan:"플랜",pSingle:"1회 피드백",pMonthly:"월 4회 플랜",pLive:"라이브 지도 (60분, 통역 포함)",
+pS1:"110,000원",pM1:"월 340,000원",pL1:"190,000원",
+kidNote:"초·중학생(15세 이하)은 약 20% 주니어 할인이 있습니다. Instagram DM으로 문의하시면 할인 코드를 보내드립니다. 지도는 구속보다 올바른 폼과 부상 예방을 중심으로 합니다.",gH:"첫 피드백 만족 보장.",g:"첫 피드백에 만족하지 못하시면 전액 환불해 드립니다.",
 watchH:"무료 드릴 영상",watch:"구속 향상 드릴과 지도 사례를 TikTok과 Instagram에서 매주 공개합니다.",notes:"만 19세 미만은 보호자 동의가 필요합니다. 영상은 지도 목적으로만 사용하며, 사례 소개 시에는 사전 동의 후 수치만 사용합니다."},
 en:{eyebrow:"The Japanese velocity program",h1:"Today's velocity doesn't define you. What you do next does.",
 lede:"A Japanese pitching coach who has worked with NPB and KBO players analyzes your delivery and sends a breakdown video and a personal training plan within 3 days.",
-cta:"Apply via Instagram DM",cta2:"See pricing",sample:"Sample readout. To be replaced with a real client case.",
+cta:"Apply now",cta2:"See pricing",sample:"Sample readout. To be replaced with a real client case.",
 coachH:"Your coach",c1:"Has coached players in NPB (Japan) and KBO (Korea)",c2:"NASM Performance Enhancement Specialist",c3:"Velocity and spin measured, every plan built on data",c4h:"On-site clinics",c4:"Has run clinics in Korea in person",
 forH:"Who it's for",f1:"Pitchers who want to throw harder and reach the next level",f2:"High school players aiming for college or pro baseball",f3:"Parents who want their kids to develop without injury",f4:"Coaches who want a second opinion on their pitchers",
-howH:"How it works",s1:"Choose a plan and apply via Instagram DM.",s2:"Send your pitching video: one from the front, one from the side.",s3:"Within 3 days, get a breakdown video and a personal training plan.",
-priceH:"Pricing",tPlan:"Plan",tAdult:"Age 16+",tKid:"Ages 15 and under",pSingle:"Single analysis",pMonthly:"Monthly plan (4 analyses)",pLive:"Live session (60 min)",
-pS1:"$99",pS2:"$79",pM1:"$299 / month",pM2:"$239 / month",pL1:"$149",pL2:"$119",
-kidNote:"For younger players, we focus on proper mechanics and injury prevention rather than chasing velocity.",gH:"First-analysis guarantee.",g:"Not satisfied with your first analysis? You get a full refund.",
+howH:"How it works",s1:"Choose a plan and pay right here on the site.",s2:"Upload your pitching video from the link in your email: one from the front, one from the side.",s3:"Within 3 days, get a breakdown video and a personal training plan.",
+priceH:"Pricing",tPlan:"Plan",pSingle:"Single analysis",pMonthly:"Monthly plan (4 analyses)",pLive:"Live session (60 min)",
+pS1:"$99",pM1:"$299 / month",pL1:"$149",
+kidNote:"Players 15 and under get about 20% off. Message us on Instagram and we will send you a junior code. For younger players, we focus on proper mechanics and injury prevention rather than chasing velocity.",gH:"First-analysis guarantee.",g:"Not satisfied with your first analysis? You get a full refund.",
 watchH:"Free drills",watch:"Velocity drills and coaching breakdowns, posted every week on TikTok and Instagram.",notes:"Players under 18 need a parent's or guardian's consent. Videos are used only for coaching; results are shared only with permission, as numbers, never names or video."},
 ja:{eyebrow:"日本式 球速アップ・プログラム",h1:"今日の球速が、あなたを決めるんじゃない。次の一球が、あなたをつくる。",
 lede:"NPB・KBOの選手を指導してきた日本のピッチングコーチが、あなたの投球動画を分析し、3日以内に解説動画と個別の練習メニューを届けます。",
-cta:"Instagram DMで申し込む",cta2:"料金を見る",sample:"計測の表示例です。実際の指導事例に差し替え予定。",
+cta:"申し込む",cta2:"料金を見る",sample:"計測の表示例です。実際の指導事例に差し替え予定。",
 coachH:"コーチ紹介",c1:"NPB・KBOの選手の指導経験",c2:"米国NASMのパフォーマンス向上スペシャリスト資格",c3:"球速と回転数を測り、データで指導",c4h:"出張クリニック",c4:"韓国での対面クリニックの実施経験",
 forH:"こんな人に",f1:"プロを目指して球速を上げたい選手",f2:"より高い舞台を目指す高校生投手",f3:"子どもに故障なく成長してほしい保護者",f4:"正しいフォームから学びたい小中学生",
-howH:"申込の流れ",s1:"プランを選び、Instagram DMで申し込みます。",s2:"投球動画（正面と側面を1本ずつ）を送ります。",s3:"3日以内に、解説動画と個別の練習メニューが届きます。",
-priceH:"料金（海外向け）",tPlan:"プラン",tAdult:"16歳以上",tKid:"15歳以下",pSingle:"1回の添削",pMonthly:"月4回プラン",pLive:"ライブ指導（60分）",
-pS1:"$99",pS2:"$79",pM1:"$299 / 月",pM2:"$239 / 月",pL1:"$149",pL2:"$119",
-kidNote:"小中学生は、球速よりも正しいフォームと故障予防を中心に指導します。",gH:"初回の添削の満足保証。",g:"初回の添削に満足できなければ、全額を返金します。",
+howH:"申込の流れ",s1:"プランを選び、このサイトでそのまま支払います。",s2:"メールで届くリンクから、投球動画（正面と側面を1本ずつ）をアップロードします。",s3:"3日以内に、解説動画と個別の練習メニューが届きます。",
+priceH:"料金（海外向け）",tPlan:"プラン",pSingle:"1回の添削",pMonthly:"月4回プラン",pLive:"ライブ指導（60分）",
+pS1:"$99",pM1:"$299 / 月",pL1:"$149",
+kidNote:"15歳以下は約20%のジュニア割引があります。InstagramのDMで連絡いただければ割引コードをお送りします。小中学生は、球速よりも正しいフォームと故障予防を中心に指導します。",gH:"初回の添削の満足保証。",g:"初回の添削に満足できなければ、全額を返金します。",
 watchH:"無料のドリル動画",watch:"球速アップのドリルと指導事例を、TikTokとInstagramで毎週公開しています。",notes:"18歳未満は保護者の同意が必要です。動画は指導にだけ使い、事例として紹介するときは事前に同意を得て、数字だけを使います。"}
 };
+const T2={
+ko:{ann:"J-Velo 온라인 영상 피드백, 한국에서 접수 시작.",annLink:"자세히 보기",applyShort:"신청",season:"J-Velo 한국 런칭",learn:"자세히 보기",
+weekly:"#BeTheBridge 를 달아 당신의 1구를 올려주세요. 매주 1명을 무료로 피드백합니다.",fAbout:"일본과 세계의 야구를 잇는 브랜드. 운영: Yudai Boda.",
+heroSub:"실패가 당신을 정하지 않는다. 그다음 어떻게 하느냐가 당신을 만든다.",kakeMean:"카케하시: 일본과 세계의 야구를 잇는 다리가 되다",
+programsSub:"세 가지 방법으로 시작하세요",
+o1d:"투구 영상을 1회 분석합니다. 3일 이내에 해설 영상과 맞춤 훈련 메뉴를 보내드립니다.",
+o2d:"한 달에 4회 분석. 매주 변화를 확인하며 꾸준히 구속을 올립니다.",
+o3d:"코치와 실시간으로 연결되는 60분 온라인 지도입니다.",
+coachSub:"Yudai Boda · 일본 피칭 코치",
+newsSub:"새로운 소식",n1:"J-Velo 한국 온라인 영상 분석 접수 시작",n2:"BE THE BRIDGE 홈페이지 오픈",
+eventsSub:"클리닉 일정",e1t:"J-Velo 한국 클리닉",e1when:"날짜 미정 · 3개월 이내 예정",
+e1d:"코치가 직접 한국을 방문해 현장에서 지도합니다. 일정과 장소는 Instagram에서 가장 먼저 공지합니다.",notify:"Instagram에서 소식 받기",
+coKicker:"신청",coTitle:"신청과 결제",coClose:"닫기",coEmail:"이메일",
+coEmailHint:"결제 후 영상 업로드 링크를 이 주소로 보내드립니다.",coEmailErr:"올바른 이메일 주소를 입력해 주세요.",
+coConsent:"본인이 성인이거나, 보호자가 이 신청과 투구 영상 제출에 동의했습니다.",coConsentErr:"이 항목을 확인해 주세요.",
+coTotal:"합계",coMonthly:"매월 자동 결제됩니다.",coPay:"결제하기",coNoLink:"결제 링크 준비 중",
+coNoLinkHelp:"이 플랜은 아직 온라인 결제를 준비 중입니다. 지금은 Instagram DM으로 신청해 주세요.",
+coOpened:"Stripe 결제 페이지가 새 탭에서 열렸습니다.",coNewTab:" (새 탭에서 열림)",coNextH:"결제 후 진행",
+coNext:"결제 후 영상 업로드 링크가 이메일로 도착합니다. 영상을 올리면 3일 이내에 분석을 받습니다.",
+coNextLive:"결제 후 지도 일정을 정하는 이메일을 보내드립니다.",
+tPrice:"가격",coPromo:"주니어 할인이나 친구 소개 코드는 다음 결제 화면에서 입력할 수 있습니다.",fManage:"구독 관리",fLegal:"판매자 정보 · 환불 정책",coSecure:"Stripe 보안 결제 · 카드 · Apple Pay · Google Pay",coDm:"궁금한 점은 Instagram DM으로"},
+en:{ann:"J-Velo online video analysis is now open in Korea.",annLink:"Learn more",applyShort:"Apply",season:"J-Velo Korea launch",learn:"Learn more",
+weekly:"Post one pitch with #BeTheBridge. Every week, one player gets a free analysis.",fAbout:"A brand that bridges Japanese and world baseball. Run by Yudai Boda.",
+heroSub:"",kakeMean:"Kakehashi: to be the bridge between Japanese baseball and the world",
+programsSub:"Three ways to start",
+o1d:"One full analysis of your delivery, with a breakdown video and a personal training plan within 3 days.",
+o2d:"Four analyses a month. Track the change week by week and build velocity steadily.",
+o3d:"Sixty minutes of real-time online coaching, one to one with the coach.",
+coachSub:"Yudai Boda · Pitching coach, Japan",
+newsSub:"Latest updates",n1:"J-Velo Korea online video analysis opens",n2:"BE THE BRIDGE homepage launches",
+eventsSub:"Clinics and sessions",e1t:"J-Velo Korea Clinic",e1when:"Date TBA · within 3 months",
+e1d:"The coach travels to Korea to coach players in person. Date and venue will be announced first on Instagram.",notify:"Get updates on Instagram",
+coKicker:"Apply",coTitle:"Apply and pay",coClose:"Close",coEmail:"Email",
+coEmailHint:"After you pay, we send your video upload link to this address.",coEmailErr:"Enter a valid email address.",
+coConsent:"I am an adult, or my parent or guardian agrees to this application and to sending pitching video.",coConsentErr:"Please confirm this to continue.",
+coTotal:"Total",coMonthly:"Billed every month.",coPay:"Pay",coNoLink:"Payment link not set yet",
+coNoLinkHelp:"Online payment for this plan isn't ready yet. For now, please apply by Instagram DM.",
+coOpened:"Stripe checkout opened in a new tab.",coNewTab:" (opens in a new tab)",coNextH:"What happens next",
+coNext:"After you pay, you'll get an email with your video upload link. Your analysis comes back within 3 days of upload.",
+coNextLive:"After you pay, you'll get an email to book your session time.",
+tPrice:"Price",coPromo:"Have a junior or friend referral code? You can enter it on the next payment screen.",fManage:"Manage subscription",fLegal:"Legal notice · Refunds",coSecure:"Secure checkout by Stripe · Card · Apple Pay · Google Pay",coDm:"Questions? DM us on Instagram"},
+ja:{ann:"J-Veloのオンライン動画添削、韓国で受付を始めました。",annLink:"詳しく見る",applyShort:"申し込む",season:"J-Velo 韓国ローンチ",learn:"詳しく見る",
+weekly:"#BeTheBridge を付けて、あなたの1球を投稿してください。毎週1人を無料で添削します。",fAbout:"日本と世界の野球をつなぐブランド。運営：Yudai Boda。",
+heroSub:"",kakeMean:"日本の野球と世界をつなぐ。",
+programsSub:"3つの始め方",
+o1d:"投球動画を1回分析。3日以内に解説動画と個別の練習メニューを届けます。",
+o2d:"月4回の分析。毎週の変化を確かめながら、着実に球速を上げます。",
+o3d:"コーチとリアルタイムでつながる、60分のオンライン指導です。",
+coachSub:"Yudai Boda · ピッチングコーチ",
+newsSub:"お知らせ",n1:"J-Velo 韓国向けオンライン動画分析、受付開始",n2:"BE THE BRIDGE ホームページ公開",
+eventsSub:"クリニック情報",e1t:"J-Velo 韓国クリニック",e1when:"日程未定・3か月以内に開催予定",
+e1d:"コーチが韓国を訪れ、現地で直接指導します。日程と会場はInstagramで最初にお知らせします。",notify:"Instagramで最新情報を見る",
+coKicker:"お申し込み",coTitle:"申し込みと支払い",coClose:"閉じる",coEmail:"メールアドレス",
+coEmailHint:"支払い後、動画アップロード用のリンクをこのアドレスに送ります。",coEmailErr:"正しいメールアドレスを入力してください。",
+coConsent:"本人が成人である、または保護者がこの申し込みと投球動画の送付に同意しています。",coConsentErr:"この項目を確認してください。",
+coTotal:"合計",coMonthly:"毎月自動で請求されます。",coPay:"支払う",coNoLink:"支払いリンクは準備中です",
+coNoLinkHelp:"このプランのオンライン決済は準備中です。今はInstagram DMでお申し込みください。",
+coOpened:"Stripeの支払いページを新しいタブで開きました。",coNewTab:"（新しいタブで開きます）",coNextH:"支払いのあと",
+coNext:"支払い後、動画アップロード用のリンクがメールで届きます。動画が届いてから3日以内に分析をお返しします。",
+coNextLive:"支払い後、指導の日程を決めるメールを送ります。",
+tPrice:"料金",coPromo:"ジュニア割引や友人紹介のコードは、次の決済画面で入力できます。",fManage:"サブスクの管理",fLegal:"特定商取引法の表記・返金",coSecure:"Stripeの安全な決済 · カード · Apple Pay · Google Pay",coDm:"質問はInstagram DMへ"}
+};
+for(const k in T2) Object.assign(T[k],T2[k]);
 function setLang(l){
   if(!T[l]) l="en";
   document.documentElement.lang=l;
   document.querySelectorAll("[data-i]").forEach(el=>{const v=T[l][el.dataset.i]; if(v!==undefined) el.textContent=v;});
   document.querySelectorAll(".langs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===l)));
+  document.querySelectorAll('a[href^="legal.html"]').forEach(a=>a.setAttribute("href","legal.html#"+l));
   try{localStorage.setItem("jvelo-lang",l)}catch(e){}
+  if(window.coRender) window.coRender();
 }
 document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
 let start="ko";
 try{const s=localStorage.getItem("jvelo-lang"); if(s) start=s; else {const n=(navigator.language||"").slice(0,2); if(T[n]) start=n; else start="en";}}catch(e){}
 setLang(start);
+/* Hero bridge: suspension bridge built from a few numbers. Redrawn (without animation) when the hero resizes. */
+(function(){
+  const svg=document.getElementById("span"); if(!svg) return;
+  const NS="http://www.w3.org/2000/svg", hero=svg.closest(".hero"), tk=hero.querySelector(".ticker");
+  let drawn=false, lastW=0, lastH=0;
+  const P=(cls,d,draw)=>{const e=document.createElementNS(NS,"path");e.setAttribute("class",cls+(draw?" draw":""));e.setAttribute("d",d);if(draw)e.setAttribute("pathLength","1");svg.appendChild(e);return e};
+  const r=n=>Math.round(n*10)/10;
+  function build(){
+    const W=hero.clientWidth, tkH=tk?hero.clientHeight-tk.offsetTop:0, avail=hero.clientHeight-tkH, phone=W<700; // svg bottom = ticker top
+    const H=Math.round(phone?Math.max(150,W*.46):Math.min(340,Math.max(240,W*.22))); // the bridge has its own band below the buttons
+    hero.style.setProperty("--bridge-h",H+"px");
+    svg.style.bottom=tkH+"px";
+    if(W===lastW&&H===lastH) return; lastW=W; lastH=H;
+    svg.style.height=H+"px";
+    svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.textContent="";
+    const deckY=H-46, waterY=H-4, topY=Math.round(H*.05)+4;
+    const ta=Math.round(W*(phone?.2:.215)), tb=W-ta;             // tower centre lines
+    const yT=topY+8, yLow=deckY-16, mid=W/2, half=(tb-ta)/2;      // main cable: tower saddle to mid-span low point
+    const main=x=>yT+(yLow-yT)*(1-((x-mid)/half)**2);
+    const ax=Math.max(6,Math.round(ta*.06)), cy=(deckY+yT)/2+(deckY-yT)*.2; // side span: anchor to tower
+    const side=(x,a,b)=>{const t=(x-a)/(b-a);return (1-t)**2*deckY+2*t*(1-t)*cy+t*t*yT};
+    // water
+    for(let k=0;k<4;k++){const y=deckY+14+k*((waterY-deckY-14)/3);const e=P("water",`M0 ${r(y)}H${W}`);e.setAttribute("stroke-dasharray",`${18+k*14} ${10+k*9}`);e.setAttribute("stroke-dashoffset",k*23)}
+    // hangers, evenly spaced across the main span and both side spans
+    const sp=phone?13:Math.max(16,Math.min(22,W/72));
+    const n=Math.max(4,Math.round((tb-ta)/sp)), step=(tb-ta)/n;
+    let h="";
+    for(let i=1;i<n;i++){const x=ta+i*step;h+=`M${r(x)} ${r(main(x))}V${deckY}`}
+    for(let x=ta-step;x>ax+step*.6;x-=step){const y=side(x,ax,ta);if(deckY-y>5)h+=`M${r(x)} ${r(y)}V${deckY}M${r(W-x)} ${r(y)}V${deckY}`}
+    P("hanger",h);
+    // deck: road surface, underside, railing; full width as approach roads
+    P("rail",`M0 ${deckY-9}H${W}`);
+    P("deck",`M0 ${deckY}H${W}`,true);
+    P("deck2",`M0 ${deckY+6}H${W}`,true);
+    // anchorages
+    for(const x of [ax,W-ax]){const e=document.createElementNS(NS,"rect");e.setAttribute("class","anchor");e.setAttribute("x",x-6);e.setAttribute("y",deckY-4);e.setAttribute("width",12);e.setAttribute("height",10);svg.appendChild(e)}
+    // main cables: centre span + two side spans (one continuous path each side)
+    P("cable",`M${ta} ${yT}Q${mid} ${r(2*yLow-yT)} ${tb} ${yT}`,true);
+    P("cable",`M${ax} ${deckY}Q${r((ax+ta)/2)} ${r(cy)} ${ta} ${yT}`,true);
+    P("cable",`M${W-ax} ${deckY}Q${r(W-(ax+ta)/2)} ${r(cy)} ${tb} ${yT}`,true);
+    // towers: two slightly tapered legs from the water to the top, cross-beams at the top, mid-height and under the deck
+    const gTop=phone?7:10, gBot=phone?10:14;
+    for(const c of [ta,tb]){
+      const xl=y=>c-(gTop+(gBot-gTop)*(y-topY)/(waterY-topY))/2, xr=y=>2*c-xl(y);
+      P("tw",`M${r(xl(waterY))} ${waterY}L${r(xl(topY))} ${topY}`,true);
+      P("tw",`M${r(xr(waterY))} ${waterY}L${r(xr(topY))} ${topY}`,true);
+      let b="";for(const y of [topY+2,topY+12,Math.round(topY+(deckY-topY)*.45),deckY+12])b+=`M${r(xl(y))} ${y}H${r(xr(y))}`;
+      P("beam",b,true);
+    }
+    if(drawn) svg.classList.add("still"); drawn=true;
+  }
+  let raf=0; const req=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(build)};
+  build();
+  if(window.ResizeObserver){const ro=new ResizeObserver(req);ro.observe(hero);if(tk)ro.observe(tk)} else addEventListener("resize",req);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(req);
+})();
+
+/* Checkout sheet: plan + age + email, then a real link to the Stripe Payment Link. */
+(function(){
+  const $=id=>document.getElementById(id);
+  const dlg=$("checkout"), scrim=$("co-scrim"), form=$("co-form"), pay=$("co-pay"), payTxt=$("co-pay-txt"), email=$("co-email"),
+        consent=$("co-consent"), status=$("co-status");
+  if(!dlg) return;
+  const PRICE={single:"pS1",monthly:"pM1",live:"pL1"};
+  const st={plan:"single"}; let tried=false, lastFocus=null, isOpen=false;
+  const t=k=>{const l=document.documentElement.lang;return (T[l]&&T[l][k])||T.en[k]||""};
+  const okEmail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  const link=()=>{const raw=(CHECKOUT[st.plan]||"").trim();if(!raw)return null;
+    try{const u=new URL(raw);if(u.protocol!=="https:")return null;const em=email.value.trim();
+      if(okEmail(em))u.searchParams.set("prefilled_email",em);else u.searchParams.delete("prefilled_email");
+      u.searchParams.set("client_reference_id",st.plan);return u.toString()}catch(e){return null}};
+  function validate(focus){
+    const eOk=okEmail(email.value.trim()), cOk=consent.checked;
+    email.setAttribute("aria-invalid",String(!eOk)); $("co-email-err").hidden=eOk;
+    email.setAttribute("aria-describedby",eOk?"co-email-hint":"co-email-err co-email-hint");
+    consent.setAttribute("aria-invalid",String(!cOk)); $("co-consent-err").hidden=cOk;
+    if(cOk) consent.removeAttribute("aria-describedby"); else consent.setAttribute("aria-describedby","co-consent-err");
+    if(focus){if(!eOk)email.focus();else if(!cOk)consent.focus()}
+    return eOk&&cOk;
+  }
+  function render(){
+    dlg.querySelectorAll("[data-price]").forEach(el=>el.textContent=t(PRICE[el.dataset.price]));
+    const total=t(PRICE[st.plan]);
+    $("co-total").textContent=total;
+    $("co-monthly").hidden=st.plan!=="monthly";
+    $("co-next").textContent=t(st.plan==="live"?"coNextLive":"coNext");
+    const href=link();
+    if(href){pay.href=href;pay.removeAttribute("aria-disabled");pay.removeAttribute("tabindex");payTxt.textContent=t("coPay")+" · "+total;
+      if(status.dataset.k==="nolink"){status.textContent="";status.dataset.k=""}}
+    else{pay.removeAttribute("href");pay.setAttribute("aria-disabled","true");pay.setAttribute("tabindex","0");payTxt.textContent=t("coNoLink");
+      status.textContent=t("coNoLinkHelp");status.dataset.k="nolink"}
+    if(status.dataset.k==="opened") status.textContent=t("coOpened");
+    if(tried) validate(false);
+  }
+  window.coRender=render;
+  const focusables=()=>[...dlg.querySelectorAll('a[href],a[tabindex],button,input,[tabindex]:not([tabindex="-1"])')].filter(e=>!e.disabled&&e.offsetParent!==null);
+  const others=()=>[...document.body.children].filter(e=>e!==dlg&&e!==scrim&&e.tagName!=="SCRIPT");
+  function open(plan,opener){
+    if(PRICE[plan]) st.plan=plan;
+    $("co-plan-"+st.plan).checked=true;
+    tried=false; status.dataset.k=""; status.textContent=""; $("co-email-err").hidden=true; $("co-consent-err").hidden=true;
+    email.removeAttribute("aria-invalid"); render();
+    lastFocus=opener||document.activeElement; isOpen=true;
+    others().forEach(e=>e.inert=true); document.body.classList.add("co-lock");
+    dlg.setAttribute("aria-hidden","false"); dlg.classList.add("open"); scrim.classList.add("open");
+    setTimeout(()=>$("co-title").focus({preventScroll:true}),30);
+  }
+  function close(){
+    if(!isOpen) return; isOpen=false;
+    dlg.classList.remove("open"); scrim.classList.remove("open"); dlg.setAttribute("aria-hidden","true");
+    others().forEach(e=>e.inert=false); document.body.classList.remove("co-lock");
+    if(location.hash.startsWith("#apply")) history.replaceState(null,"",location.pathname+location.search);
+    if(lastFocus&&lastFocus.focus) lastFocus.focus({preventScroll:true});
+  }
+  document.querySelectorAll("[data-checkout]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();open(b.dataset.checkout,b)}));
+  $("co-close").addEventListener("click",close); scrim.addEventListener("click",close);
+  form.addEventListener("change",e=>{if(e.target.name==="plan")st.plan=e.target.value;render()});
+  email.addEventListener("input",()=>{const h=link();if(h)pay.href=h;if(tried)validate(false)});
+  consent.addEventListener("change",()=>{if(tried)validate(false)});
+  pay.addEventListener("click",e=>{
+    if(!pay.hasAttribute("href")){e.preventDefault();return}
+    tried=true;
+    if(!validate(true)){e.preventDefault();return}
+    pay.href=link(); status.dataset.k="opened"; status.textContent=t("coOpened");
+  });
+  pay.addEventListener("keydown",e=>{if(e.key===" "&&pay.hasAttribute("href")){e.preventDefault();pay.click()}});
+  form.addEventListener("submit",e=>{e.preventDefault();pay.click()});
+  dlg.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){e.preventDefault();close();return}
+    if(e.key!=="Tab") return;
+    const f=focusables(); if(!f.length) return; const first=f[0], last=f[f.length-1];
+    if(e.shiftKey&&(document.activeElement===first||document.activeElement===$("co-title"))){e.preventDefault();last.focus()}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+  });
+  // deep links for the Instagram bio, e.g. index.html#apply or #apply-monthly
+  const fromHash=()=>{const m=location.hash.match(/^#apply(?:-(single|monthly|live))?$/);if(m)open(m[1]||"single")};
+  addEventListener("hashchange",fromHash); fromHash();
+})();
 </script>
 </body>
 </html>
