@@ -4,91 +4,118 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>BE THE BRIDGE | J-Velo Pitching Program</title>
-<meta name="description" content="J-Velo: Japanese pitching velocity program. Video analysis and online coaching from a Japanese pitching coach.">
+<title>BE THE BRIDGE | J-Velo</title>
+<meta name="description" content="BE THE BRIDGE: J-Velo, a Japanese pitching velocity program by Yudai Boda. Video analysis and online coaching from Japan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one narrow reading column; a radar-readout panel is the signature; bands separated by stitched seams */
+/* Layout: a single column on paper, a vertical kanji spine at the left edge, one vermilion arch (a taiko bridge and a pitch's flight) as the only ornament */
 :root{
-  --bg:#F5F7F3; --surface:#FFFFFF; --ink:#14231F; --muted:#56655F; --line:#D9E0DA;
-  --seam:#C8102E; --panel:#10201B; --panel-ink:#E9F2EC; --readout:#7CF2B0;
-  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --paper:#F6F6F3; --sumi:#141414; --ink2:#5C5A57; --rule:#DEDCD7;
+  --shu:#C8361E; --shu-ink:#FFFFFF; --surface:#FFFFFF;
+  --f-mincho:"Shippori Mincho B1","Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
   --f-body:"Noto Sans JP","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0E1714; --surface:#15211D; --ink:#E6EEE9; --muted:#9AAAA3; --line:#26352F;
-  --seam:#F0445C; --panel:#08110E; --panel-ink:#E6EEE9; --readout:#7CF2B0; color-scheme:dark}}
+  --paper:#121212; --sumi:#EDECE8; --ink2:#A3A09A; --rule:#2C2B29;
+  --shu:#E4553A; --shu-ink:#121212; --surface:#1A1A19; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0E1714; --surface:#15211D; --ink:#E6EEE9; --muted:#9AAAA3; --line:#26352F;
-  --seam:#F0445C; --panel:#08110E; --panel-ink:#E6EEE9; --readout:#7CF2B0; color-scheme:dark}
+  --paper:#121212; --sumi:#EDECE8; --ink2:#A3A09A; --rule:#2C2B29;
+  --shu:#E4553A; --shu-ink:#121212; --surface:#1A1A19; color-scheme:dark}
+
 html:lang(ko) body{font-family:"Noto Sans KR","Noto Sans JP",system-ui,sans-serif}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;padding-inline:16px;padding-block:0}
-.wrap{max-width:880px;margin:0 auto}
+body{background:var(--paper);color:var(--sumi);font-family:var(--f-body);font-size:16px;line-height:1.8;padding-inline:16px;padding-block:0}
+.wrap{max-width:960px;margin:0 auto;position:relative}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--seam);outline-offset:3px}
+:focus-visible{outline:2px solid var(--shu);outline-offset:3px}
 
-header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:20px;border-bottom:1px solid var(--line)}
-.brand{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
-.brand span{color:var(--seam)}
-.langs{display:flex;gap:4px}
-.langs button{font:500 13px var(--f-mono);background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:4px 10px;cursor:pointer}
-.langs button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+/* header */
+header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:24px}
+.mark{display:flex;align-items:center;gap:12px;text-decoration:none}
+.hanko{width:40px;height:40px;flex:none;background:var(--shu);color:var(--shu-ink);display:grid;place-items:center;border-radius:4px;font:800 14px/1.05 var(--f-mincho);writing-mode:vertical-rl;letter-spacing:.05em}
+.wordmark{display:flex;flex-direction:column;line-height:1.15}
+.wordmark b{font:700 17px var(--f-mincho);letter-spacing:.22em}
+.wordmark small{font:400 11px var(--f-mono);letter-spacing:.14em;color:var(--ink2);text-transform:uppercase}
+.langs{display:flex;gap:2px}
+.langs button{font:500 12px var(--f-mono);background:transparent;color:var(--ink2);border:0;border-bottom:1px solid transparent;padding:6px 8px;cursor:pointer;letter-spacing:.06em}
+.langs button[aria-pressed="true"]{color:var(--sumi);border-bottom-color:var(--shu)}
 
-.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;padding-block:48px 40px}
+/* hero */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,5vw,56px);padding-block:clamp(40px,8vw,88px) 24px}
 .hero>*{min-width:0}
-.eyebrow{font:500 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--seam);margin:0 0 12px}
-h1{font-family:var(--f-display);font-weight:800;font-size:clamp(34px,5.6vw,52px);line-height:1.05;text-transform:uppercase;margin:0 0 16px;text-wrap:balance}
-.lede{color:var(--muted);font-size:17px;margin:0 0 24px;max-width:34em}
+.spine{writing-mode:vertical-rl;font:800 clamp(40px,7vw,72px)/1 var(--f-mincho);color:var(--shu);letter-spacing:.12em;margin:0;user-select:none}
+.spine span{display:block;font:500 12px var(--f-mono);letter-spacing:.3em;color:var(--ink2);margin-right:12px;text-transform:uppercase}
+.origin{font:500 12px var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);margin:0 0 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.origin i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--shu)}
+h1{font:700 clamp(30px,4.8vw,50px)/1.35 var(--f-mincho);margin:0 0 24px;text-wrap:balance;letter-spacing:.01em}
+.lede{color:var(--ink2);font-size:16px;margin:0 0 32px;max-width:36em}
 .cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:6px;border:2px solid var(--ink)}
-.btn.primary{background:var(--seam);border-color:var(--seam);color:#fff}
-.btn.ghost{background:transparent;color:var(--ink)}
+.btn{display:inline-block;text-decoration:none;font-weight:500;font-size:15px;padding:13px 24px;border:1px solid var(--sumi);letter-spacing:.04em}
+.btn.primary{background:var(--shu);border-color:var(--shu);color:var(--shu-ink)}
+.btn.ghost{background:transparent;color:var(--sumi)}
+.btn:hover{opacity:.88}
 
-.readout{background:var(--panel);color:var(--panel-ink);border-radius:10px;padding:20px;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
-.readout .row{display:flex;justify-content:space-between;gap:12px;padding-block:8px;border-bottom:1px dashed rgba(124,242,176,.25)}
-.readout .row:last-of-type{border-bottom:0}
-.readout .k{font-size:12px;letter-spacing:.1em;opacity:.7}
-.readout .v{color:var(--readout);font-size:18px}
-.readout .big{font-family:var(--f-display);font-weight:800;font-size:48px;color:var(--readout);line-height:1;margin:6px 0 2px}
-.readout .note{font-size:11px;opacity:.6;margin-top:10px;font-family:var(--f-body)}
+/* the arch */
+.arch{display:block;width:100%;height:auto;max-width:100%;margin-block:8px 0}
+.arch path{fill:none;stroke:var(--shu);stroke-width:2.5;stroke-linecap:round}
+.arch line{stroke:var(--rule);stroke-width:1}
+.arch circle{fill:var(--shu)}
+@media (prefers-reduced-motion:no-preference){
+  .arch path{stroke-dasharray:1200;stroke-dashoffset:0;animation:draw 1.6s cubic-bezier(.4,0,.2,1) both}
+  @keyframes draw{from{stroke-dashoffset:1200}to{stroke-dashoffset:0}}
+}
 
-.seam{height:14px;margin-block:8px;background:
-  repeating-linear-gradient(115deg,transparent 0 10px,var(--seam) 10px 12px,transparent 12px 20px) top/100% 6px no-repeat,
-  linear-gradient(var(--line),var(--line)) center/100% 1px no-repeat;opacity:.9}
+/* proof */
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-block:8px 48px;font-variant-numeric:tabular-nums}
+.proof>div{min-width:0;border-top:1px solid var(--sumi);padding-top:14px}
+.proof .k{font:500 11px var(--f-mono);letter-spacing:.18em;color:var(--ink2);text-transform:uppercase}
+.proof .v{font:700 clamp(30px,5vw,44px)/1.1 var(--f-mincho);margin-top:6px}
+.proof .v small{font:400 13px var(--f-mono);color:var(--ink2);margin-left:6px}
+.proof .gain .v{color:var(--shu)}
+.proof-note{grid-column:1/-1;font-size:12px;color:var(--ink2);margin:0}
 
-section{padding-block:40px}
-h2{font-family:var(--f-display);font-weight:800;font-size:32px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 20px;text-wrap:balance}
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+/* sections */
+section{padding-block:56px;border-top:1px solid var(--rule);display:grid;grid-template-columns:180px 1fr;gap:24px}
+section>*{min-width:0}
+.sh{margin:0}
+.sh .kanji{display:block;font:800 30px/1 var(--f-mincho);color:var(--shu);letter-spacing:.1em;margin-bottom:10px}
+.sh h2{font:700 18px/1.4 var(--f-mincho);margin:0;letter-spacing:.04em;text-wrap:balance}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 32px}
 .grid2>*{min-width:0}
-.cred{border-top:2px solid var(--ink);padding-top:12px}
-.cred b{display:block;font-family:var(--f-display);font-size:22px;text-transform:uppercase;letter-spacing:.02em}
-.cred p{margin:4px 0 0;color:var(--muted);font-size:15px}
-ul.for{margin:0;padding-left:1.2em}
-ul.for li{margin-block:6px}
-ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
-ol.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
-ol.steps li::before{content:counter(s);display:block;font:800 28px var(--f-display);color:var(--seam)}
+.cred b{display:block;font:700 20px var(--f-mincho);letter-spacing:.06em}
+.cred p{margin:4px 0 0;color:var(--ink2);font-size:15px}
+ul.for{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+ul.for li{padding-left:22px;position:relative}
+ul.for li::before{content:"";position:absolute;left:0;top:.8em;width:10px;height:1px;background:var(--shu)}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s}
+ol.steps li{counter-increment:s;min-width:0;font-size:15px}
+ol.steps li::before{content:counter(s,cjk-ideographic);display:block;font:800 26px var(--f-mincho);color:var(--shu);margin-bottom:6px}
 
 .tablewrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;background:var(--surface)}
-th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);white-space:nowrap}
-th{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-td.p{font-family:var(--f-mono);font-size:17px}
-.small{color:var(--muted);font-size:14px;margin-top:12px}
-.guarantee{border:2px solid var(--seam);border-radius:8px;padding:16px 20px;margin-top:20px}
-.guarantee b{color:var(--seam)}
-footer{border-top:1px solid var(--line);padding-block:28px 40px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:14px 12px 14px 0;border-bottom:1px solid var(--rule);white-space:nowrap}
+th{font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+td.p{font:500 18px var(--f-mincho)}
+.small{color:var(--ink2);font-size:14px;margin:14px 0 0}
+.guarantee{display:flex;gap:14px;align-items:flex-start;margin-top:24px;padding:18px 20px;background:var(--surface);border:1px solid var(--rule)}
+.guarantee .seal{flex:none;width:34px;height:34px;border:2px solid var(--shu);color:var(--shu);display:grid;place-items:center;font:800 15px var(--f-mincho);border-radius:50%}
+.guarantee b{display:block;font-family:var(--f-mincho)}
+.links{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
 
-@media (max-width:640px){
-  .hero{grid-template-columns:1fr;padding-block:32px}
+footer{border-top:1px solid var(--sumi);padding-block:32px 48px;color:var(--ink2);font-size:13px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer .fmark{font:700 14px var(--f-mincho);letter-spacing:.2em;color:var(--sumi)}
+
+@media (max-width:720px){
+  section{grid-template-columns:1fr;gap:20px}
   .grid2,ol.steps{grid-template-columns:1fr}
+  .proof{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 }
-@media (prefers-reduced-motion:no-preference){
-  .readout .big{animation:tick .9s ease-out both}
-  @keyframes tick{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (max-width:440px){
+  .hero{grid-template-columns:1fr}
+  .spine{writing-mode:horizontal-tb;font-size:34px}
+  .spine span{display:inline;margin:0 0 0 10px}
 }
 </style>
 </head>
@@ -96,7 +123,10 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;color:var(--mute
 
 <div class="wrap">
   <header class="top">
-    <div class="brand">Be the Bridge <span>|</span> J-Velo</div>
+    <a class="mark" href="#top" aria-label="BE THE BRIDGE">
+      <span class="hanko" aria-hidden="true">棒田</span>
+      <span class="wordmark"><b>BE THE BRIDGE</b><small>J-Velo · Tokyo, Japan</small></span>
+    </a>
     <div class="langs" role="group" aria-label="Language">
       <button type="button" data-lang="ko" id="lang-ko">한국어</button>
       <button type="button" data-lang="en" id="lang-en">EN</button>
@@ -104,9 +134,10 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;color:var(--mute
     </div>
   </header>
 
-  <div class="hero">
+  <div class="hero" id="top">
+    <p class="spine" aria-hidden="true">架け橋<span>Kakehashi</span></p>
     <div>
-      <p class="eyebrow" data-i="eyebrow"></p>
+      <p class="origin"><i aria-hidden="true"></i><span data-i="eyebrow"></span></p>
       <h1 data-i="h1"></h1>
       <p class="lede" data-i="lede"></p>
       <div class="cta">
@@ -114,20 +145,23 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;color:var(--mute
         <a class="btn ghost" href="#pricing" data-i="cta2"></a>
       </div>
     </div>
-    <div class="readout" aria-label="Rapsodo sample readout">
-      <div class="k">RAPSODO · FASTBALL · 12 WKS</div>
-      <div class="big">139<small style="font-size:20px"> km/h</small></div>
-      <div class="row"><span class="k">BEFORE</span><span class="v">128 km/h · 79.5 mph</span></div>
-      <div class="row"><span class="k">AFTER</span><span class="v">139 km/h · 86.4 mph</span></div>
-      <div class="row"><span class="k">GAIN</span><span class="v">+11 km/h</span></div>
-      <div class="note" data-i="sample"></div>
-    </div>
   </div>
 
-  <div class="seam" aria-hidden="true"></div>
+  <svg class="arch" viewBox="0 0 960 120" role="img" aria-label="Bridge arch">
+    <line x1="0" y1="110" x2="960" y2="110"/>
+    <path d="M40 110 Q480 -50 920 110"/>
+    <circle cx="920" cy="110" r="5"/>
+  </svg>
+
+  <div class="proof" aria-label="Rapsodo sample">
+    <div><div class="k">Before</div><div class="v">128<small>km/h</small></div></div>
+    <div><div class="k">After · 12 wks</div><div class="v">139<small>km/h</small></div></div>
+    <div class="gain"><div class="k">Gain</div><div class="v">+11<small>km/h</small></div></div>
+    <p class="proof-note" data-i="sample"></p>
+  </div>
 
   <section id="coach">
-    <h2 data-i="coachH"></h2>
+    <div class="sh"><span class="kanji" aria-hidden="true">師</span><h2 data-i="coachH"></h2></div>
     <div class="grid2">
       <div class="cred"><b>NPB · KBO</b><p data-i="c1"></p></div>
       <div class="cred"><b>NASM-PES</b><p data-i="c2"></p></div>
@@ -137,48 +171,52 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;color:var(--mute
   </section>
 
   <section id="for">
-    <h2 data-i="forH"></h2>
+    <div class="sh"><span class="kanji" aria-hidden="true">志</span><h2 data-i="forH"></h2></div>
     <ul class="for">
       <li data-i="f1"></li><li data-i="f2"></li><li data-i="f3"></li><li data-i="f4"></li>
     </ul>
   </section>
 
   <section id="how">
-    <h2 data-i="howH"></h2>
+    <div class="sh"><span class="kanji" aria-hidden="true">流</span><h2 data-i="howH"></h2></div>
     <ol class="steps">
       <li data-i="s1"></li><li data-i="s2"></li><li data-i="s3"></li>
     </ol>
   </section>
 
-  <section id="watch">
-    <h2 data-i="watchH"></h2>
-    <p data-i="watch"></p>
-    <div class="cta">
-      <a class="btn ghost" href="https://www.tiktok.com/@neolab.boda" target="_blank" rel="noopener">TikTok @neolab.boda</a>
-      <a class="btn ghost" href="https://www.instagram.com/neolab.boda/" target="_blank" rel="noopener">Instagram @neolab.boda</a>
+  <section id="pricing">
+    <div class="sh"><span class="kanji" aria-hidden="true">価</span><h2 data-i="priceH"></h2></div>
+    <div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th data-i="tPlan"></th><th data-i="tAdult"></th><th data-i="tKid"></th></tr></thead>
+          <tbody>
+            <tr><td data-i="pSingle"></td><td class="p" data-i="pS1"></td><td class="p" data-i="pS2"></td></tr>
+            <tr><td data-i="pMonthly"></td><td class="p" data-i="pM1"></td><td class="p" data-i="pM2"></td></tr>
+            <tr><td data-i="pLive"></td><td class="p" data-i="pL1"></td><td class="p" data-i="pL2"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small" data-i="kidNote"></p>
+      <div class="guarantee"><span class="seal" aria-hidden="true">証</span><div><b data-i="gH"></b><span data-i="g"></span></div></div>
+      <p class="small" data-i="notes"></p>
     </div>
   </section>
 
-  <section id="pricing">
-    <h2 data-i="priceH"></h2>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th data-i="tPlan"></th><th data-i="tAdult"></th><th data-i="tKid"></th></tr></thead>
-        <tbody>
-          <tr><td data-i="pSingle"></td><td class="p" data-i="pS1"></td><td class="p" data-i="pS2"></td></tr>
-          <tr><td data-i="pMonthly"></td><td class="p" data-i="pM1"></td><td class="p" data-i="pM2"></td></tr>
-          <tr><td data-i="pLive"></td><td class="p" data-i="pL1"></td><td class="p" data-i="pL2"></td></tr>
-        </tbody>
-      </table>
+  <section id="watch">
+    <div class="sh"><span class="kanji" aria-hidden="true">学</span><h2 data-i="watchH"></h2></div>
+    <div>
+      <p style="margin:0" data-i="watch"></p>
+      <div class="links">
+        <a class="btn ghost" href="https://www.instagram.com/neolab.boda/" target="_blank" rel="noopener">Instagram @neolab.boda</a>
+        <a class="btn ghost" href="https://www.tiktok.com/@neolab.boda" target="_blank" rel="noopener">TikTok @neolab.boda</a>
+      </div>
     </div>
-    <p class="small" data-i="kidNote"></p>
-    <div class="guarantee"><b data-i="gH"></b> <span data-i="g"></span></div>
-    <p class="small" data-i="notes"></p>
   </section>
 
   <footer>
-    <span>© BE THE BRIDGE · J-Velo by Yudai Boda</span>
-    <span class="social"><a href="https://www.instagram.com/neolab.boda/" target="_blank" rel="noopener">Instagram @neolab.boda</a> · <a href="https://www.tiktok.com/@neolab.boda" target="_blank" rel="noopener">TikTok @neolab.boda</a></span>
+    <span class="fmark">BE THE BRIDGE</span>
+    <span>© BE THE BRIDGE · J-Velo by Yudai Boda · Made in Japan</span>
   </footer>
 </div>
 
