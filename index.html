@@ -79,16 +79,26 @@ nav.main a:hover,.util a.u:hover{border-bottom-color:currentColor}
 .hero .btn:not(.fill):hover{background:var(--on-night);color:var(--night)}
 .btn.ink{background:var(--sumi);border-color:var(--sumi);color:var(--paper)}
 .btn.line:hover{background:var(--sumi);color:var(--paper)}
-/* the bridge: an arch with hangers spanning the hero, drawn behind the type */
-.span{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;max-width:100%;z-index:0;pointer-events:none}
-.span *{vector-effect:non-scaling-stroke}
-.span .arch{fill:none;stroke:var(--flag-red);stroke-width:3;stroke-linecap:round}
-.span .deck{stroke:var(--on-night);stroke-opacity:.5;stroke-width:2}
-.span .hanger{stroke:var(--on-night);stroke-opacity:.10;stroke-width:1}
+/* the bridge: a suspension bridge silhouette spanning the hero, drawn behind the type (geometry built in JS, 1 SVG unit = 1 CSS px) */
+.span{position:absolute;left:0;right:0;bottom:0;width:100%;max-width:100%;z-index:0;pointer-events:none;overflow:visible}
+.span *{vector-effect:non-scaling-stroke;fill:none}
+.span .tw{stroke:var(--flag-red);stroke-width:3;stroke-linecap:square}
+.span .beam{stroke:var(--flag-red);stroke-width:2}
+.span .cable{stroke:var(--flag-red);stroke-width:2.5;stroke-linecap:round}
+.span .deck{stroke:var(--on-night);stroke-opacity:.6;stroke-width:2}
+.span .deck2{stroke:var(--on-night);stroke-opacity:.28;stroke-width:1}
+.span .rail{stroke:var(--on-night);stroke-opacity:.2;stroke-width:1}
+.span .hanger{stroke:var(--on-night);stroke-opacity:.16;stroke-width:1}
+.span .anchor{fill:var(--on-night);fill-opacity:.22;stroke:none}
+.span .water{stroke:var(--on-night);stroke-opacity:.1;stroke-width:1}
 @media (prefers-reduced-motion:no-preference){
-  .span .arch{stroke-dasharray:2400;animation:draw 2.2s cubic-bezier(.4,0,.2,1) both}
-  .span .hanger{animation:fade 1.2s .9s ease-out both}
-  @keyframes draw{from{stroke-dashoffset:2400}to{stroke-dashoffset:0}}
+  .span:not(.still) .draw{stroke-dasharray:1;animation:draw 1s cubic-bezier(.4,0,.2,1) both}
+  .span:not(.still) .tw{animation-duration:.8s}
+  .span:not(.still) .beam{animation-delay:.6s;animation-duration:.4s}
+  .span:not(.still) .cable{animation-delay:.7s;animation-duration:1.5s}
+  .span:not(.still) .hanger,.span:not(.still) .rail,.span:not(.still) .anchor{animation:fade .9s 1.5s ease-out both}
+  .span:not(.still) .water{animation:fade 1.4s .2s ease-out both}
+  @keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
   @keyframes fade{from{opacity:0}to{opacity:1}}
 }
 .ticker{border-top:1px solid var(--night-rule);display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;padding-block:14px;color:var(--night-2)}
@@ -210,6 +220,70 @@ footer a:hover{color:var(--sumi);text-decoration:underline;text-underline-offset
 .fbig{font:900 calc((100vw - 2 * var(--gut)) / 8.5)/.82 var(--f-display);letter-spacing:-.04em;color:var(--sumi);text-transform:uppercase;padding-block:8px 0;white-space:nowrap;overflow:hidden}
 .legal{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--rule);padding-block:18px calc(18px + env(safe-area-inset-bottom,0px))}
 
+/* buttons that open the checkout */
+button.btn{background:transparent;color:inherit;cursor:pointer;width:auto}
+button.apply{border:0;cursor:pointer;font-family:inherit}
+
+/* checkout sheet: right drawer on desktop, full-height bottom sheet on phone */
+.co-scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;z-index:40}
+.co-scrim.open{opacity:1;visibility:visible}
+.co{position:fixed;top:0;right:0;bottom:0;width:min(480px,100%);background:var(--paper);color:var(--sumi);z-index:41;display:flex;flex-direction:column;border-left:1px solid var(--rule);transform:translateX(100%);visibility:hidden;transition:transform .32s cubic-bezier(.2,.7,.2,1),visibility .32s}
+.co.open{transform:none;visibility:visible}
+.co form{display:flex;flex-direction:column;height:100%;min-height:0;margin:0}
+.co-h{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 24px 18px;border-bottom:1px solid var(--rule)}
+.co-h .label{color:var(--ink2);margin:0}
+.co-h h2{margin:8px 0 0;font:800 26px/1.15 var(--f-sans);letter-spacing:-.01em}
+.co-h h2:focus{outline:none}
+.co-x{flex:none;width:44px;height:44px;display:grid;place-items:center;background:transparent;color:var(--sumi);border:1px solid var(--rule);cursor:pointer;padding:0}
+.co-x:hover{border-color:var(--sumi)}
+.co-b{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:22px 24px 24px;display:grid;gap:24px;align-content:start}
+.co fieldset{border:0;margin:0;padding:0;min-width:0}
+.co legend,.co .fl{display:block;padding:0;margin:0 0 10px;font:500 11px/1.5 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+.co .opt{position:relative}
+.co .opt input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.co .opt label{display:flex;align-items:center;gap:12px;min-height:52px;padding:12px 16px;border:1px solid var(--rule);cursor:pointer;font-weight:700;font-size:14px;line-height:1.35;transition:background-color .15s,color .15s,border-color .15s}
+.co .opt label::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 1px currentColor;opacity:.5}
+.co .opt label .pr{margin-left:auto;font:800 15px/1.2 var(--f-display);white-space:nowrap;font-variant-numeric:tabular-nums}
+.co .opt label:hover{border-color:var(--sumi)}
+.co .opt input:checked+label{background:var(--sumi);color:var(--paper);border-color:var(--sumi)}
+.co .opt input:checked+label::before{background:var(--flag-red);box-shadow:none;opacity:1}
+.co .opt input:focus-visible+label{outline:2px solid var(--sumi);outline-offset:2px}
+.co .plans{display:grid;gap:6px}
+.co .ages{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.co .ages label{justify-content:center;text-align:center}
+.co .ages label::before{display:none}
+.co input[type=email]{display:block;width:100%;font:500 16px/1.4 var(--f-sans);color:var(--sumi);background:var(--paper);border:1px solid var(--sumi);border-radius:0;padding:13px 14px;-webkit-appearance:none;appearance:none}
+.co input[type=email]::placeholder{color:var(--ink2);opacity:.7}
+.co input[type=email]:focus-visible{outline:2px solid var(--sumi);outline-offset:2px}
+.co input[aria-invalid=true]{border-width:2px;padding:12px 13px}
+.co .hint{margin:8px 0 0;font-size:12px;color:var(--ink2);line-height:1.5}
+.co .err{margin:8px 0 0;font-size:13px;font-weight:700;line-height:1.5;display:flex;gap:8px;align-items:baseline}
+.co .err::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--flag-red);transform:translateY(-1px)}
+.co .consent{background:var(--tint);padding:14px 16px}
+.co .consent .row{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.55}
+.co .consent input{flex:none;width:20px;height:20px;margin:1px 0 0;accent-color:var(--sumi)}
+.co .sum{border-top:1px solid var(--rule);padding-top:16px;display:grid;gap:14px}
+.co .total{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.co .total>span:first-child{display:grid;gap:2px}
+.co .total .small{font-size:12px}
+.co .total output{font:900 clamp(24px,6.4vw,30px)/1 var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;text-align:right}
+.co .gl{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.55;margin:0}
+.co .gl::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--flag-red);margin-top:6px}
+.co .gl b{font-weight:700}
+.co-f{border-top:1px solid var(--sumi);padding:14px 24px calc(14px + env(safe-area-inset-bottom,0px));display:grid;gap:12px;background:var(--paper)}
+.co-f #co-status:empty{display:none}
+.co-pay{display:block;text-align:center;font-size:12px;padding:18px 20px}
+.co-pay:hover{opacity:.88}
+.co-pay[aria-disabled=true]{background:var(--tint2);border-color:var(--tint2);color:var(--ink2);cursor:not-allowed;opacity:1}
+.co-f .small{font-size:12px;line-height:1.55}
+.co .next{margin:0;font-size:13px;line-height:1.55}
+.co .next b{display:block;font:500 11px/1.5 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin-bottom:2px}
+.co .meta{display:flex;justify-content:space-between;gap:6px 16px;flex-wrap:wrap;font-size:12px;color:var(--ink2)}
+.co .meta a{text-underline-offset:3px}
+.co .meta a:hover{color:var(--sumi)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+body.co-lock{overflow:hidden}
+
 @media (max-width:1000px){
   .cards{grid-template-columns:1fr 1fr}
   .cards .card:last-child{grid-column:1/-1}
@@ -238,6 +312,11 @@ footer a:hover{color:var(--sumi);text-decoration:underline;text-underline-offset
   .event .when{min-height:0}
   .soc{min-height:160px}
   footer .in{grid-template-columns:1fr 1fr}
+  .co{width:100%;height:100%;height:100dvh;border-left:0;transform:translateY(100%)}
+  .co-h{padding:16px 16px 14px}
+  .co-h h2{font-size:22px}
+  .co-b{padding:18px 16px 20px;gap:20px}
+  .co-f{padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px))}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -267,7 +346,7 @@ footer a:hover{color:var(--sumi);text-decoration:underline;text-underline-offset
       <button type="button" data-lang="en" id="lang-en">EN</button>
       <button type="button" data-lang="ja" id="lang-ja">日本語</button>
     </div>
-    <a class="apply caps" href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" data-i="applyShort"></a>
+    <button type="button" class="apply caps" id="apply-header" data-checkout="single" aria-haspopup="dialog" data-i="applyShort"></button>
   </div>
 </header>
 
@@ -282,7 +361,7 @@ footer a:hover{color:var(--sumi);text-decoration:underline;text-underline-offset
         <p class="ja" lang="ja"><span>失敗があなたを決めるんじゃない。</span><span>そのあとどうするかが、あなたをつくる。</span></p>
         <p class="sub" data-i="heroSub"></p>
         <div class="btns">
-          <a class="btn fill" href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" data-i="cta"></a>
+          <button type="button" class="btn fill" id="hero-apply" data-checkout="single" aria-haspopup="dialog" data-i="cta"></button>
           <a class="btn" href="#jvelo" data-i="learn"></a>
         </div>
       </div>
@@ -317,7 +396,7 @@ footer a:hover{color:var(--sumi);text-decoration:underline;text-underline-offset
             <div><dt data-i="tAdult"></dt><dd data-i="pS1"></dd></div>
             <div><dt data-i="tKid"></dt><dd data-i="pS2"></dd></div>
           </dl>
-          <a class="btn line" href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" data-i="cta"></a>
+          <button type="button" class="btn line" id="plan-single-apply" data-checkout="single" aria-haspopup="dialog" data-i="cta"></button>
         </div>
       </article>
       <article class="card dark">
@@ -330,7 +409,7 @@ footer a:hover{color:var(--sumi);text-decoration:underline;text-underline-offset
             <div><dt data-i="tAdult"></dt><dd data-i="pM1"></dd></div>
             <div><dt data-i="tKid"></dt><dd data-i="pM2"></dd></div>
           </dl>
-          <a class="btn ink" href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" data-i="cta"></a>
+          <button type="button" class="btn ink" id="plan-monthly-apply" data-checkout="monthly" aria-haspopup="dialog" data-i="cta"></button>
         </div>
       </article>
       <article class="card">
@@ -343,7 +422,7 @@ footer a:hover{color:var(--sumi);text-decoration:underline;text-underline-offset
             <div><dt data-i="tAdult"></dt><dd data-i="pL1"></dd></div>
             <div><dt data-i="tKid"></dt><dd data-i="pL2"></dd></div>
           </dl>
-          <a class="btn line" href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" data-i="cta"></a>
+          <button type="button" class="btn line" id="plan-live-apply" data-checkout="live" aria-haspopup="dialog" data-i="cta"></button>
         </div>
       </article>
     </div>
@@ -445,34 +524,98 @@ footer a:hover{color:var(--sumi);text-decoration:underline;text-underline-offset
   <div class="g"><div class="legal"><span>© 2026 BE THE BRIDGE · Yudai Boda</span><span lang="ja">架け橋 · Made in Japan</span></div></div>
 </footer>
 
+<div class="co-scrim" id="co-scrim"></div>
+<div class="co" id="checkout" role="dialog" aria-modal="true" aria-labelledby="co-title" aria-hidden="true">
+  <form id="co-form" novalidate>
+    <div class="co-h">
+      <div><p class="label">J-Velo · <span data-i="coKicker"></span></p><h2 id="co-title" tabindex="-1" data-i="coTitle"></h2></div>
+      <button type="button" class="co-x" id="co-close"><span class="sr" data-i="coClose"></span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.6"/></svg></button>
+    </div>
+    <div class="co-b">
+      <fieldset id="co-plan">
+        <legend data-i="tPlan"></legend>
+        <div class="plans">
+          <div class="opt"><input type="radio" name="plan" id="co-plan-single" value="single"><label for="co-plan-single"><span data-i="pSingle"></span><span class="pr" data-price="single"></span></label></div>
+          <div class="opt"><input type="radio" name="plan" id="co-plan-monthly" value="monthly"><label for="co-plan-monthly"><span data-i="pMonthly"></span><span class="pr" data-price="monthly"></span></label></div>
+          <div class="opt"><input type="radio" name="plan" id="co-plan-live" value="live"><label for="co-plan-live"><span data-i="pLive"></span><span class="pr" data-price="live"></span></label></div>
+        </div>
+      </fieldset>
+      <fieldset id="co-age">
+        <legend data-i="coAge"></legend>
+        <div class="ages">
+          <div class="opt"><input type="radio" name="age" id="co-age-adult" value="adult" checked><label for="co-age-adult" data-i="tAdult"></label></div>
+          <div class="opt"><input type="radio" name="age" id="co-age-junior" value="junior"><label for="co-age-junior" data-i="tKid"></label></div>
+        </div>
+      </fieldset>
+      <div>
+        <label class="fl" for="co-email" data-i="coEmail"></label>
+        <input type="email" id="co-email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required placeholder="you@example.com" aria-describedby="co-email-hint">
+        <p class="hint" id="co-email-hint" data-i="coEmailHint"></p>
+        <p class="err" id="co-email-err" hidden data-i="coEmailErr"></p>
+      </div>
+      <div class="consent" id="co-consent-wrap" hidden>
+        <div class="row"><input type="checkbox" id="co-consent" name="consent"><label for="co-consent" data-i="coConsent"></label></div>
+        <p class="err" id="co-consent-err" hidden data-i="coConsentErr"></p>
+      </div>
+      <div class="sum">
+        <p class="gl"><span><b data-i="gH"></b> <span data-i="g"></span></span></p>
+        <p class="next" id="co-next-wrap"><b data-i="coNextH"></b><span id="co-next"></span></p>
+        <div class="meta"><span data-i="coSecure"></span><a href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" id="co-dm" data-i="coDm"></a></div>
+      </div>
+    </div>
+    <div class="co-f">
+      <div class="total"><span><span class="label muted" data-i="coTotal"></span><span class="small" id="co-monthly" hidden data-i="coMonthly"></span></span><output id="co-total" for="co-plan co-age" aria-live="polite"></output></div>
+      <a class="btn ink co-pay" id="co-pay" target="_blank" rel="noopener"><span id="co-pay-txt"></span><span class="sr" data-i="coNewTab"></span></a>
+      <p class="small" id="co-status" aria-live="polite"></p>
+    </div>
+  </form>
+</div>
+
 <script>
+/* ===== CHECKOUT: Stripe Payment Links =====================================================
+   Yudai: create one Payment Link per plan x age in the Stripe Dashboard (Payment Links > New),
+   then paste each URL (https://buy.stripe.com/...) between the quotes below.
+   - "monthly_*" links should use a recurring (monthly) price, so Stripe bills it as a subscription.
+   - The site appends ?prefilled_email=...&client_reference_id=<plan>-<age> to each link, so every
+     payment in Stripe shows which plan and age group was chosen.
+   - Prices shown on the page come from the pS1..pL2 strings in T. Keep them identical to the
+     Stripe prices (the Korean page shows KRW, the EN/JA pages show USD).
+   - A link left empty shows "Payment link not set yet" and the Pay button stays disabled. */
+const CHECKOUT={
+  single_adult:"",   // Single analysis, age 16+
+  single_junior:"",  // Single analysis, 15 and under
+  monthly_adult:"",  // Monthly plan (subscription), age 16+
+  monthly_junior:"", // Monthly plan (subscription), 15 and under
+  live_adult:"",     // Live session 60 min, age 16+
+  live_junior:""     // Live session 60 min, 15 and under
+};
 const T={
 ko:{eyebrow:"일본식 구속 향상 프로그램",h1:"오늘의 구속이 당신을 정하지 않는다. 다음 한 구가 정한다.",
 lede:"NPB·KBO 선수를 지도한 일본 피칭 코치가 당신의 투구 영상을 분석하고, 3일 이내에 해설 영상과 맞춤 훈련 메뉴를 보내드립니다.",
-cta:"Instagram DM으로 신청",cta2:"요금 보기",sample:"측정 예시입니다. 실제 지도 사례로 교체 예정.",
+cta:"신청하기",cta2:"요금 보기",sample:"측정 예시입니다. 실제 지도 사례로 교체 예정.",
 coachH:"코치 소개",c1:"NPB·KBO 선수 지도 경험",c2:"미국 NASM 퍼포먼스 향상 전문가 자격",c3:"구속·회전수를 측정해 데이터로 지도",c4h:"현장 클리닉",c4:"한국에서 직접 클리닉 개최 경험",
 forH:"이런 분께 추천합니다",f1:"프로 진출을 목표로 구속을 올리고 싶은 선수",f2:"더 높은 무대를 목표로 하는 고등학생 투수",f3:"자녀가 부상 없이 성장하기를 바라는 학부모",f4:"올바른 폼부터 배우고 싶은 초·중학생",
-howH:"진행 방법",s1:"플랜을 선택하고 Instagram DM으로 신청합니다.",s2:"투구 영상(정면·측면 각 1개)을 보내주세요.",s3:"3일 이내에 해설 영상과 맞춤 훈련 메뉴를 받습니다.",
+howH:"진행 방법",s1:"플랜을 선택하고 이 사이트에서 바로 결제합니다.",s2:"이메일로 받은 링크로 투구 영상(정면·측면 각 1개)을 올립니다.",s3:"3일 이내에 해설 영상과 맞춤 훈련 메뉴를 받습니다.",
 priceH:"요금",tPlan:"플랜",tAdult:"고등학생 이상",tKid:"초·중학생",pSingle:"1회 피드백",pMonthly:"월 4회 플랜",pLive:"라이브 지도 (60분, 통역 포함)",
 pS1:"110,000원",pS2:"88,000원",pM1:"월 340,000원",pM2:"월 270,000원",pL1:"190,000원",pL2:"150,000원",
 kidNote:"초·중학생은 구속보다 올바른 폼과 부상 예방을 중심으로 지도합니다.",gH:"첫 피드백 만족 보장.",g:"첫 피드백에 만족하지 못하시면 전액 환불해 드립니다.",
 watchH:"무료 드릴 영상",watch:"구속 향상 드릴과 지도 사례를 TikTok과 Instagram에서 매주 공개합니다.",notes:"만 19세 미만은 보호자 동의가 필요합니다. 영상은 지도 목적으로만 사용하며, 사례 소개 시에는 사전 동의 후 수치만 사용합니다."},
 en:{eyebrow:"The Japanese velocity program",h1:"Today's velocity doesn't define you. What you do next does.",
 lede:"A Japanese pitching coach who has worked with NPB and KBO players analyzes your delivery and sends a breakdown video and a personal training plan within 3 days.",
-cta:"Apply via Instagram DM",cta2:"See pricing",sample:"Sample readout. To be replaced with a real client case.",
+cta:"Apply now",cta2:"See pricing",sample:"Sample readout. To be replaced with a real client case.",
 coachH:"Your coach",c1:"Has coached players in NPB (Japan) and KBO (Korea)",c2:"NASM Performance Enhancement Specialist",c3:"Velocity and spin measured, every plan built on data",c4h:"On-site clinics",c4:"Has run clinics in Korea in person",
 forH:"Who it's for",f1:"Pitchers who want to throw harder and reach the next level",f2:"High school players aiming for college or pro baseball",f3:"Parents who want their kids to develop without injury",f4:"Coaches who want a second opinion on their pitchers",
-howH:"How it works",s1:"Choose a plan and apply via Instagram DM.",s2:"Send your pitching video: one from the front, one from the side.",s3:"Within 3 days, get a breakdown video and a personal training plan.",
+howH:"How it works",s1:"Choose a plan and pay right here on the site.",s2:"Upload your pitching video from the link in your email: one from the front, one from the side.",s3:"Within 3 days, get a breakdown video and a personal training plan.",
 priceH:"Pricing",tPlan:"Plan",tAdult:"Age 16+",tKid:"Ages 15 and under",pSingle:"Single analysis",pMonthly:"Monthly plan (4 analyses)",pLive:"Live session (60 min)",
 pS1:"$99",pS2:"$79",pM1:"$299 / month",pM2:"$239 / month",pL1:"$149",pL2:"$119",
 kidNote:"For younger players, we focus on proper mechanics and injury prevention rather than chasing velocity.",gH:"First-analysis guarantee.",g:"Not satisfied with your first analysis? You get a full refund.",
 watchH:"Free drills",watch:"Velocity drills and coaching breakdowns, posted every week on TikTok and Instagram.",notes:"Players under 18 need a parent's or guardian's consent. Videos are used only for coaching; results are shared only with permission, as numbers, never names or video."},
 ja:{eyebrow:"日本式 球速アップ・プログラム",h1:"今日の球速が、あなたを決めるんじゃない。次の一球が、あなたをつくる。",
 lede:"NPB・KBOの選手を指導してきた日本のピッチングコーチが、あなたの投球動画を分析し、3日以内に解説動画と個別の練習メニューを届けます。",
-cta:"Instagram DMで申し込む",cta2:"料金を見る",sample:"計測の表示例です。実際の指導事例に差し替え予定。",
+cta:"申し込む",cta2:"料金を見る",sample:"計測の表示例です。実際の指導事例に差し替え予定。",
 coachH:"コーチ紹介",c1:"NPB・KBOの選手の指導経験",c2:"米国NASMのパフォーマンス向上スペシャリスト資格",c3:"球速と回転数を測り、データで指導",c4h:"出張クリニック",c4:"韓国での対面クリニックの実施経験",
 forH:"こんな人に",f1:"プロを目指して球速を上げたい選手",f2:"より高い舞台を目指す高校生投手",f3:"子どもに故障なく成長してほしい保護者",f4:"正しいフォームから学びたい小中学生",
-howH:"申込の流れ",s1:"プランを選び、Instagram DMで申し込みます。",s2:"投球動画（正面と側面を1本ずつ）を送ります。",s3:"3日以内に、解説動画と個別の練習メニューが届きます。",
+howH:"申込の流れ",s1:"プランを選び、このサイトでそのまま支払います。",s2:"メールで届くリンクから、投球動画（正面と側面を1本ずつ）をアップロードします。",s3:"3日以内に、解説動画と個別の練習メニューが届きます。",
 priceH:"料金（海外向け）",tPlan:"プラン",tAdult:"16歳以上",tKid:"15歳以下",pSingle:"1回の添削",pMonthly:"月4回プラン",pLive:"ライブ指導（60分）",
 pS1:"$99",pS2:"$79",pM1:"$299 / 月",pM2:"$239 / 月",pL1:"$149",pL2:"$119",
 kidNote:"小中学生は、球速よりも正しいフォームと故障予防を中心に指導します。",gH:"初回の添削の満足保証。",g:"初回の添削に満足できなければ、全額を返金します。",
@@ -489,7 +632,16 @@ o3d:"코치와 실시간으로 연결되는 60분 온라인 지도입니다.",
 coachSub:"棒田雄大 (Yudai Boda) · 일본 피칭 코치",
 newsSub:"새로운 소식",n1:"J-Velo 한국 온라인 영상 분석 접수 시작",n2:"BE THE BRIDGE 홈페이지 오픈",
 eventsSub:"클리닉 일정",e1t:"J-Velo 한국 클리닉",e1when:"날짜 미정 · 3개월 이내 예정",
-e1d:"코치가 직접 한국을 방문해 현장에서 지도합니다. 일정과 장소는 Instagram에서 가장 먼저 공지합니다.",notify:"Instagram에서 소식 받기"},
+e1d:"코치가 직접 한국을 방문해 현장에서 지도합니다. 일정과 장소는 Instagram에서 가장 먼저 공지합니다.",notify:"Instagram에서 소식 받기",
+coKicker:"신청",coTitle:"신청과 결제",coClose:"닫기",coAge:"연령",coEmail:"이메일",
+coEmailHint:"결제 후 영상 업로드 링크를 이 주소로 보내드립니다.",coEmailErr:"올바른 이메일 주소를 입력해 주세요.",
+coConsent:"보호자로서 자녀의 신청과 투구 영상 제출에 동의합니다.",coConsentErr:"초·중학생은 보호자 동의가 필요합니다.",
+coTotal:"합계",coMonthly:"매월 자동 결제됩니다.",coPay:"결제하기",coNoLink:"결제 링크 준비 중",
+coNoLinkHelp:"이 플랜은 아직 온라인 결제를 준비 중입니다. 지금은 Instagram DM으로 신청해 주세요.",
+coOpened:"Stripe 결제 페이지가 새 탭에서 열렸습니다.",coNewTab:" (새 탭에서 열림)",coNextH:"결제 후 진행",
+coNext:"결제 후 영상 업로드 링크가 이메일로 도착합니다. 영상을 올리면 3일 이내에 분석을 받습니다.",
+coNextLive:"결제 후 지도 일정을 정하는 이메일을 보내드립니다.",
+coSecure:"Stripe 보안 결제 · 카드 · Apple Pay · Google Pay",coDm:"궁금한 점은 Instagram DM으로"},
 en:{ann:"J-Velo online video analysis is now open in Korea.",annLink:"Learn more",applyShort:"Apply",season:"J-Velo Korea launch",learn:"Learn more",
 weekly:"Post one pitch with #BeTheBridge. Every week, one player gets a free analysis.",fAbout:"A brand that bridges Japanese and world baseball. Run by Yudai Boda.",
 heroSub:"",kakeMean:"Kakehashi: to be the bridge between Japanese baseball and the world",
@@ -500,7 +652,16 @@ o3d:"Sixty minutes of real-time online coaching, one to one with the coach.",
 coachSub:"Yudai Boda (棒田雄大) · Pitching coach, Japan",
 newsSub:"Latest updates",n1:"J-Velo Korea online video analysis opens",n2:"BE THE BRIDGE homepage launches",
 eventsSub:"Clinics and sessions",e1t:"J-Velo Korea Clinic",e1when:"Date TBA · within 3 months",
-e1d:"The coach travels to Korea to coach players in person. Date and venue will be announced first on Instagram.",notify:"Get updates on Instagram"},
+e1d:"The coach travels to Korea to coach players in person. Date and venue will be announced first on Instagram.",notify:"Get updates on Instagram",
+coKicker:"Apply",coTitle:"Apply and pay",coClose:"Close",coAge:"Age group",coEmail:"Email",
+coEmailHint:"After you pay, we send your video upload link to this address.",coEmailErr:"Enter a valid email address.",
+coConsent:"I am the player's parent or guardian, and I consent to them taking part and sending pitching video.",coConsentErr:"Parental consent is required for players 15 and under.",
+coTotal:"Total",coMonthly:"Billed every month.",coPay:"Pay",coNoLink:"Payment link not set yet",
+coNoLinkHelp:"Online payment for this plan isn't ready yet. For now, please apply by Instagram DM.",
+coOpened:"Stripe checkout opened in a new tab.",coNewTab:" (opens in a new tab)",coNextH:"What happens next",
+coNext:"After you pay, you'll get an email with your video upload link. Your analysis comes back within 3 days of upload.",
+coNextLive:"After you pay, you'll get an email to book your session time.",
+coSecure:"Secure checkout by Stripe · Card · Apple Pay · Google Pay",coDm:"Questions? DM us on Instagram"},
 ja:{ann:"J-Veloのオンライン動画添削、韓国で受付を始めました。",annLink:"詳しく見る",applyShort:"申し込む",season:"J-Velo 韓国ローンチ",learn:"詳しく見る",
 weekly:"#BeTheBridge を付けて、あなたの1球を投稿してください。毎週1人を無料で添削します。",fAbout:"日本と世界の野球をつなぐブランド。運営：棒田雄大。",
 heroSub:"",kakeMean:"日本の野球と世界をつなぐ。",
@@ -511,7 +672,16 @@ o3d:"コーチとリアルタイムでつながる、60分のオンライン指�
 coachSub:"棒田雄大（ぼうだ ゆうだい）· ピッチングコーチ",
 newsSub:"お知らせ",n1:"J-Velo 韓国向けオンライン動画分析、受付開始",n2:"BE THE BRIDGE ホームページ公開",
 eventsSub:"クリニック情報",e1t:"J-Velo 韓国クリニック",e1when:"日程未定・3か月以内に開催予定",
-e1d:"コーチが韓国を訪れ、現地で直接指導します。日程と会場はInstagramで最初にお知らせします。",notify:"Instagramで最新情報を見る"}
+e1d:"コーチが韓国を訪れ、現地で直接指導します。日程と会場はInstagramで最初にお知らせします。",notify:"Instagramで最新情報を見る",
+coKicker:"お申し込み",coTitle:"申し込みと支払い",coClose:"閉じる",coAge:"年齢",coEmail:"メールアドレス",
+coEmailHint:"支払い後、動画アップロード用のリンクをこのアドレスに送ります。",coEmailErr:"正しいメールアドレスを入力してください。",
+coConsent:"保護者として、子どもの申し込みと投球動画の送付に同意します。",coConsentErr:"15歳以下は保護者の同意が必要です。",
+coTotal:"合計",coMonthly:"毎月自動で請求されます。",coPay:"支払う",coNoLink:"支払いリンクは準備中です",
+coNoLinkHelp:"このプランのオンライン決済は準備中です。今はInstagram DMでお申し込みください。",
+coOpened:"Stripeの支払いページを新しいタブで開きました。",coNewTab:"（新しいタブで開きます）",coNextH:"支払いのあと",
+coNext:"支払い後、動画アップロード用のリンクがメールで届きます。動画が届いてから3日以内に分析をお返しします。",
+coNextLive:"支払い後、指導の日程を決めるメールを送ります。",
+coSecure:"Stripeの安全な決済 · カード · Apple Pay · Google Pay",coDm:"質問はInstagram DMへ"}
 };
 for(const k in T2) Object.assign(T[k],T2[k]);
 function setLang(l){
@@ -520,16 +690,151 @@ function setLang(l){
   document.querySelectorAll("[data-i]").forEach(el=>{const v=T[l][el.dataset.i]; if(v!==undefined) el.textContent=v;});
   document.querySelectorAll(".langs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===l)));
   try{localStorage.setItem("jvelo-lang",l)}catch(e){}
+  if(window.coRender) window.coRender();
 }
 document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
 let start="ko";
 try{const s=localStorage.getItem("jvelo-lang"); if(s) start=s; else {const n=(navigator.language||"").slice(0,2); if(T[n]) start=n; else start="en";}}catch(e){}
 setLang(start);
-(function(){const svg=document.getElementById("span");if(!svg)return;const NS="http://www.w3.org/2000/svg";
-const L=-60,R=1500,D=558,H=40;function y(x){const t=(x-L)/(R-L);return D-(D-H)*4*t*(1-t)}
-for(let x=20;x<1440;x+=40){const l=document.createElementNS(NS,"line");l.setAttribute("class","hanger");l.setAttribute("x1",x);l.setAttribute("x2",x);l.setAttribute("y1",y(x));l.setAttribute("y2",D);svg.appendChild(l)}
-const d=document.createElementNS(NS,"line");d.setAttribute("class","deck");d.setAttribute("x1",0);d.setAttribute("x2",1440);d.setAttribute("y1",D);d.setAttribute("y2",D);svg.appendChild(d);
-const a=document.createElementNS(NS,"path");a.setAttribute("class","arch");a.setAttribute("d",`M${L} ${D} Q720 ${2*H-D} ${R} ${D}`);svg.appendChild(a);const tk=document.querySelector(".hero .ticker");const fit=()=>{if(tk)svg.style.bottom=tk.offsetHeight+"px"};fit();addEventListener("resize",fit)})();
+/* Hero bridge: suspension bridge built from a few numbers. Redrawn (without animation) when the hero resizes. */
+(function(){
+  const svg=document.getElementById("span"); if(!svg) return;
+  const NS="http://www.w3.org/2000/svg", hero=svg.closest(".hero"), tk=hero.querySelector(".ticker");
+  let drawn=false, lastW=0, lastH=0;
+  const P=(cls,d,draw)=>{const e=document.createElementNS(NS,"path");e.setAttribute("class",cls+(draw?" draw":""));e.setAttribute("d",d);if(draw)e.setAttribute("pathLength","1");svg.appendChild(e);return e};
+  const r=n=>Math.round(n*10)/10;
+  function build(){
+    const W=hero.clientWidth, tkH=tk?hero.clientHeight-tk.offsetTop:0, avail=hero.clientHeight-tkH, phone=W<700; // svg bottom = ticker top
+    const H=Math.round(Math.max(220,Math.min(avail*(phone?.6:.78),Math.max(phone?380:340,W*.44))));
+    svg.style.bottom=tkH+"px";
+    if(W===lastW&&H===lastH) return; lastW=W; lastH=H;
+    svg.style.height=H+"px";
+    svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.textContent="";
+    const deckY=H-46, waterY=H-4, topY=Math.round(H*.05)+4;
+    const ta=Math.round(W*(phone?.2:.215)), tb=W-ta;             // tower centre lines
+    const yT=topY+8, yLow=deckY-16, mid=W/2, half=(tb-ta)/2;      // main cable: tower saddle to mid-span low point
+    const main=x=>yT+(yLow-yT)*(1-((x-mid)/half)**2);
+    const ax=Math.max(6,Math.round(ta*.06)), cy=(deckY+yT)/2+(deckY-yT)*.2; // side span: anchor to tower
+    const side=(x,a,b)=>{const t=(x-a)/(b-a);return (1-t)**2*deckY+2*t*(1-t)*cy+t*t*yT};
+    // water
+    for(let k=0;k<4;k++){const y=deckY+14+k*((waterY-deckY-14)/3);const e=P("water",`M0 ${r(y)}H${W}`);e.setAttribute("stroke-dasharray",`${18+k*14} ${10+k*9}`);e.setAttribute("stroke-dashoffset",k*23)}
+    // hangers, evenly spaced across the main span and both side spans
+    const sp=phone?13:Math.max(16,Math.min(22,W/72));
+    const n=Math.max(4,Math.round((tb-ta)/sp)), step=(tb-ta)/n;
+    let h="";
+    for(let i=1;i<n;i++){const x=ta+i*step;h+=`M${r(x)} ${r(main(x))}V${deckY}`}
+    for(let x=ta-step;x>ax+step*.6;x-=step){const y=side(x,ax,ta);if(deckY-y>5)h+=`M${r(x)} ${r(y)}V${deckY}M${r(W-x)} ${r(y)}V${deckY}`}
+    P("hanger",h);
+    // deck: road surface, underside, railing; full width as approach roads
+    P("rail",`M0 ${deckY-9}H${W}`);
+    P("deck",`M0 ${deckY}H${W}`,true);
+    P("deck2",`M0 ${deckY+6}H${W}`,true);
+    // anchorages
+    for(const x of [ax,W-ax]){const e=document.createElementNS(NS,"rect");e.setAttribute("class","anchor");e.setAttribute("x",x-6);e.setAttribute("y",deckY-4);e.setAttribute("width",12);e.setAttribute("height",10);svg.appendChild(e)}
+    // main cables: centre span + two side spans (one continuous path each side)
+    P("cable",`M${ta} ${yT}Q${mid} ${r(2*yLow-yT)} ${tb} ${yT}`,true);
+    P("cable",`M${ax} ${deckY}Q${r((ax+ta)/2)} ${r(cy)} ${ta} ${yT}`,true);
+    P("cable",`M${W-ax} ${deckY}Q${r(W-(ax+ta)/2)} ${r(cy)} ${tb} ${yT}`,true);
+    // towers: two slightly tapered legs from the water to the top, cross-beams at the top, mid-height and under the deck
+    const gTop=phone?7:10, gBot=phone?10:14;
+    for(const c of [ta,tb]){
+      const xl=y=>c-(gTop+(gBot-gTop)*(y-topY)/(waterY-topY))/2, xr=y=>2*c-xl(y);
+      P("tw",`M${r(xl(waterY))} ${waterY}L${r(xl(topY))} ${topY}`,true);
+      P("tw",`M${r(xr(waterY))} ${waterY}L${r(xr(topY))} ${topY}`,true);
+      let b="";for(const y of [topY+2,topY+12,Math.round(topY+(deckY-topY)*.45),deckY+12])b+=`M${r(xl(y))} ${y}H${r(xr(y))}`;
+      P("beam",b,true);
+    }
+    if(drawn) svg.classList.add("still"); drawn=true;
+  }
+  let raf=0; const req=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(build)};
+  build();
+  if(window.ResizeObserver){const ro=new ResizeObserver(req);ro.observe(hero);if(tk)ro.observe(tk)} else addEventListener("resize",req);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(req);
+})();
+
+/* Checkout sheet: plan + age + email, then a real link to the Stripe Payment Link. */
+(function(){
+  const $=id=>document.getElementById(id);
+  const dlg=$("checkout"), scrim=$("co-scrim"), form=$("co-form"), pay=$("co-pay"), payTxt=$("co-pay-txt"), email=$("co-email"),
+        consent=$("co-consent"), consentWrap=$("co-consent-wrap"), status=$("co-status");
+  if(!dlg) return;
+  const PRICE={single:["pS1","pS2"],monthly:["pM1","pM2"],live:["pL1","pL2"]};
+  const st={plan:"single",age:"adult"}; let tried=false, lastFocus=null, isOpen=false;
+  const t=k=>{const l=document.documentElement.lang;return (T[l]&&T[l][k])||T.en[k]||""};
+  const okEmail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  const link=()=>{const raw=(CHECKOUT[st.plan+"_"+st.age]||"").trim();if(!raw)return null;
+    try{const u=new URL(raw);if(u.protocol!=="https:")return null;const em=email.value.trim();
+      if(okEmail(em))u.searchParams.set("prefilled_email",em);else u.searchParams.delete("prefilled_email");
+      u.searchParams.set("client_reference_id",st.plan+"-"+st.age);return u.toString()}catch(e){return null}};
+  function validate(focus){
+    const eOk=okEmail(email.value.trim()), cOk=st.age!=="junior"||consent.checked;
+    email.setAttribute("aria-invalid",String(!eOk)); $("co-email-err").hidden=eOk;
+    email.setAttribute("aria-describedby",eOk?"co-email-hint":"co-email-err co-email-hint");
+    consent.setAttribute("aria-invalid",String(!cOk)); $("co-consent-err").hidden=cOk;
+    if(cOk) consent.removeAttribute("aria-describedby"); else consent.setAttribute("aria-describedby","co-consent-err");
+    if(focus){if(!eOk)email.focus();else if(!cOk)consent.focus()}
+    return eOk&&cOk;
+  }
+  function render(){
+    const ai=st.age==="adult"?0:1;
+    dlg.querySelectorAll("[data-price]").forEach(el=>el.textContent=t(PRICE[el.dataset.price][ai]));
+    const total=t(PRICE[st.plan][ai]);
+    $("co-total").textContent=total;
+    consentWrap.hidden=st.age!=="junior";
+    $("co-monthly").hidden=st.plan!=="monthly";
+    $("co-next").textContent=t(st.plan==="live"?"coNextLive":"coNext");
+    const href=link();
+    if(href){pay.href=href;pay.removeAttribute("aria-disabled");pay.removeAttribute("tabindex");payTxt.textContent=t("coPay")+" · "+total;
+      if(status.dataset.k==="nolink"){status.textContent="";status.dataset.k=""}}
+    else{pay.removeAttribute("href");pay.setAttribute("aria-disabled","true");pay.setAttribute("tabindex","0");payTxt.textContent=t("coNoLink");
+      status.textContent=t("coNoLinkHelp");status.dataset.k="nolink"}
+    if(status.dataset.k==="opened") status.textContent=t("coOpened");
+    if(tried) validate(false);
+  }
+  window.coRender=render;
+  const focusables=()=>[...dlg.querySelectorAll('a[href],a[tabindex],button,input,[tabindex]:not([tabindex="-1"])')].filter(e=>!e.disabled&&e.offsetParent!==null);
+  const others=()=>[...document.body.children].filter(e=>e!==dlg&&e!==scrim&&e.tagName!=="SCRIPT");
+  function open(plan,opener){
+    if(PRICE[plan]) st.plan=plan;
+    $("co-plan-"+st.plan).checked=true; $("co-age-"+st.age).checked=true;
+    tried=false; status.dataset.k=""; status.textContent=""; $("co-email-err").hidden=true; $("co-consent-err").hidden=true;
+    email.removeAttribute("aria-invalid"); render();
+    lastFocus=opener||document.activeElement; isOpen=true;
+    others().forEach(e=>e.inert=true); document.body.classList.add("co-lock");
+    dlg.setAttribute("aria-hidden","false"); dlg.classList.add("open"); scrim.classList.add("open");
+    setTimeout(()=>$("co-title").focus({preventScroll:true}),30);
+  }
+  function close(){
+    if(!isOpen) return; isOpen=false;
+    dlg.classList.remove("open"); scrim.classList.remove("open"); dlg.setAttribute("aria-hidden","true");
+    others().forEach(e=>e.inert=false); document.body.classList.remove("co-lock");
+    if(location.hash.startsWith("#apply")) history.replaceState(null,"",location.pathname+location.search);
+    if(lastFocus&&lastFocus.focus) lastFocus.focus({preventScroll:true});
+  }
+  document.querySelectorAll("[data-checkout]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();open(b.dataset.checkout,b)}));
+  $("co-close").addEventListener("click",close); scrim.addEventListener("click",close);
+  form.addEventListener("change",e=>{if(e.target.name==="plan")st.plan=e.target.value;if(e.target.name==="age")st.age=e.target.value;render()});
+  email.addEventListener("input",()=>{const h=link();if(h)pay.href=h;if(tried)validate(false)});
+  consent.addEventListener("change",()=>{if(tried)validate(false)});
+  pay.addEventListener("click",e=>{
+    if(!pay.hasAttribute("href")){e.preventDefault();return}
+    tried=true;
+    if(!validate(true)){e.preventDefault();return}
+    pay.href=link(); status.dataset.k="opened"; status.textContent=t("coOpened");
+  });
+  pay.addEventListener("keydown",e=>{if(e.key===" "&&pay.hasAttribute("href")){e.preventDefault();pay.click()}});
+  form.addEventListener("submit",e=>{e.preventDefault();pay.click()});
+  dlg.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){e.preventDefault();close();return}
+    if(e.key!=="Tab") return;
+    const f=focusables(); if(!f.length) return; const first=f[0], last=f[f.length-1];
+    if(e.shiftKey&&(document.activeElement===first||document.activeElement===$("co-title"))){e.preventDefault();last.focus()}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+  });
+  // deep links for the Instagram bio, e.g. index.html#apply or #apply-monthly
+  const fromHash=()=>{const m=location.hash.match(/^#apply(?:-(single|monthly|live))?$/);if(m)open(m[1]||"single")};
+  addEventListener("hashchange",fromHash); fromHash();
+})();
 </script>
 </body>
 </html>
