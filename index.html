@@ -527,7 +527,7 @@ body.co-lock{overflow:hidden}
       <p style="margin:14px 0 0;max-width:30em" data-i="fAbout"></p>
     </div>
     <div><h4 class="caps">Training</h4><ul><li><a href="#jvelo">J-Velo</a></li><li><a href="#pricing" data-i="priceH"></a></li><li><a href="#how" data-i="howH"></a></li><li><a href="https://billing.stripe.com/p/login/14A14o9NEciQfGH9KTfw400" target="_blank" rel="noopener" data-i="fManage"></a></li></ul></div>
-    <div><h4 class="caps">Info</h4><ul><li><a href="#news">News</a></li><li><a href="#events">Events</a></li><li><a href="#coach">Coach</a></li></ul></div>
+    <div><h4 class="caps">Info</h4><ul><li><a href="#news">News</a></li><li><a href="#events">Events</a></li><li><a href="#coach">Coach</a></li><li><a href="legal.html" data-i="fLegal"></a></li></ul></div>
     <div><h4 class="caps">Social</h4><ul><li><a href="https://www.instagram.com/neolab.boda_/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.tiktok.com/@neolab.boda_" target="_blank" rel="noopener">TikTok</a></li><li>@neolab.boda_</li></ul></div>
   </div>
   <div class="g" aria-hidden="true"><div class="fbig">Be the Bridge</div></div>
@@ -643,7 +643,7 @@ coNoLinkHelp:"이 플랜은 아직 온라인 결제를 준비 중입니다. 지�
 coOpened:"Stripe 결제 페이지가 새 탭에서 열렸습니다.",coNewTab:" (새 탭에서 열림)",coNextH:"결제 후 진행",
 coNext:"결제 후 영상 업로드 링크가 이메일로 도착합니다. 영상을 올리면 3일 이내에 분석을 받습니다.",
 coNextLive:"결제 후 지도 일정을 정하는 이메일을 보내드립니다.",
-tPrice:"가격",coPromo:"주니어 할인이나 친구 소개 코드는 다음 결제 화면에서 입력할 수 있습니다.",fManage:"구독 관리",coSecure:"Stripe 보안 결제 · 카드 · Apple Pay · Google Pay",coDm:"궁금한 점은 Instagram DM으로"},
+tPrice:"가격",coPromo:"주니어 할인이나 친구 소개 코드는 다음 결제 화면에서 입력할 수 있습니다.",fManage:"구독 관리",fLegal:"판매자 정보 · 환불 정책",coSecure:"Stripe 보안 결제 · 카드 · Apple Pay · Google Pay",coDm:"궁금한 점은 Instagram DM으로"},
 en:{ann:"J-Velo online video analysis is now open in Korea.",annLink:"Learn more",applyShort:"Apply",season:"J-Velo Korea launch",learn:"Learn more",
 weekly:"Post one pitch with #BeTheBridge. Every week, one player gets a free analysis.",fAbout:"A brand that bridges Japanese and world baseball. Run by Yudai Boda.",
 heroSub:"",kakeMean:"Kakehashi: to be the bridge between Japanese baseball and the world",
@@ -663,7 +663,7 @@ coNoLinkHelp:"Online payment for this plan isn't ready yet. For now, please appl
 coOpened:"Stripe checkout opened in a new tab.",coNewTab:" (opens in a new tab)",coNextH:"What happens next",
 coNext:"After you pay, you'll get an email with your video upload link. Your analysis comes back within 3 days of upload.",
 coNextLive:"After you pay, you'll get an email to book your session time.",
-tPrice:"Price",coPromo:"Have a junior or friend referral code? You can enter it on the next payment screen.",fManage:"Manage subscription",coSecure:"Secure checkout by Stripe · Card · Apple Pay · Google Pay",coDm:"Questions? DM us on Instagram"},
+tPrice:"Price",coPromo:"Have a junior or friend referral code? You can enter it on the next payment screen.",fManage:"Manage subscription",fLegal:"Legal notice · Refunds",coSecure:"Secure checkout by Stripe · Card · Apple Pay · Google Pay",coDm:"Questions? DM us on Instagram"},
 ja:{ann:"J-Veloのオンライン動画添削、韓国で受付を始めました。",annLink:"詳しく見る",applyShort:"申し込む",season:"J-Velo 韓国ローンチ",learn:"詳しく見る",
 weekly:"#BeTheBridge を付けて、あなたの1球を投稿してください。毎週1人を無料で添削します。",fAbout:"日本と世界の野球をつなぐブランド。運営：Yudai Boda。",
 heroSub:"",kakeMean:"日本の野球と世界をつなぐ。",
@@ -683,7 +683,7 @@ coNoLinkHelp:"このプランのオンライン決済は準備中です。今は
 coOpened:"Stripeの支払いページを新しいタブで開きました。",coNewTab:"（新しいタブで開きます）",coNextH:"支払いのあと",
 coNext:"支払い後、動画アップロード用のリンクがメールで届きます。動画が届いてから3日以内に分析をお返しします。",
 coNextLive:"支払い後、指導の日程を決めるメールを送ります。",
-tPrice:"料金",coPromo:"ジュニア割引や友人紹介のコードは、次の決済画面で入力できます。",fManage:"サブスクの管理",coSecure:"Stripeの安全な決済 · カード · Apple Pay · Google Pay",coDm:"質問はInstagram DMへ"}
+tPrice:"料金",coPromo:"ジュニア割引や友人紹介のコードは、次の決済画面で入力できます。",fManage:"サブスクの管理",fLegal:"特定商取引法の表記・返金",coSecure:"Stripeの安全な決済 · カード · Apple Pay · Google Pay",coDm:"質問はInstagram DMへ"}
 };
 for(const k in T2) Object.assign(T[k],T2[k]);
 function setLang(l){
@@ -691,6 +691,7 @@ function setLang(l){
   document.documentElement.lang=l;
   document.querySelectorAll("[data-i]").forEach(el=>{const v=T[l][el.dataset.i]; if(v!==undefined) el.textContent=v;});
   document.querySelectorAll(".langs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===l)));
+  document.querySelectorAll('a[href^="legal.html"]').forEach(a=>a.setAttribute("href","legal.html#"+l));
   try{localStorage.setItem("jvelo-lang",l)}catch(e){}
   if(window.coRender) window.coRender();
 }
