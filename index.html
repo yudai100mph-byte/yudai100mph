@@ -59,15 +59,19 @@ nav.main a:hover,.util a.u:hover{border-bottom-color:currentColor}
 
 /* hero */
 .hero{background:var(--night);color:var(--on-night);position:relative;overflow:hidden}
-.hero-in{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,4vw,64px);align-items:end;padding-block:clamp(48px,8vw,112px) clamp(40px,6vw,80px)}
+.hero-in{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end;padding-block:clamp(48px,8vw,112px) clamp(40px,6vw,80px)}
 .hero-in>*{min-width:0}
 .hero .label{color:var(--night-2);margin:0 0 clamp(20px,3vw,36px)}
 .brand{font:900 clamp(60px,13.2vw,208px)/.84 var(--f-display);letter-spacing:-.035em;text-transform:uppercase;margin:0}
 .kake{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;margin:clamp(18px,2.4vw,30px) 0 0;padding-top:16px;border-top:1px solid var(--night-rule)}
 .kake b{font:700 clamp(15px,1.6vw,19px)/1.4 "Noto Sans JP",sans-serif;letter-spacing:.12em}
 .kake span{color:var(--night-2);font-size:13px}
-.hero h1{font:900 clamp(22px,3vw,40px)/1.45 "Noto Sans JP",sans-serif;letter-spacing:.02em;margin:clamp(32px,5vw,64px) 0 10px;max-width:24em;line-break:strict}
+.hero h1{font:900 clamp(30px,5.2vw,76px)/.98 var(--f-display);letter-spacing:-.02em;text-transform:uppercase;margin:clamp(32px,5vw,64px) 0 16px;text-wrap:balance}
 .hero h1 span{display:block}
+.hero h1 em{font-style:normal;color:var(--flag-red)}
+.hero .ja{font:700 clamp(16px,1.9vw,24px)/1.6 "Noto Sans JP",sans-serif;letter-spacing:.04em;margin:0 0 8px;line-break:strict}
+.hero .ja span{display:block}
+.hero .sub:empty{display:none}
 .hero .sub{font-size:15px;color:var(--night-2);margin:0 0 28px;max-width:38em}
 .btns{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-block;text-decoration:none;font:700 11px/1.2 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;padding:15px 22px;border:1px solid currentColor;transition:background-color .2s,color .2s}
@@ -75,10 +79,18 @@ nav.main a:hover,.util a.u:hover{border-bottom-color:currentColor}
 .hero .btn:not(.fill):hover{background:var(--on-night);color:var(--night)}
 .btn.ink{background:var(--sumi);border-color:var(--sumi);color:var(--paper)}
 .btn.line:hover{background:var(--sumi);color:var(--paper)}
-/* the sun: the flag's disc, carrying 架け橋 */
-.sun{width:clamp(150px,26vw,380px);aspect-ratio:1;border-radius:50%;background:var(--flag-red);display:grid;place-items:center;align-self:center;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) both}
-.sun b{writing-mode:vertical-rl;font:900 clamp(28px,4.6vw,66px)/1 "Noto Sans JP",sans-serif;letter-spacing:.14em;color:#fff}
-@keyframes rise{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+/* the bridge: an arch with hangers spanning the hero, drawn behind the type */
+.span{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;max-width:100%;z-index:0;pointer-events:none}
+.span *{vector-effect:non-scaling-stroke}
+.span .arch{fill:none;stroke:var(--flag-red);stroke-width:3;stroke-linecap:round}
+.span .deck{stroke:var(--on-night);stroke-opacity:.5;stroke-width:2}
+.span .hanger{stroke:var(--on-night);stroke-opacity:.10;stroke-width:1}
+@media (prefers-reduced-motion:no-preference){
+  .span .arch{stroke-dasharray:2400;animation:draw 2.2s cubic-bezier(.4,0,.2,1) both}
+  .span .hanger{animation:fade 1.2s .9s ease-out both}
+  @keyframes draw{from{stroke-dashoffset:2400}to{stroke-dashoffset:0}}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+}
 .ticker{border-top:1px solid var(--night-rule);display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;padding-block:14px;color:var(--night-2)}
 
 /* section heads */
@@ -216,7 +228,6 @@ footer a:hover{color:var(--sumi);text-decoration:underline;text-underline-offset
   .wordmark{font-size:14px;letter-spacing:.16em}
   .hero-in{grid-template-columns:1fr}
   .hero-in{padding-top:28px}
-  .sun{order:-1;justify-self:end;width:112px;margin-bottom:-8px}
   .cards,.terms,ol.steps,.follow{grid-template-columns:1fr}
   .proof{gap:8px}
   .proof .cell{padding:14px 12px}
@@ -266,17 +277,18 @@ footer a:hover{color:var(--sumi);text-decoration:underline;text-underline-offset
       <div>
         <p class="label">Fall 2026 · <span data-i="season"></span></p>
         <p class="brand" aria-hidden="true">Be the<br>Bridge</p>
-        <p class="kake"><b lang="ja">BE THE BRIDGE — 架け橋になる</b><span data-i="kakeMean"></span></p>
-        <h1 id="hero-h" lang="ja"><span>今日の球速が、あなたを決めるんじゃない。</span><span>次の一球が、あなたをつくる。</span></h1>
+        <p class="kake"><b lang="ja">BE THE BRIDGE — 架け橋になる</b><span lang="ja">日本の野球と世界をつなぐ。</span></p>
+        <h1 id="hero-h" lang="en"><span>Failure doesn&rsquo;t define you.</span><span>What you do <em>next</em> does.</span></h1>
+        <p class="ja" lang="ja"><span>失敗があなたを決めるんじゃない。</span><span>そのあとどうするかが、あなたをつくる。</span></p>
         <p class="sub" data-i="heroSub"></p>
         <div class="btns">
           <a class="btn fill" href="https://ig.me/m/neolab.boda" target="_blank" rel="noopener" data-i="cta"></a>
           <a class="btn" href="#jvelo" data-i="learn"></a>
         </div>
       </div>
-      <div class="sun" role="img" aria-label="架け橋 (kakehashi): bridge"><b lang="ja" aria-hidden="true">架け橋</b></div>
     </div>
-    <div class="ticker g label"><span>J-Velo · Japan → Korea</span><span>NPB · KBO · NASM-PES · Rapsodo</span><span>@neolab.boda</span></div>
+    <svg class="span" id="span" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax meet" role="img" aria-label="架け橋: a bridge spanning the page"></svg>
+    <div class="ticker g label" style="position:relative;z-index:1"><span>J-Velo · Japan → Korea</span><span>NPB · KBO · NASM-PES · Rapsodo</span><span>@neolab.boda</span></div>
   </section>
 
   <section class="s g" id="jvelo" aria-labelledby="jv-h">
@@ -469,7 +481,7 @@ watchH:"無料のドリル動画",watch:"球速アップのドリルと指導事
 const T2={
 ko:{ann:"J-Velo 온라인 영상 피드백, 한국에서 접수 시작.",annLink:"자세히 보기",applyShort:"신청",season:"J-Velo 한국 런칭",learn:"자세히 보기",
 weekly:"#BeTheBridge 를 달아 당신의 1구를 올려주세요. 매주 1명을 무료로 피드백합니다.",fAbout:"일본과 세계의 야구를 잇는 브랜드. 운영: 棒田雄大 (Yudai Boda).",
-heroSub:"오늘의 구속이 당신을 정하지 않는다. 다음 한 구가 정한다.",kakeMean:"카케하시: 일본과 세계의 야구를 잇는 다리가 되다",
+heroSub:"실패가 당신을 정하지 않는다. 그다음 어떻게 하느냐가 당신을 만든다.",kakeMean:"카케하시: 일본과 세계의 야구를 잇는 다리가 되다",
 programsSub:"세 가지 방법으로 시작하세요",
 o1d:"투구 영상을 1회 분석합니다. 3일 이내에 해설 영상과 맞춤 훈련 메뉴를 보내드립니다.",
 o2d:"한 달에 4회 분석. 매주 변화를 확인하며 꾸준히 구속을 올립니다.",
@@ -480,7 +492,7 @@ eventsSub:"클리닉 일정",e1t:"J-Velo 한국 클리닉",e1when:"날짜 미정
 e1d:"코치가 직접 한국을 방문해 현장에서 지도합니다. 일정과 장소는 Instagram에서 가장 먼저 공지합니다.",notify:"Instagram에서 소식 받기"},
 en:{ann:"J-Velo online video analysis is now open in Korea.",annLink:"Learn more",applyShort:"Apply",season:"J-Velo Korea launch",learn:"Learn more",
 weekly:"Post one pitch with #BeTheBridge. Every week, one player gets a free analysis.",fAbout:"A brand that bridges Japanese and world baseball. Run by Yudai Boda.",
-heroSub:"Today's velocity doesn't define you. What you do next does.",kakeMean:"Kakehashi: to be the bridge between Japanese baseball and the world",
+heroSub:"",kakeMean:"Kakehashi: to be the bridge between Japanese baseball and the world",
 programsSub:"Three ways to start",
 o1d:"One full analysis of your delivery, with a breakdown video and a personal training plan within 3 days.",
 o2d:"Four analyses a month. Track the change week by week and build velocity steadily.",
@@ -491,7 +503,7 @@ eventsSub:"Clinics and sessions",e1t:"J-Velo Korea Clinic",e1when:"Date TBA · w
 e1d:"The coach travels to Korea to coach players in person. Date and venue will be announced first on Instagram.",notify:"Get updates on Instagram"},
 ja:{ann:"J-Veloのオンライン動画添削、韓国で受付を始めました。",annLink:"詳しく見る",applyShort:"申し込む",season:"J-Velo 韓国ローンチ",learn:"詳しく見る",
 weekly:"#BeTheBridge を付けて、あなたの1球を投稿してください。毎週1人を無料で添削します。",fAbout:"日本と世界の野球をつなぐブランド。運営：棒田雄大。",
-heroSub:"Today's velocity doesn't define you. What you do next does.",kakeMean:"日本の野球と世界をつなぐ。",
+heroSub:"",kakeMean:"日本の野球と世界をつなぐ。",
 programsSub:"3つの始め方",
 o1d:"投球動画を1回分析。3日以内に解説動画と個別の練習メニューを届けます。",
 o2d:"月4回の分析。毎週の変化を確かめながら、着実に球速を上げます。",
@@ -513,6 +525,11 @@ document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click"
 let start="ko";
 try{const s=localStorage.getItem("jvelo-lang"); if(s) start=s; else {const n=(navigator.language||"").slice(0,2); if(T[n]) start=n; else start="en";}}catch(e){}
 setLang(start);
+(function(){const svg=document.getElementById("span");if(!svg)return;const NS="http://www.w3.org/2000/svg";
+const L=-60,R=1500,D=558,H=40;function y(x){const t=(x-L)/(R-L);return D-(D-H)*4*t*(1-t)}
+for(let x=20;x<1440;x+=40){const l=document.createElementNS(NS,"line");l.setAttribute("class","hanger");l.setAttribute("x1",x);l.setAttribute("x2",x);l.setAttribute("y1",y(x));l.setAttribute("y2",D);svg.appendChild(l)}
+const d=document.createElementNS(NS,"line");d.setAttribute("class","deck");d.setAttribute("x1",0);d.setAttribute("x2",1440);d.setAttribute("y1",D);d.setAttribute("y2",D);svg.appendChild(d);
+const a=document.createElementNS(NS,"path");a.setAttribute("class","arch");a.setAttribute("d",`M${L} ${D} Q720 ${2*H-D} ${R} ${D}`);svg.appendChild(a);const tk=document.querySelector(".hero .ticker");const fit=()=>{if(tk)svg.style.bottom=tk.offsetHeight+"px"};fit();addEventListener("resize",fit)})();
 </script>
 </body>
 </html>
